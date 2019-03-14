@@ -1,6 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
   var Task = sequelize.define("Task", {
-    // Giving the Author model a name of type STRING
     id: {
       type: DataTypes.STRING,
       primaryKey: true,
