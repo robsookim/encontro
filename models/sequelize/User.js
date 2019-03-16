@@ -11,13 +11,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     organization: {
       type: DataTypes.STRING,
-      default: 0
+      default: null
     },
-    numQuotes: {
+    numMeetings: {
       type: DataTypes.INTEGER,
       default: 0
     }
   });
+
   User.associate = function(models) {
     User.hasMany(models.MeetingNote, {
       onDelete: "cascade"
