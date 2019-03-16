@@ -23,6 +23,11 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.MeetingNote, {
       onDelete: "cascade"
     });
+
+    User.belongsTo(models.Meeting);
+    // User.belongsTo(models.Meeting, { as: "Attendees" });
+
+    // User.belongsTo(models.Organization);
   };
 
   return User;

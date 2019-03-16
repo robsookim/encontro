@@ -1,18 +1,42 @@
 module.exports = function(sequelize, DataTypes) {
     var Meeting = sequelize.define("Meeting", {
-        date: DataTypes.DATEONLY,
-        time: DataTypes.TIME,
-        title: DataTypes.STRING,
-        agenda: DataTypes.ARRAY(DataTypes.STRING),
-        // attendees: DataTypes.ARRAY(DataTypes.STRING),
-        minutes: DataTypes.TEXT
+        id : {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            unique: true,
+            autoIncrement: true
+        },
+        date: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
+        },
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false
+        },
+        title: {
+            allowNull: false,
+            type: DataTypes.STRING
+        },
+        agenda: {
+            type: DataTypes.ARRAY(DataTypes.STRING)
+        },
+        attendees: {
+            type: DataTypes.ARRAY(DataTypes.STRING)
+        },
+        minutes: {
+            type: DataTypes.TEXT
+        }
     });
 
-    // Meeting.associate = function(models) {
-    //     Meeting.hasMany(models.User, {
-    //         // don't want to cascade on delete, but in case we want to do anything else...
-    //     });
-    // }
+    Meeting.associate = function(models) {
+        Meeting.hasMany(models.User);
+
+        // not sure if this will be necessary
+        Meeting.hasMany(models.Task);
+
+        // Meeting.belongsTo(models.Organization);
+    }
 
     return Meeting;
   };
