@@ -30,9 +30,9 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Meeting.associate = function(models) {
-        // Meeting.hasMany(models.User);
+        Meeting.hasMany(models.User);
 
-        Meeting.hasMany(models.Task);
+        // Meeting.hasMany(models.Task);
 
         Meeting.belongsTo(models.Organization, {
             foreignKey: {

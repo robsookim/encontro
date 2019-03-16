@@ -24,7 +24,11 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: "cascade"
     });
 
-    User.hasMany(models.Meeting);
+    User.hasMany(models.Task, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
 
     User.belongsTo(models.Organization, {
       foreignKey: {
