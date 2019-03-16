@@ -34,6 +34,8 @@ module.exports = function(sequelize, DataTypes) {
 
         // not sure if this will be necessary
         Meeting.hasMany(models.Task);
+
+        // Meeting.belongsTo(models.Organization);
     }
 
     return Meeting;
