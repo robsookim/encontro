@@ -30,10 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Meeting.associate = function(models) {
-        Meeting.hasMany(models.User, {as: "Attendees"});
+        Meeting.hasMany(models.User);
 
         // not sure if this will be necessary
-        // Meeting.hasMany(models.Task, {as: "Tasks"});
+        Meeting.hasMany(models.Task);
     }
 
     return Meeting;
