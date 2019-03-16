@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-const routes = require("./routes")(router);
+const routes = require("./routes")(router, db);
 
 app.use(routes);
 
