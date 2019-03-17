@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull:false
     }
   });
+  
   Task.associate = function(models) {
 
     Task.belongsTo(models.User, {
@@ -18,6 +19,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+
     Task.belongsTo(models.Meeting, {
       foreignKey: {
         allowNull: false
