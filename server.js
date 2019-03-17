@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 require("dotenv").config();
 
@@ -24,11 +25,13 @@ const db = {
   mongo: require("./models/mongoose")
 };
 
+passport.use(require("/auth/googleconfig.js")(db));
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-const routes = require("./routes")(router, db);
+const routes = require("./routes")(router, db, passport);
 
 app.use(routes);
 

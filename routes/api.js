@@ -8,4 +8,6 @@ module.exports = function(router, db){
             minutes:"These are the minutes"
         })
     })
+
+    return router;
 }
