@@ -26,10 +26,23 @@ const db = {
 };
 
 passport.use(require("/auth/googleconfig.js")(db));
+passport.use(require("/auth/linkedin.js")(db));
+
+passport.serializeUser((user, cb) => {
+  cb(null, user);
+});
+passport.deserializeUser((obj, cb) => {
+  cb(null, obj);
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+app.use(express.cookieParser());
+app.use(express.bodyParser());
+app.use(express.session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 const routes = require("./routes")(router, db, passport);
 
