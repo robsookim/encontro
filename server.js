@@ -14,6 +14,15 @@ const router = express.Router();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+function authRequired(req, res, next) {
+  if (!req.user) {
+    req.session.oauth2return = req.originalUrl;
+    return res.redirect("/auth/login");
+  }
+  next();
+}
+app.use(authRequired);
+
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/encontro";
 
 mongoose.connect(MONGODB_URI, {

@@ -1,4 +1,5 @@
 module.exports = function(router, passport) {
+
   router.get(
     "/auth/google",
     (req, res, next) => {
@@ -12,7 +13,7 @@ module.exports = function(router, passport) {
     })
   );
 
-  app.get(
+  router.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
@@ -22,12 +23,12 @@ module.exports = function(router, passport) {
     }
   );
 
-  app.get("/auth/linkedin", passport.authenticate("linkedin"), (req, res) => {
+  router.get("/auth/linkedin", passport.authenticate("linkedin"), (req, res) => {
     // The request will be redirected to LinkedIn for authentication, so this
     // function will not be called.
   });
 
-  app.get(
+  router.get(
     "/auth/linkedin/callback",
     passport.authenticate("linkedin", {
       successRedirect: "/",
