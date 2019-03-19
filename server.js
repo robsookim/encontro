@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+
 
 require("dotenv").config();
 
@@ -34,8 +37,8 @@ const db = {
   mongo: require("./models/mongoose")
 };
 
-passport.use(require("/auth/googleconfig.js")(db));
-passport.use(require("/auth/linkedin.js")(db));
+passport.use(require("./auth/googleconfig.js")(db));
+passport.use(require("./auth/linkedinconfig.js")(db));
 
 passport.serializeUser((user, cb) => {
   cb(null, user);
@@ -47,9 +50,8 @@ passport.deserializeUser((obj, cb) => {
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.session({ secret: process.env.SESSION_SECRET }));
+app.use(cookieParser());
+app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
 app.use(passport.session());
 

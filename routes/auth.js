@@ -1,4 +1,4 @@
-module.exports = function(router, passport) {
+module.exports = function(router,db, passport) {
 
   router.get(
     "/auth/google",
@@ -12,7 +12,7 @@ module.exports = function(router, passport) {
       scope: ["email", "profile"]
     })
   );
-
+  
   router.get(
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
