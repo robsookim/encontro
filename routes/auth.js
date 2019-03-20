@@ -15,9 +15,11 @@ module.exports = function(router,db, passport) {
   
   router.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: "/login" }),
+    passport.authenticate("google", { failureRedirect: "http://localhost:3000/login" }),
     (req, res) => {
-      const redirect = req.session.oauth2return || "/home";
+      console.log("HEY WHERE AM I");
+      
+      const redirect = "http://localhost:3000/home";
       delete req.session.oauth2return;
       res.redirect(redirect);
     }
@@ -31,8 +33,8 @@ module.exports = function(router,db, passport) {
   router.get(
     "/auth/linkedin/callback",
     passport.authenticate("linkedin", {
-      successRedirect: "/",
-      failureRedirect: "/login"
+      successRedirect: "http://localhost:3000/home",
+      failureRedirect: "http://localhost:3000/login"
     })
   );
 
