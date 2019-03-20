@@ -20,9 +20,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    User.hasMany(models.MeetingNote, {
-      onDelete: "cascade"
-    });
+    // User.hasMany(models.MeetingNote, {
+    //   onDelete: "cascade"
+    // });
 
     User.hasMany(models.Task, {
       foreignKey: {

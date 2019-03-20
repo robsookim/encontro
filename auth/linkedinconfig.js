@@ -1,19 +1,23 @@
 const LinkedInStrategy = require("passport-linkedin-oauth2").OAuth2Strategy;
 
+function extractProfile(profile) {
+  return {
+    id: profile.id
+  };
+}
+
 module.exports = function(db) {
   return new LinkedInStrategy(
     {
-      clientID: LINKEDIN_CLIENT_ID,
-      clientSecret: LINKEDIN_CLIENT_SECRET,
-      callbackURL: "https://www.encontro.herokuapp.com/auth/linkedin/callback",
+      clientID: process.env.LINKEDIN_CLIENT_ID,
+      clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+      callbackURL: "http://localhost:3001/auth/linkedin/callback",
       scope: ["r_emailaddress", "r_basicprofile"],
       state:true
     },
     function(accessToken, refreshToken, profile, done) {
-      // asynchronous verification, for effect...
-      db.sql.User.findOrCreate({ id: profile.id }, function(err, user) {
-        return done(err, user);
-      });
+      console.log(extractProfile(profile));
+      done(null, extractProfile(profile));
     }
   );
 };

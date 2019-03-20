@@ -1,6 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+
 
 require("dotenv").config();
 
@@ -14,14 +17,7 @@ const router = express.Router();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-function authRequired(req, res, next) {
-  if (!req.user) {
-    req.session.oauth2return = req.originalUrl;
-    return res.redirect("/auth/login");
-  }
-  next();
-}
-app.use(authRequired);
+
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/encontro";
 
@@ -33,25 +29,39 @@ const db = {
   sql: require("./models/sequelize"),
   mongo: require("./models/mongoose")
 };
-
-passport.use(require("/auth/googleconfig.js")(db));
-passport.use(require("/auth/linkedin.js")(db));
-
-passport.serializeUser((user, cb) => {
-  cb(null, user);
+passport.serializeUser((user, done) => {
+  console.log("NOw");
+  done(null, user);
 });
-passport.deserializeUser((obj, cb) => {
-  cb(null, obj);
+passport.deserializeUser((user, done) => {
+  console.log(user);
+  db.sql.User.findOrCreate({where:{id:user.id}}).then(()=>{done(null,user)})
 });
+passport.use(require("./auth/googleconfig.js")(db));
+passport.use(require("./auth/linkedinconfig.js")(db));
+
+
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.session({ secret: process.env.SESSION_SECRET }));
+app.use(cookieParser());
+app.use(session({ secret: process.env.SESSION_SECRET }));
+
+app.use(authRequired);
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+function authRequired(req, res, next) {
+  if (!req.session.passport) {
+    req.session.oauth2return = req.originalUrl;
+    if(req.originalUrl==="/"||req.originalUrl==="/home"){
+      return res.redirect("/login");
+    }
+  }
+  next();
+}
 
 const routes = require("./routes")(router, db, passport);
 

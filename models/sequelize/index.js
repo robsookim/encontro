@@ -8,10 +8,11 @@ const env = process.env.NODE_ENV || "development";
 const config = env==="development"?require(__dirname + "/../../config/devConfig.json"):require(__dirname + "/../../config/config.json")[env];
 console.log(config);
 const db = {};
+let sequelize = null;
 if (config.use_env_variable) {
-  const sequelize = new Sequelize(process.env[config.use_env_variable]);
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  const sequelize = new Sequelize(
+  sequelize = new Sequelize(
     config.database,
     config.username,
     config.password,
