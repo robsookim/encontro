@@ -24,10 +24,17 @@ module.exports = function(sequelize, DataTypes) {
     //   onDelete: "cascade"
     // });
 
-    User.belongsTo(models.Meeting);
-    // User.belongsTo(models.Meeting, { as: "Attendees" });
+    User.hasMany(models.Task, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
 
-    // User.belongsTo(models.Organization);
+    User.belongsTo(models.Organization, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
   };
 
   return User;
