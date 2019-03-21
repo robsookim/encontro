@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING
       },
       members: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING,
         default: null
       },
       numMeetings: {
@@ -22,9 +22,9 @@ module.exports = function(sequelize, DataTypes) {
     Organization.associate = function(models) {
       Organization.hasMany(models.Meeting);
 
-      Organization.hasMany(models.User);
+      // Organization.hasMany(models.User);
     };
   
-    return User;
+    return Organization;
   };
   
