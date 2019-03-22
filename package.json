@@ -4,6 +4,7 @@
   "description": "An interactive, agenda-focused meeting app which allows users to join meetings, chat, take notes, raise silent concerns, etc. The app stores the agenda and notes for users to access at a later date",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "cookie-parser": "^1.4.4",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",

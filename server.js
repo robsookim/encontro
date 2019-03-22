@@ -35,6 +35,7 @@ passport.serializeUser((user, done) => {
 });
 passport.deserializeUser((user, done) => {
   console.log(user);
+  console.log("hitting the deserialize path");
   db.sql.User.findOrCreate({where:{id:user.id}}).then(()=>{done(null,user)})
 });
 passport.use(require("./auth/googleconfig.js")(db));
@@ -45,6 +46,7 @@ passport.use(require("./auth/linkedinconfig.js")(db));
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));
 
