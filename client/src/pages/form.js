@@ -50,10 +50,8 @@ class Form extends Component {
         agenda: ""
       })
 
-      // app is saving the meeting here...
       API.saveMeeting(meeting)
       .then(res => {
-        // but not hitting this "then" block...
         console.log("REACT saved the meeting")
         // this.getMeetings()
       }).catch(err => console.log(err));

@@ -23,12 +23,11 @@ export function FormBtn(props) {
     <div>
       <button
         {...props}
-        style={{ float: "right", marginBottom: 10 }}
+        style={{ align: "left", marginBottom: 10 }}
         className="btn btn-success"
       >
         {props.children}
       </button>
-      <a href="http://localhost:3001/auth/linkedin">CLICK HERE</a>
     </div>
   );
 }
