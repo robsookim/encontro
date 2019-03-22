@@ -6,18 +6,14 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       autoIncrement: true
     },
-    // date: {
-    //   // type: DataTypes.DATEONLY,
-    //   type: DataTypes.STRING,
-    //   // allowNull: false,
-    //   defaultValue: "some day"
-    // },
-    // time: {
-    //   // type: DataTypes.TIME,
-    //   type: DataTypes.STRING,
-    //   // allowNull: false
-    //   defaultValue: "some time"
-    // },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     title: {
       allowNull: false,
       type: DataTypes.STRING

@@ -16,6 +16,14 @@ class Form extends Component {
       this.handleInputChange = this.handleInputChange.bind(this);
       this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
+
+    getMeetings = () => {
+      API.getMeetings()
+        .then(res =>
+          console.log("got some meetings")
+        )
+        .catch(err => console.log(err));
+    };
   
     handleInputChange(event) {
       let {name: fieldName, value} = event.target;
@@ -27,17 +35,26 @@ class Form extends Component {
 
     handleFormSubmit(event) {
       event.preventDefault();
+      console.log("form has been submitted");
       const meeting = {
         title: this.state.title,
         date: this.state.date,
         time: this.state.time,
         agenda: this.state.agenda
-      }  
+      }
+
+      this.setState({
+        title: "",
+        date: "",
+        time: "",
+        agenda: ""
+      })
 
       API.saveMeeting(meeting)
-      .then(res => 
+      .then(res => {
         console.log("REACT saved the meeting")
-      ).catch(err => console.log(err));
+        // this.getMeetings()
+      }).catch(err => console.log(err));
     }
   
     render() {
@@ -49,15 +66,15 @@ class Form extends Component {
             name="title"
             placeholder="Meeting Title"
           />
-          {/* should change this to a date format? */}
+          {/* should change this to a "select a date" format? */}
           <Input
             value={this.state.date}
             onChange={this.handleInputChange}
             name="date"
             placeholder="Meeting Date"
           />
-          {/* change this to time format? */}
-          <TextArea
+          {/* change this to "select a time" format? */}
+          <Input
             value={this.state.time}
             onChange={this.handleInputChange}
             name="time"
@@ -73,7 +90,7 @@ class Form extends Component {
             disabled={!(this.state.title)}
             onClick={this.handleFormSubmit}
           >
-            Set Meeting
+            Schedule Meeting
           </FormBtn>
         </form>
       );
