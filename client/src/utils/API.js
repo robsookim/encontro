@@ -5,7 +5,11 @@ export default {
         return axios.post("/api/meetings", meetingData);
     },
 
-    getMeetings: function(params) {
+    getMeetings: function() {
         return axios.get("/api/meetings");
+    },
+
+    getUsers: function() {
+        return axios.get("/api/users");
     }
   };
