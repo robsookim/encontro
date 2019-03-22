@@ -1,13 +1,10 @@
+const controller = require("../controllers/controller");
+const router = require("express").Router();
+
 module.exports = function(router, db) {
-  router.post("/api/savemeeting", (req, res) => {
-    db.sql.Meeting.create({
-      date: req.body.date,
-      time: req.body.time,
-      title: req.body.title,
-      agenda: "This is the agenda",
-      minutes: "These are the minutes"
-    });
-  });
+
+  router.route("/api/meetings")
+    .post(controller.saveMeeting);
 
   return router;
 };

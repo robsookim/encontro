@@ -1,25 +1,43 @@
 import React, { Component } from "react";
 import { Input, TextArea, FormBtn } from "./../components/Form";
+import API from "./../utils/API.js";
 
 class Form extends Component {
+  state = {
+    title: "",
+    date: "",
+    time: "",
+    agenda: ""
+    // attendees: []
+  };
     constructor(props) {
       super(props);
-      this.state = {
-        isGoing: true,
-        numberOfGuests: 2
-      };
   
       this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
   
     handleInputChange(event) {
-      const target = event.target;
-      const value = target.type === 'checkbox' ? target.checked : target.value;
-      const name = target.name;
+      let {name: fieldName, value} = event.target;
   
       this.setState({
-        [name]: value
+        [fieldName]: value
       });
+    }
+
+    handleFormSubmit(event) {
+      event.preventDefault();
+      const meeting = {
+        title: this.state.title,
+        date: this.state.date,
+        time: this.state.time,
+        agenda: this.state.agenda
+      }  
+
+      API.saveMeeting(meeting)
+      .then(res => 
+        console.log("REACT saved the meeting")
+      ).catch(err => console.log(err));
     }
   
     render() {
@@ -31,12 +49,14 @@ class Form extends Component {
             name="title"
             placeholder="Meeting Title"
           />
+          {/* should change this to a date format? */}
           <Input
             value={this.state.date}
             onChange={this.handleInputChange}
             name="date"
             placeholder="Meeting Date"
           />
+          {/* change this to time format? */}
           <TextArea
             value={this.state.time}
             onChange={this.handleInputChange}

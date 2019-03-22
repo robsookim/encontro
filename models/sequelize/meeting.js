@@ -6,14 +6,18 @@ module.exports = function(sequelize, DataTypes) {
       unique: true,
       autoIncrement: true
     },
-    date: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
-    },
-    time: {
-      type: DataTypes.TIME,
-      allowNull: false
-    },
+    // date: {
+    //   // type: DataTypes.DATEONLY,
+    //   type: DataTypes.STRING,
+    //   // allowNull: false,
+    //   defaultValue: "some day"
+    // },
+    // time: {
+    //   // type: DataTypes.TIME,
+    //   type: DataTypes.STRING,
+    //   // allowNull: false
+    //   defaultValue: "some time"
+    // },
     title: {
       allowNull: false,
       type: DataTypes.STRING
@@ -35,11 +39,12 @@ module.exports = function(sequelize, DataTypes) {
     // not sure if this will be necessary
     // Meeting.hasMany(models.Task);
 
-    // Meeting.belongsTo(models.Organization, {
-    //   foreignKey: {
-    //     allowNull: false
-    //   }
-    // });
+        Meeting.belongsTo(models.Organization, {
+            foreignKey: {
+                allowNull: false
+            }
+        });
+    }
+    
+    return Meeting;
   };
-  return Meeting;
-};
