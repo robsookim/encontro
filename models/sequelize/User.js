@@ -30,11 +30,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
-    User.belongsTo(models.Organization, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
+    // User.belongsTo(models.Organization, {
+    //   foreignKey: {}
+    // });
   };
 
   return User;

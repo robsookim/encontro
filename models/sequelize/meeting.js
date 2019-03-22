@@ -33,12 +33,11 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-
   Meeting.associate = function(models) {
     Meeting.hasMany(models.User);
 
     // not sure if this will be necessary
-        // Meeting.hasMany(models.Task);
+    // Meeting.hasMany(models.Task);
 
         Meeting.belongsTo(models.Organization, {
             foreignKey: {

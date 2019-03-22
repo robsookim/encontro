@@ -20,8 +20,15 @@ export function TextArea(props) {
 
 export function FormBtn(props) {
   return (
-    <button {...props} style={{ float: "right", marginBottom: 10 }} className="btn btn-success">
-      {props.children}
-    </button>
+    <div>
+      <button
+        {...props}
+        style={{ float: "right", marginBottom: 10 }}
+        className="btn btn-success"
+      >
+        {props.children}
+      </button>
+      <a href="http://localhost:3001/auth/linkedin">CLICK HERE</a>
+    </div>
   );
 }

@@ -4,7 +4,6 @@ const passport = require("passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
-
 require("dotenv").config();
 
 // Sets up the Express App
@@ -16,8 +15,10 @@ const router = express.Router();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+app.use(cookieParser());
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/encontro";
 
@@ -29,9 +30,14 @@ const db = {
   sql: require("./models/sequelize"),
   mongo: require("./models/mongoose")
 };
+
+passport.use(require("./auth/googleconfig.js")(db,process.env.NODE_ENV));
+passport.use(require("./auth/linkedinconfig.js")(db,process.env.NODE_ENV));
 passport.serializeUser((user, done) => {
-  console.log("NOw");
-  done(null, user);
+  console.log("SERIALIZE");
+  db.sql.User.findOrCreate({ where: { id: user.id }, defaults:{name:user.name, picture:user.image} }).then(() => {
+    done(null, user);
+  });
 });
 passport.deserializeUser((user, done) => {
   console.log(user);
@@ -55,17 +61,28 @@ app.use(authRequired);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    cookie: {
+      secure: false,
+      httpOnly: true
+    }
+  })
+);
+
 function authRequired(req, res, next) {
   if (!req.session.passport) {
     req.session.oauth2return = req.originalUrl;
-    if(req.originalUrl==="/"||req.originalUrl==="/home"){
+    if (req.originalUrl === "/" || req.originalUrl === "/home") {
       return res.redirect("/login");
     }
   }
   next();
 }
+app.use(authRequired);
 
-const routes = require("./routes")(router, db, passport);
+const routes = require("./routes")(router, db, passport, process.env.NODE_ENV);
 
 app.use(routes);
 
