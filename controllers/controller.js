@@ -8,6 +8,11 @@ module.exports = {
         const organizationId = await db.sql.User.findOne({where:{id:userId}, attributes:['organization']});
         const meetings = await db.sql.Meeting.findAll({where:{OrganizationId:organizationId[0]}});
         res.send(meetings);
+      },
+    getUsers: function(req, res) {
+        db.User.findAll()
+        .then(dbUsers => res.json(dbUsers))
+        .catch(err => res.status(422).json(err));
     },
 
     saveMeeting: function(req, res) {

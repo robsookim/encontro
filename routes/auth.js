@@ -19,7 +19,7 @@ module.exports = function(router,db, passport, nodeEnv) {
     (req, res) => {
       console.log("HEY WHERE AM I");
       
-      const redirect = !nodeEnv?"http://localhost:3000/home":"https://encontro.herokuapp.com/home";
+      const redirect = !nodeEnv?"http://localhost:3000":"https://encontro.herokuapp.com/";
       delete req.session.oauth2return;
       res.redirect(redirect);
     }
@@ -33,8 +33,8 @@ module.exports = function(router,db, passport, nodeEnv) {
   router.get(
     "/auth/linkedin/callback",
     passport.authenticate("linkedin", {
-      successRedirect: !nodeEnv?"http://localhost:3000/home":"https://encontro.herokuapp.com/home",
-      failureRedirect: !nodeEnv?"http://localhost:3000/home":"https://encontro.herokuapp.com/home"
+      successRedirect: !nodeEnv?"http://localhost:3000":"https://encontro.herokuapp.com/",
+      failureRedirect: !nodeEnv?"http://localhost:3000":"https://encontro.herokuapp.com/"
     })
   );
 
