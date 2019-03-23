@@ -59,8 +59,6 @@ if (process.env.NODE_ENV === "production") {
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));
 
-app.use(authRequired);
-
 app.use(passport.initialize());
 app.use(passport.session());
 

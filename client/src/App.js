@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Home from "./pages/home";
 import Meetings from "./pages/meetings";
 import Users from "./pages/users";
+import Meeting from "./pages/meeting";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/form" component={Form} />
           <Route exact path="/meetings" component={Meetings} />
           <Route exact path="/users" component={Users} />
+          <Route exact path="/meeting/:id" component={Meeting} />
 
         </Switch>
       </div>
