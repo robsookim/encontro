@@ -31,23 +31,26 @@ const db = {
   mongo: require("./models/mongoose")
 };
 
-passport.use(require("./auth/googleconfig.js")(db,process.env.NODE_ENV));
-passport.use(require("./auth/linkedinconfig.js")(db,process.env.NODE_ENV));
+passport.use(require("./auth/googleconfig.js")(db, process.env.NODE_ENV));
+passport.use(require("./auth/linkedinconfig.js")(db, process.env.NODE_ENV));
 passport.serializeUser((user, done) => {
   console.log("SERIALIZE");
-  db.sql.User.findOrCreate({ where: { id: user.id }, defaults:{name:user.name, picture:user.image} }).then(() => {
+  db.sql.User.findOrCreate({
+    where: { id: user.id },
+    defaults: { name: user.name, picture: user.image }
+  }).then(() => {
     done(null, user);
   });
 });
 passport.deserializeUser((user, done) => {
   console.log(user);
   console.log("hitting the deserialize path");
-  db.sql.User.findOrCreate({where:{id:user.id}}).then(()=>{done(null,user)})
+  db.sql.User.findOrCreate({ where: { id: user.id } }).then(() => {
+    done(null, user);
+  });
 });
 passport.use(require("./auth/googleconfig.js")(db));
 passport.use(require("./auth/linkedinconfig.js")(db));
-
-
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -74,7 +77,10 @@ app.use(
 function authRequired(req, res, next) {
   if (!req.session.passport) {
     req.session.oauth2return = req.originalUrl;
-    if (req.originalUrl === "/" || req.originalUrl === "/home") {
+    if (
+      req.originalUrl !== "/auth/google" &&
+      req.originalUrl !== "/auth/linkedin"
+    ) {
       return res.redirect("/login");
     }
   }

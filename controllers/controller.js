@@ -1,14 +1,14 @@
 const axios = require("axios");
-const db = require("../models/sequelize");
+const db = require("../models");
 
 module.exports = {
 
-    getMeetings: function(req, res) {
-        db.Meeting.findAll()
-        .then(dbMeetings => res.json(dbMeetings))
-        .catch(err => res.status(422).json(err));
-    },
-
+    getMeetings: async function(req, res) {
+        const userId = req.passport.session.id;
+        const organizationId = await db.sql.User.findOne({where:{id:userId}, attributes:['organization']});
+        const meetings = await db.sql.Meeting.findAll({where:{OrganizationId:organizationId[0]}});
+        res.send(meetings);
+      },
     getUsers: function(req, res) {
         db.User.findAll()
         .then(dbUsers => res.json(dbUsers))
@@ -17,7 +17,9 @@ module.exports = {
 
     saveMeeting: function(req, res) {
         const meeting = req.body;
-        db.Meeting.create(meeting)
+        console.log("CONTROLLER meeting info: " + meeting);
+
+        db.sql.Meeting.create(meeting)
         .then(dbMeeting => res.json(dbMeeting))
         .catch(err => res.status(422).json(err));
     }
