@@ -12,6 +12,9 @@ module.exports = function(router, db) {
   router.route("/api/users")
     .get(controller.getUsers)
 
+  router.route("/meeting/:id")
+    .get(controller.getMeetingByID)
+
 
   return router;
 };
