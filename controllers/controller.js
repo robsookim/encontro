@@ -1,7 +1,6 @@
 const axios = require("axios");
-const db = require("../models");
 
-module.exports = {
+module.exports = (db)=>{return {
 
     getMeetings: async function(req, res) {
         const userId = req.passport.session.id;
@@ -23,4 +22,4 @@ module.exports = {
         .then(dbMeeting => res.json(dbMeeting))
         .catch(err => res.status(422).json(err));
     }
-}
+}}
