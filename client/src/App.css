@@ -246,6 +246,51 @@ input.placeholder {
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
+.externalLogin {
+  width: 100%;
+  /* background-color: #519e8a; */
+  display: flex;
+  flex-direction: column;
+}
+
+.linkedInLogin {
+  background-color: #519e8a;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 47%;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin-bottom: 0.25em;
+  /* margin-right: 1%;  */
+  align-items: center;
+  text-align: center; 
+}
+
+.googleLogin {
+  background-color: #519e8a;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 47%;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin-bottom: 0.25em; 
+  /* margin-left: 1%;  */
+  align-items: center;
+  text-align: center; 
+}
+
+.externalLogin a:link{
+  color: #000000;
+  text-decoration: none; 
+}
+.externalLogin a:visited{
+  color: #fff;
+  text-decoration: none; 
+}
 
 
 
