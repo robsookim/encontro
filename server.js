@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 require("dotenv").config();
 
@@ -15,9 +16,7 @@ const router = express.Router();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+
 app.use(cookieParser());
 
 const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/encontro";
@@ -51,11 +50,6 @@ passport.deserializeUser((user, done) => {
 });
 passport.use(require("./auth/googleconfig.js")(db));
 passport.use(require("./auth/linkedinconfig.js")(db));
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
-
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));
 
@@ -89,6 +83,13 @@ app.use(
 const routes = require("./routes")(router, db, passport, process.env.NODE_ENV);
 
 app.use(routes);
+/////////////********************IF USING BUILD FOLDER, NOT FOR HOT RELOADING */
+app.use(express.static(__dirname + "/client"));
+app.use(express.static(path.join(__dirname, '/client/build')));
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+///////////////************************************************************** */
 
 db.sql.sequelize
   .sync({ force: !process.env.NODE_ENV? true : false })
