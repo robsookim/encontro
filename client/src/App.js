@@ -7,18 +7,23 @@ import Home from "./pages/home";
 import Meetings from "./pages/meetings";
 import Users from "./pages/users";
 import Meeting from "./pages/meeting";
+import {createBrowserHistory} from "history";
+
 
 function App() {
+  const browserHistory = createBrowserHistory();
+
   return (
-    <Router>
+    
+    <Router basename={process.env.PUBLIC_URL} history={browserHistory}>
       <div>
         <Switch>
         <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/form" component={Form} />
-          <Route exact path="/meetings" component={Meetings} />
-          <Route exact path="/users" component={Users} />
-          <Route exact path="/meeting/:id" component={Meeting} />
+          <Route path="/login" component={Login} />
+          <Route path="/form" component={Form} />
+          <Route path="/meetings" component={Meetings} />
+          <Route path="/users" component={Users} />
+          <Route path="/meeting/:id" component={Meeting} />
 
         </Switch>
       </div>
