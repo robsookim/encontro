@@ -3,7 +3,10 @@ import API from "./../utils/API.js";
 
 class Meeting extends Component {
     state = {
-        title: ""
+        title: "",
+        date: "",
+        time: "",
+        agenda: ""
     }
 
     componentDidMount() {
@@ -11,9 +14,11 @@ class Meeting extends Component {
 
         API.getMeetingById(id).then(res => {
             // res.data contains all the meeting info we'll want to display in the component
-            console.log(res.data);
             this.setState({
-                title: res.data.title
+                title: res.data.title,
+                date: res.data.date,
+                time: res.data.time,
+                agenda: res.data.agenda
             });
         }).catch(err => console.log(err));
     }
@@ -22,8 +27,11 @@ class Meeting extends Component {
     render() {
       return (
         <div>
-            <span>looking for one particular meeting...</span>
+            <h1>Meeting Details</h1>
             <h1>{this.state.title}</h1>
+            <h3>{this.state.date}</h3>
+            <h3>{this.state.time}</h3>
+            <p>{this.state.agenda}</p>
         </div>
       );
     }
