@@ -91,7 +91,7 @@ const routes = require("./routes")(router, db, passport, process.env.NODE_ENV);
 app.use(routes);
 
 db.sql.sequelize
-  .sync({ force: process.env.NODE_ENV === "development" ? true : false })
+  .sync({ force: !process.env.NODE_ENV? true : false })
   .then(() => {
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
