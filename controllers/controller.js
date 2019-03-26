@@ -4,19 +4,22 @@ const agendaFunctions = require("./utilities/agenda.js");
 module.exports = db => {
   return {
     getMeetings: async function(req, res) {
-      const userId = req.passport.session.id;
-      const organizationId = await db.sql.User.findOne({
-        where: { id: userId },
-        attributes: ["organization"]
-      });
-      let meetings = await db.sql.Meeting.findAll({
-        where: { OrganizationId: organizationId[0] }
-      });
-      meetings = meetings.map(meeting => {
-        meeting.agenda = agendaFunctions.agendaIntoObject(meeting.agenda);
-        return meeting;
-      });
-      res.send(meetings);
+      // const userId = req.passport.session.id;
+      // const organizationId = await db.sql.User.findOne({
+      //   where: { id: userId },
+      //   attributes: ["organization"]
+      // });
+      // let meetings = await db.sql.Meeting.findAll({
+      //   where: { OrganizationId: organizationId[0] }
+      // });
+      // meetings = meetings.map(meeting => {
+      //   meeting.agenda = agendaFunctions.agendaIntoObject(meeting.agenda);
+      //   return meeting;
+      // });
+      // res.json(meetings);
+
+      let meetings = await db.sql.Meeting.findAll();
+      res.json(meetings);
     },
     getMeetingByID: async function(req, res) {
       const meetingId = req.params.id;

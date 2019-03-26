@@ -4,33 +4,16 @@ import API from "./../utils/API.js";
 
 class Meetings extends Component {
   state = {
-    meetings: [
-      {
-        id: "1",
-        title: "meeting 1",
-        date: "march 25, 2019",
-        time: "7:30pm",
-        agenda: "do some stuff"
-      },
-      {
-        id: "2",
-        title: "meeting 2",
-        date: "march 30, 2019",
-        time: "9:00pm",
-        agenda: "do more stuff"
-      }
-  ]
+    meetings: []
   };
 
   componentDidMount() {
-    // this.getMeetings();
+    this.getMeetings();
   }
 
   getMeetings = () => {
     API.getMeetings()
       .then(res => {
-        console.log("got some meetings...")
-        console.log(res.data)
         this.setState({ meetings: res.data })
       })
     .catch(err => console.log(err));
