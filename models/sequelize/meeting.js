@@ -26,6 +26,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     minutes: {
       type: DataTypes.TEXT
+    },
+    host:{
+      type:DataTypes.STRING
     }
   });
 
