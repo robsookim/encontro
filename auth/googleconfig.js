@@ -16,7 +16,7 @@ module.exports = function(db, nodeEnv) {
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: !nodeEnv?"http://localhost:3001/auth/google/callback":"https://encontro.herokuapp.com/auth/google/callback"
+      callbackURL: nodeEnv?"https://encontro.herokuapp.com/auth/google/callback":"http://localhost:3001/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, done) {
       done(null, extractProfile(profile));
