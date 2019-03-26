@@ -15,7 +15,7 @@ module.exports = function(db, nodeEnv) {
     {
       clientID: process.env.LINKEDIN_CLIENT_ID,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-      callbackURL: !nodeEnv?"http://localhost:3001/auth/linkedin/callback":"https://encontro.herokuapp.com/auth/linkedin/callback",
+      callbackURL: nodeEnv?"https://encontro.herokuapp.com/auth/linkedin/callback":"http://localhost:3001/auth/linkedin/callback",
       scope: ["r_emailaddress", "r_basicprofile"],
       state:true
     },
