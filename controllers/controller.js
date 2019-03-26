@@ -44,7 +44,7 @@ module.exports = db => {
     openMeetingLive: async function(req, res) {
        // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
        // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
-      const meeting = req.params.id;
+      const meetingId = req.params.id;
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId}
       });

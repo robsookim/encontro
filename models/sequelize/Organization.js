@@ -21,7 +21,6 @@ module.exports = function(sequelize, DataTypes) {
   
     Organization.associate = function(models) {
       Organization.hasMany(models.Meeting);
-
       // Organization.hasMany(models.User);
     };
   
