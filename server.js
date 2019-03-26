@@ -84,10 +84,9 @@ const routes = require("./routes")(router, db, passport, process.env.NODE_ENV);
 
 app.use(routes);
 /////////////********************IF USING BUILD FOLDER, NOT FOR HOT RELOADING */
-app.use(express.static(__dirname + "client"));
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  res.sendFile(path.join(__dirname, "client","build", "index.html"));
 });
 ///////////////************************************************************** */
 
