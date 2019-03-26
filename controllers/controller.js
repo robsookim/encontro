@@ -37,6 +37,50 @@ module.exports = db => {
       db.sql.Meeting.create(meeting)
         .then(dbMeeting => res.json(dbMeeting))
         .catch(err => res.status(422).json(err));
+    },
+    openMeetingLive: async function(req, res) {
+      const meeting = req.params.id;
+      const meeting = await db.sql.Meeting.findOne({
+        where: { id: meetingId }
+      });
+      meeting.attendees = meeting.attendees.split(",").map(x => {
+        return { attendee: x.trim(), present: false };
+      });
+      meeting.agenda = agendaFunctions.agendaIntoObject(meeting.agenda);
+
+      const liveMeeting = new db.mongo.Meeting(meeting);
+      liveMeeting.save(err => {
+        if (err) console.log(err);
+      });
+      res.send(meeting);
+    },
+    closeLiveMeeting: async function(req, res) {
+      const mongoMeetingId = req.params.id;
+      const mongoMeeting = await db.mongo.findByIdAndRemove(mongoMeetingId);
+      mongoMeeting.agenda = agendaFunctions.recieveAgenda(mongoMeeting.agenda);
+      mongoMeeting.attendees = mongoMeeting.attendees
+        .map(x => x.attendee)
+        .join(",");
+      delete mongoMeeting._id;
+      const sqlMeetingId = mongoMeeting.id;
+      await db.sql.Meeting.update(
+        { mongoMeeting },
+        { where: { id: sqlMeetingId } }
+      );
+      res.send("Meeting closed and saved");
+    },
+    joinMeeting: async function(req, res) {
+      const mongoMeetingId = req.params.id;
+      const mongoMeeting = await db.mongo.findById(mongoMeetingId);
+      if (mongoMeeting) {
+        if (!(req.passport.session.UserId in mongoMeeting.attendees)) {
+          res.status(404);
+        }
+      } else {
+        res.status(404);
+      }
+      req.session.currentMeeting = mongoMeetingId;
+      res.send(mongoMeeting);
     }
   };
 };
