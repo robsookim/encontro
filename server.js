@@ -11,6 +11,7 @@ require("dotenv").config();
 // =============================================================
 const app = express();
 const PORT = process.env.PORT || 3001;
+
 const router = express.Router();
 // Requiring our models for syncing
 
@@ -69,19 +70,19 @@ app.use(
   })
 );
 
-// function authRequired(req, res, next) {
-//   if (!req.session.passport) {
-//     req.session.oauth2return = req.originalUrl;
-//     if (
-//       req.originalUrl === "/" &&
-//       req.originalUrl === "/home"
-//     ) {
-//       return res.redirect("/login");
-//     }
-//   }
-//   next();
-// }
-// app.use(authRequired);
+function authRequired(req, res, next) {
+  if (!req.session.passport) {
+    req.session.oauth2return = req.originalUrl;
+    if (
+      req.originalUrl === "/" ||
+      req.originalUrl === "/home"
+    ) {
+      return res.redirect("/login");
+    }
+  }
+  next();
+}
+app.use(authRequired);
 
 const routes = require("./routes")(router, db, passport, process.env.NODE_ENV);
 

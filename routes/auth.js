@@ -15,11 +15,11 @@ module.exports = function(router,db, passport, nodeEnv) {
   
   router.get(
     "/auth/google/callback",
-    passport.authenticate("google", { failureRedirect: !nodeEnv?"http://localhost:3000/login":"https://encontro.herokuapp.com/login" }),
+    passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
       console.log("HEY WHERE AM I");
       
-      const redirect = !nodeEnv?"http://localhost:3000":"https://encontro.herokuapp.com/";
+      const redirect = "/";
       delete req.session.oauth2return;
       res.redirect(redirect);
     }
@@ -33,10 +33,15 @@ module.exports = function(router,db, passport, nodeEnv) {
   router.get(
     "/auth/linkedin/callback",
     passport.authenticate("linkedin", {
-      successRedirect: !nodeEnv?"http://localhost:3000":"https://encontro.herokuapp.com/",
-      failureRedirect: !nodeEnv?"http://localhost:3000":"https://encontro.herokuapp.com/"
+      successRedirect: "/",
+      failureRedirect: "/"
     })
   );
+
+  router.get("/auth/logout", (req,res)=>{
+    req.session.passport=null;
+    res.redirect("/login");
+  })
 
   return router;
 };

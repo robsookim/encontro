@@ -26,6 +26,9 @@ module.exports = function(sequelize, DataTypes) {
     },
     minutes: {
       type: DataTypes.TEXT
+    },
+    host:{
+      type:DataTypes.STRING
     }
   });
 
@@ -36,9 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     // Meeting.hasMany(models.Task);
 
         Meeting.belongsTo(models.Organization, {
-            foreignKey: {
-                allowNull: false
-            }
+            foreignKey: {}
         });
     }
     

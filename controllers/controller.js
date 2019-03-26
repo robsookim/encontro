@@ -42,10 +42,15 @@ module.exports = db => {
         .catch(err => res.status(422).json(err));
     },
     openMeetingLive: async function(req, res) {
-      const meeting = req.params.id;
+       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
+       // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
+      const meetingId = req.params.id;
       const meeting = await db.sql.Meeting.findOne({
-        where: { id: meetingId }
+        where: { id: meetingId}
       });
+      if(meeting.id !== req.passport.session.UserId){
+        res.status(403);
+      }
       meeting.attendees = meeting.attendees.split(",").map(x => {
         return { attendee: x.trim(), present: false };
       });
@@ -54,10 +59,12 @@ module.exports = db => {
       const liveMeeting = new db.mongo.Meeting(meeting);
       liveMeeting.save(err => {
         if (err) console.log(err);
+        return(liveMeeting);
       });
-      res.send(meeting);
     },
     closeLiveMeeting: async function(req, res) {
+      // grabs meeting data from mongo and deletes the document. This meeting data is then stored properly in sql for later access
+      // takes in a mongo meeting id and returns nothing to front end
       const mongoMeetingId = req.params.id;
       const mongoMeeting = await db.mongo.findByIdAndRemove(mongoMeetingId);
       mongoMeeting.agenda = agendaFunctions.recieveAgenda(mongoMeeting.agenda);
@@ -70,20 +77,21 @@ module.exports = db => {
         { mongoMeeting },
         { where: { id: sqlMeetingId } }
       );
-      res.send("Meeting closed and saved");
+      res.status(200);
     },
     joinMeeting: async function(req, res) {
+      // takes in mongo meeting id and adds meeting to the user's session if he/she has access
       const mongoMeetingId = req.params.id;
       const mongoMeeting = await db.mongo.findById(mongoMeetingId);
       if (mongoMeeting) {
         if (!(req.passport.session.UserId in mongoMeeting.attendees)) {
-          res.status(404);
+          res.status(403);
         }
       } else {
         res.status(404);
       }
       req.session.currentMeeting = mongoMeetingId;
-      res.send(mongoMeeting);
+      res.send(200);
     }
   };
 };

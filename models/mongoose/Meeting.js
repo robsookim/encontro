@@ -13,7 +13,8 @@ const MeetingSchema = new Schema({
   minutes: [],
   chat:[],
   attendees:[],
-  id:Number
+  id:Number,
+  host:String  //meeting can only be started by host
 });
 
 // This creates our model from the above schema, using mongoose's model method
