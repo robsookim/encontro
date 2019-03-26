@@ -38,5 +38,10 @@ module.exports = function(router,db, passport, nodeEnv) {
     })
   );
 
+  router.get("/auth/logout", (req,res)=>{
+    req.session.passport=null;
+    res.redirect("/login");
+  })
+
   return router;
 };
