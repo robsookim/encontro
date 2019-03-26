@@ -32,6 +32,8 @@ const db = {
 
 passport.use(require("./auth/googleconfig.js")(db, process.env.NODE_ENV));
 passport.use(require("./auth/linkedinconfig.js")(db, process.env.NODE_ENV));
+
+
 passport.serializeUser((user, done) => {
   console.log("SERIALIZE");
   db.sql.User.findOrCreate({
@@ -48,11 +50,12 @@ passport.deserializeUser((user, done) => {
     done(null, user);
   });
 });
+
+
 passport.use(require("./auth/googleconfig.js")(db));
 passport.use(require("./auth/linkedinconfig.js")(db));
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
