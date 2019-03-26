@@ -92,8 +92,8 @@ class Login extends Component {
 
             <div className="externalLogin">
             
-              <a href="http://localhost:3001/auth/linkedin">Login through LinkedIn</a>
-              <a href="http://localhost:3001/auth/google">Login with Google</a>
+              <a href="/auth/linkedin">Login through LinkedIn</a>
+              <a href="/auth/google">Login with Google</a>
 
             </div>
   
