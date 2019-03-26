@@ -11,7 +11,9 @@ const MeetingSchema = new Schema({
   title: String,
   agenda: [],
   minutes: [],
-  chat:[]
+  chat:[],
+  attendees:[],
+  id:Number
 });
 
 // This creates our model from the above schema, using mongoose's model method
