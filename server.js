@@ -34,7 +34,6 @@ const db = {
 passport.use(require("./auth/googleconfig.js")(db, process.env.NODE_ENV));
 passport.use(require("./auth/linkedinconfig.js")(db, process.env.NODE_ENV));
 
-
 passport.serializeUser((user, done) => {
   console.log("SERIALIZE");
   db.sql.User.findOrCreate({
@@ -51,7 +50,6 @@ passport.deserializeUser((user, done) => {
     done(null, user);
   });
 });
-
 
 passport.use(require("./auth/googleconfig.js")(db));
 passport.use(require("./auth/linkedinconfig.js")(db));
@@ -73,9 +71,13 @@ app.use(
 function authRequired(req, res, next) {
   if (!req.session.passport) {
     req.session.oauth2return = req.originalUrl;
+    console.log(req.originalUrl);
+    console.log(req.originalUrl.split("/")[1]);
+
     if (
-      req.originalUrl === "/" ||
-      req.originalUrl === "/home"
+      req.originalUrl !== "/login" &&
+      (req.originalUrl.split("/")[1].trim() !== "auth" &&
+        req.originalUrl.split("/")[1].trim() !== "static")
     ) {
       return res.redirect("/login");
     }
@@ -88,14 +90,14 @@ const routes = require("./routes")(router, db, passport, process.env.NODE_ENV);
 
 app.use(routes);
 /////////////********************IF USING BUILD FOLDER, NOT FOR HOT RELOADING */
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, "client/build")));
 app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "client","build", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 ///////////////************************************************************** */
 
 db.sql.sequelize
-  .sync({ force: !process.env.NODE_ENV? true : false })
+  .sync({ force: !process.env.NODE_ENV ? true : false })
   .then(() => {
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
