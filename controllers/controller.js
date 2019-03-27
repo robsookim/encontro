@@ -4,7 +4,7 @@ const agendaFunctions = require("./utilities/agenda.js");
 module.exports = db => {
   return {
     getMeetings: async function(req, res) {
-      // const userId = req.passport.session.id;
+      // const userId = req.session.passport.id;
       // const organizationId = await db.sql.User.findOne({
       //   where: { id: userId },
       //   attributes: ["organization"]
@@ -48,7 +48,7 @@ module.exports = db => {
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId}
       });
-      if(meeting.id !== req.passport.session.UserId){
+      if(meeting.id !== req.session.passport.id){
         res.status(403);
       }
       meeting.attendees = meeting.attendees.split(",").map(x => {
@@ -84,7 +84,7 @@ module.exports = db => {
       const mongoMeetingId = req.params.id;
       const mongoMeeting = await db.mongo.findById(mongoMeetingId);
       if (mongoMeeting) {
-        if (!(req.passport.session.UserId in mongoMeeting.attendees)) {
+        if (!(req.session.passport.id in mongoMeeting.attendees)) {
           res.status(403);
         }
       } else {
