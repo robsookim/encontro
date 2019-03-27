@@ -54,6 +54,7 @@ class Form extends Component {
       .then(res => {
         console.log("REACT saved the meeting")
         // this.getMeetings()
+        this.props.history.push("/meetings");
       }).catch(err => console.log(err));
     }
   
