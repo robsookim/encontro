@@ -26,11 +26,11 @@ class Home extends Component {
                   <h1>Encontro</h1>
                   <div className="jumbotron jumbotron-1 ">
                     <h2>Join Meeting</h2>
-                    <button type="button" className="btn btn-join">→</button>
+                    <a href="/meetings"><button type="button" className="btn btn-join">→</button></a>
                    </div>
                   <div className="jumbotron jumbotron-2">
                     <h2>Create Meeting</h2>
-                    <button type="button" className="btn btn-create">+</button>
+                    <a href="/form"><button type="button" className="btn btn-create">+</button></a>
                   </div>
                 </div>
 
