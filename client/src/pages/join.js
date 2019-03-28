@@ -10,6 +10,7 @@ class Join extends Component {
         return (
             <div>
                 <div className="container">
+                <h1>Encontro</h1>
                     <div className="jumbotron">
                         <h1>Join a Meeting</h1>
                         <div className="meetingName">

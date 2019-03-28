@@ -12,7 +12,15 @@ body{
 .jumbotron{
     background-color: #ffc673;
     width: 70%;
-    margin: 20px auto 0 auto;
+    margin: 20px auto 10px auto;
+    height: 80%;
+}
+.container h1{
+    font-size: 50px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #0b3b69;
 }
 h1{
     text-align: center;

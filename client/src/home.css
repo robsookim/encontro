@@ -20,6 +20,7 @@ h1{
     width: 40%;
     height: 80vh;
     display: inline-flex;
+    margin: 0 5px 0 5px;
 }
 .jumbotron-1 {
     background-color: #ffc673;
@@ -42,6 +43,7 @@ h2{
     color: white;
 
 }
+
 .btn-join{
     border-radius: 10px;
 }

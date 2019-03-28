@@ -10,6 +10,7 @@ import Meeting from "./pages/meeting";
 import {createBrowserHistory} from "history";
 
 
+
 function App() {
   const browserHistory = createBrowserHistory();
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/meetings" component={Meetings} />
           <Route path="/users" component={Users} />
           <Route path="/meeting/:id" component={Meeting} />
+          
 
         </Switch>
       </div>

@@ -25,16 +25,12 @@ class Home extends Component {
                 <div className="container-fluid">
                   <h1>Encontro</h1>
                   <div className="jumbotron jumbotron-1 ">
-                    <h2>Join Meeting</h2>
-                    <a href="join.js">
-                        <button type="button" className="btn btn-join">→</button>
-                    </a>
+                    <h2>Join Meeting</h2>                  
+                        <button type="button" className="btn btn-join">→</button>                   
                    </div>
                   <div className="jumbotron jumbotron-2">
-                    <h2>Create Meeting</h2>
-                    <a href="create.js">
-                        <button type="button" className="btn btn-create">+</button>
-                    </a>
+                    <h2>Create Meeting</h2>                    
+                        <button type="button" className="btn btn-create">+</button>                  
                   </div>
                 </div>
 
