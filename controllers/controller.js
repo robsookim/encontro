@@ -42,13 +42,13 @@ module.exports = db => {
         .catch(err => res.status(422).json(err));
     },
     openMeetingLive: async function(req, res) {
-       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
-       // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
+      // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
+      // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
       const meetingId = req.params.id;
       const meeting = await db.sql.Meeting.findOne({
-        where: { id: meetingId}
+        where: { id: meetingId }
       });
-      if(meeting.id !== req.session.passport.id){
+      if (meeting.id !== req.session.passport.id) {
         res.status(403);
       }
       meeting.attendees = meeting.attendees.split(",").map(x => {
@@ -59,7 +59,7 @@ module.exports = db => {
       const liveMeeting = new db.mongo.Meeting(meeting);
       liveMeeting.save(err => {
         if (err) console.log(err);
-        return(liveMeeting);
+        return liveMeeting;
       });
     },
     closeLiveMeeting: async function(req, res) {
@@ -92,6 +92,45 @@ module.exports = db => {
       }
       req.session.currentMeeting = mongoMeetingId;
       res.send(200);
+    },
+    getUsersInOrg: async function(req, res) {
+      // finds users within organization and returns array of names and ids
+      const user = await db.sql.User.findOne({
+        where: {
+          id: req.session.passport.id
+        }
+      });
+      const orgUsers = await db.sql.findAll({
+        where: {
+          id: user.get("organizationId")
+        }
+      });
+      res.send(
+        orgUsers.map(user => {
+          return { id: user.id, name: user.name };
+        })
+      );
+    },
+    getUsersInOrgBySearch: async function(req, res) {
+      // finds users within organization matching input field and returns array of names and ids
+      const user = await db.sql.User.findOne({
+        where: {
+          id: req.session.passport.id
+        }
+      });
+
+      const orgUsers = await db.sql.findAll({
+        where: {
+          id: user.get("organizationId")
+        }
+      });
+      res.send(
+        orgUsers.filter(user=>{
+          return user.match(new RegExp(`${req.body.searchName}`)) // searchName is the value in the search input field
+        }).map(user => {
+          return { id: user.id, name: user.name };
+        })
+      );
     }
   };
 };

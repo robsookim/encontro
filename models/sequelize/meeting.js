@@ -27,21 +27,22 @@ module.exports = function(sequelize, DataTypes) {
     minutes: {
       type: DataTypes.TEXT
     },
-    host:{
-      type:DataTypes.STRING
+    host: {
+      type: DataTypes.STRING
     }
   });
 
   Meeting.associate = function(models) {
-    Meeting.hasMany(models.User);
+    Meeting.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
 
-    // not sure if this will be necessary
-    // Meeting.hasMany(models.Task);
-
-        Meeting.belongsTo(models.Organization, {
-            foreignKey: {}
-        });
-    }
-    
-    return Meeting;
+    Meeting.belongsTo(models.Organization, {
+      foreignKey: {}
+    });
   };
+
+  return Meeting;
+};
