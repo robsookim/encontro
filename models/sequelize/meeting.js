@@ -35,12 +35,14 @@ module.exports = function(sequelize, DataTypes) {
   Meeting.associate = function(models) {
     Meeting.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: true
       }
     });
 
     Meeting.belongsTo(models.Organization, {
-      foreignKey: {}
+      foreignKey: {
+        allowNull:true
+      }
     });
   };
 
