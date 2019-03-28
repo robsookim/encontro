@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     from: {
-      type: DataTypes.String,
+      type: DataTypes.STRING,
       allowNull: false
     },
     organization: {

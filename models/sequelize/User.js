@@ -20,19 +20,11 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   User.associate = function(models) {
-    // User.hasMany(models.MeetingNote, {
-    //   onDelete: "cascade"
-    // });
+    User.hasMany(models.Meeting);
 
-    User.hasMany(models.Task, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
+    User.hasMany(models.Task);
 
-    // User.belongsTo(models.Organization, {
-    //   foreignKey: {}
-    // });
+    User.hasMany(models.Invitation);
   };
 
   return User;
