@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import Form from "./pages/form";
+import Create from "./pages/create";
 import Login from "./pages/login";
 import Home from "./pages/home";
+import Join from "./pages/join"; 
 import Meetings from "./pages/meetings";
 import Users from "./pages/users";
 import Meeting from "./pages/meeting";
@@ -20,7 +21,8 @@ function App() {
         <Switch>
         <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/form" component={Form} />
+          <Route path="/create" component={Create} />
+          <Route path="/join" component={Join} /> 
           <Route path="/meetings" component={Meetings} />
           <Route path="/users" component={Users} />
           <Route path="/meeting/:id" component={Meeting} />

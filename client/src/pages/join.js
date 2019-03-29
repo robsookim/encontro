@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import '../join.css';
 
 class Join extends Component {
-  
     render() {
         return (
             <div>
