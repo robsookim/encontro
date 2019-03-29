@@ -4,12 +4,12 @@ import '../meeting.css';
 // import API from "./../utils/API.js";
 
 class Meeting extends Component {
-  // state = {
-  //     title: "",
-  //     date: "",
-  //     time: "",
-  //     agenda: ""
-  // }
+  state = {
+      title: "",
+      date: "",
+      time: "",
+      agenda: ""
+  }
 
   // componentDidMount() {
   //     const id = this.props.match.params.id;
