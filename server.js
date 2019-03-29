@@ -51,8 +51,6 @@ passport.deserializeUser((user, done) => {
   });
 });
 
-passport.use(require("./auth/googleconfig.js")(db));
-passport.use(require("./auth/linkedinconfig.js")(db));
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET }));
 app.use(passport.initialize());
