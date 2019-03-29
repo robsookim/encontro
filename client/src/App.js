@@ -25,7 +25,8 @@ function App() {
           <Route path="/join" component={Join} /> 
           <Route path="/meetings" component={Meetings} />
           <Route path="/users" component={Users} />
-          <Route path="/meeting/:id" component={Meeting} />
+          {/* <Route path="/meeting/:id" component={Meeting} /> */}
+          <Route exact path="/meeting" component={Meeting} />  
 
         </Switch>
       </div>
