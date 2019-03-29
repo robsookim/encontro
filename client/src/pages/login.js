@@ -55,8 +55,6 @@ class Login extends Component {
     event.preventDefault();
   };
 
-
-
   handleSubmit = e => {
     e.preventDefault();
 
