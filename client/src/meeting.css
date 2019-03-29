@@ -36,7 +36,7 @@ white - #ffffff
 
 /* ------------------------------------------------------------ */
 
-/*  */
+/* notes section in the meeting page */
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
@@ -47,6 +47,8 @@ white - #ffffff
   flex: 0.8;
   background-color: #7A9CC6;
   width: 33%; 
+  /* height: 100%; */
+  min-height: 700px; 
 }
 
 .notes__input {
@@ -54,20 +56,24 @@ white - #ffffff
   font-family: inherit;
   font-size: inherit;
   border: none;
-  background-color: #9FBBCC; 
+  /* background-color: #9FBBCC;  */
+  background-color: #7A9CC6;
 }
 
-.notes__input_title {
+/* .notes__input_title { */
   /* margin-bottom: 1rem; */
-  font-size: 1.5em;
+  /* font-size: 1.5em; */
   /* background-color: #B3D2B2;  */
-  background-color: #9FBBCC; 
-}
+  /* background-color: #9FBBCC;  */
+/* } */
 
 .notes__input_text {
   /* flex-grow: 1; */
+  padding: 1px;
   line-height: 1.5;
-  background-color: #9FBBCC; 
+  min-height: 650px;
+  /* background-color: #9FBBCC;  */
   /* background-color: #B3D2B2;  */
   /* background-color: #BDE4A7;  */
+  background-color: #7A9CC6;
 }
