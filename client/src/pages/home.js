@@ -12,7 +12,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-        
         <div className="container-fluid">
           <h1>Encontro</h1>
           <div className="jumbotron jumbotron-1 ">
@@ -21,7 +20,7 @@ class Home extends Component {
             </div>
           <div className="jumbotron jumbotron-2">
             <h2>Create Meeting</h2>
-            <a href="/form"><button type="button" className="btn btn-create">+</button></a>
+            <a href="/create"><button type="button" className="btn btn-create">+</button></a>
           </div>
         </div>
 
