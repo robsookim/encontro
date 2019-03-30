@@ -12,17 +12,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-
-        <a href="/login">click to see login or create account options</a>
-        <br></br>
-        <a href="/create">click to go straight to create a new meeting</a>
-        <br></br>
-        <a href="/join">click to join an existing meeting</a>
-        <br></br>
-        <a href="/users">click  to see all the users</a>
-        <br></br>
-        <a href="/meeting">click to see the meeting page once a part of a meeting</a>
-        
         <div className="container-fluid">
           <h1>Encontro</h1>
           <div className="jumbotron jumbotron-1 ">
