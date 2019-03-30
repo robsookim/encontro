@@ -23,7 +23,8 @@ class Meeting extends Component {
               time: res.data.time,
               agenda: res.data.agenda
           });
-      }).catch(err => console.log(err));
+          console.log(this.state);
+      }).catch(err => console.log(err))
   }
   constructor(props) {
     super(props);
