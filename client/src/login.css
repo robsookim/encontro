@@ -55,7 +55,7 @@
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-.form-wrapper {
+/* .form-wrapper {
   width: 400px;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,17 @@
   border-radius: 10px; 
   box-shadow: 0px 10px 50px #555;
   background-color: #ffffff; 
-}
+} */
+
+.form-wrapper {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 60px 20px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 50px #555;
+  background-color: #ffffff;
+ }
 
 /* ------------------------------------------------------------ */
 
