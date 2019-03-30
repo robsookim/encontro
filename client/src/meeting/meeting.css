@@ -12,7 +12,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: #ffc673;
+  /* background-color: #0b3b69; */
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -100,6 +100,7 @@ white - #ffffff
   border-bottom: 1px solid #efefef;
   text-align: left;
   margin-bottom: 10px;
+  float: left;
 }
 
 .agendaTitle{
@@ -128,4 +129,9 @@ button {
   /* color: #7A9CC6;
   border-color: #7A9CC6; */
   background-color: #36c389;
+}
+
+chat_placeholder {
+  width: 300px; 
+  float: center; 
 }
