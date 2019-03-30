@@ -10,5 +10,10 @@ module.exports = function(router, db) {
   router.route("/api/users")
     // .get(controller.getUsers)
     .post(controller.getUsersInOrgBySearch)
+    
+  router.route("/api/organization")
+    .put(controller.joinOrganization)
+    .post(controller.createOrganization)
+
   return router;
 };
