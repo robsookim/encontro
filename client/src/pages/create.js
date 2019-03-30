@@ -100,8 +100,7 @@ class Create extends Component {
           return arr;
         }
       }else{
-        // console.log("Parent: "+parent);
-        // console.log(arr);
+
         arr[parent[0]].items = stepThrough(arr[parent[0]].items, parent.slice(1));
         return arr;
       }
