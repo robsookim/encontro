@@ -31,7 +31,7 @@ class Home extends Component {
             </div>
           <div className="jumbotron jumbotron-2">
             <h2>Create Meeting</h2>
-            <a href="/form"><button type="button" className="btn btn-create">+</button></a>
+            <a href="/create"><button type="button" className="btn btn-create">+</button></a>
           </div>
         </div>
 
