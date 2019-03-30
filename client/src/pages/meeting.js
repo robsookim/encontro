@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Notes from '../meeting/notes';
+import Agenda from '../meeting/agenda';
 import '../meeting/meeting.css';
 import API from "./../utils/API.js";
 
@@ -33,8 +34,8 @@ class Meeting extends Component {
       notes: {
         note0: {
           id: 0,
-          title: 'Notes',
-          text: 'add your notes here',
+          title: 'notes',
+          text: ' ',
         },
       },
     };
@@ -69,6 +70,7 @@ class Meeting extends Component {
 
       <main className="app">
         <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
+        <Agenda /> 
       </main>
 
     );
