@@ -69,6 +69,10 @@ white - #ffffff
   /* background-color: #9FBBCC;  */
 /* } */
 
+.notesTitle{
+  background-color: #36c389; 
+}
+
 .notes__input_text {
   /* flex-grow: 1; */
   padding: 1px;
@@ -102,6 +106,10 @@ white - #ffffff
   border-bottom: 1px solid #efefef;
   text-align: left;
   margin-bottom: 10px;
+}
+
+.agendaTitle{
+  background-color: #ff8566;
 }
 
 .agendaList{

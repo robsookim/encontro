@@ -1,13 +1,14 @@
 import React from 'react';
-import '../meeting.css';
+import './meeting.css';
 
 const Notes = ({currentNote, handleChange}) => (
   <section className="notes">
-    <input className="notes__input notes__input_title"
+    <h1 className="notesTitle">notes</h1>
+    {/* <input className="notes__input notes__input_title"
            type="text"
            name="title"
           //  onChange={handleChange}
-           value={currentNote.title} />
+           value={currentNote.title} /> */}
     <textarea className="notes__input notes__input_text"
               name="text"
               value={currentNote.text}
