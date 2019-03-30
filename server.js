@@ -46,9 +46,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
   console.log(user);
   console.log("hitting the deserialize path");
-  db.sql.User.findOrCreate({ where: { id: user.id } }).then(() => {
-    done(null, user);
-  });
+  done(null, user);
+
 });
 
 app.use(cookieParser());

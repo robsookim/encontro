@@ -113,15 +113,16 @@ module.exports = db => {
     },
     getUsersInOrgBySearch: async function(req, res) {
       // finds users within organization matching input field and returns array of names and ids
+      console.log(req.session.passport);
       const user = await db.sql.User.findOne({
         where: {
-          id: req.session.passport.id
+          id: req.session.passport.user.id
         }
       });
-
-      const orgUsers = await db.sql.findAll({
+      console.log(user);
+      const orgUsers = await db.sql.Organization.findAll({
         where: {
-          id: user.get("organizationId")
+          id: user.organizationId
         }
       });
       res.send(

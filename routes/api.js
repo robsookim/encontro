@@ -8,7 +8,7 @@ module.exports = function(router, db) {
     .post(controller.saveMeeting);
 
   router.route("/api/users")
-    .get(controller.getUsers)
-
+    // .get(controller.getUsers)
+    .post(controller.getUsersInOrgBySearch)
   return router;
 };
