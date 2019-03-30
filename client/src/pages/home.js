@@ -12,16 +12,6 @@ class Home extends Component {
   render() {
     return (
       <div>
-
-        <a href="client/src/pages/login.js">click to see login or create account options</a>
-        <br></br>
-        <a href="client/src/pages/create.js">click to go straight to create a new meeting</a>
-        <br></br>
-        <a href="client/src/pages/join.js">click to join an existing meeting</a>
-        <br></br>
-        <a href="client/src/pages/users.js">click  to see all the users</a>
-        <br></br>
-        <a href="client/src/pages/meeting.js">click to see the meeting page once a part of a meeting</a>
         
         <div className="container-fluid">
           <h1>Encontro</h1>

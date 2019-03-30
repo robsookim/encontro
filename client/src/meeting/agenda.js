@@ -29,11 +29,13 @@ export default class Agenda extends Component {
   render() {
     return (
       <div className="agendaWrapper">
+
         <h1 className="agendaTitle">agenda</h1>
+
         <ul className="agendaList">
           {this.state.list.map( (val)=> <li key={val}>{val}</li>)}
         </ul>
-        <input 
+        <input className="agendaInput"
           onChange={ (e)=>this.changeUserInput(e.target.value) }
           value={this.state.userInput} 
           type="text"
