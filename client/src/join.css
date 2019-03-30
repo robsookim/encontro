@@ -1,0 +1,57 @@
+body{
+  background-color: white;
+}
+.jumbotron{
+  background-color: #ffc673;
+  width: 70%;
+  margin: 20px auto 10px auto;
+  height: 80%;
+}
+.container h1{
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #0b3b69;
+}
+h1{
+  text-align: center;
+  color: #0b3b69;
+}
+#meetingNameInput{
+  width: 500px;
+  margin-left: 20px;
+}
+label{
+  font-weight: bold;
+  color: #0b3b69;
+}
+form{
+  text-align: center;
+  margin-top: 40px;
+  color: #0b3b69;
+}
+button{
+  width: 100px;
+  text-align: center;
+  margin-top: 30px;
+}
+.btn{
+  background-color: #36c389;
+  border: solid 2px #0b3b69;
+}
+.btn:hover{
+  background-color: #ff8566;
+}
+h2{
+  font-size: 25px;
+  text-align: center;
+  margin-top: 20px;
+  color: #0b3b69
+}
+li{
+  color: #0b3b69;
+}
+hr{
+  margin-top: 30px;
+}
