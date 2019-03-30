@@ -70,7 +70,7 @@ class Meeting extends Component {
 
       <main className="app">
         <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
-        {/* <Agenda />  */}
+        <Agenda /> 
       </main>
 
     );
