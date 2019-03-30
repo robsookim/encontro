@@ -9,8 +9,9 @@ class Create extends Component {
     title: "",
     date: "",
     time: "",
-    agenda: [{ header: "", items: [] }]
-    // attendees: []
+    agenda: [{ header: "", items: [] }],
+    attendees: [],
+    searchVal:""
   };
   constructor(props) {
     super(props);
@@ -26,6 +27,13 @@ class Create extends Component {
   };
 
   handleInputChange(event) {
+    let { name: fieldName, value } = event.target;
+
+    this.setState({
+      [fieldName]: value
+    });
+  }
+  handleSearchAttendee(event) {
     let { name: fieldName, value } = event.target;
 
     this.setState({
@@ -100,8 +108,7 @@ class Create extends Component {
           return arr;
         }
       }else{
-        // console.log("Parent: "+parent);
-        // console.log(arr);
+
         arr[parent[0]].items = stepThrough(arr[parent[0]].items, parent.slice(1));
         return arr;
       }
@@ -166,6 +173,10 @@ class Create extends Component {
               name="time"
               placeholder="Meeting Time"
             />
+            {/* <Input
+              value={this.state.searchVal}
+              onChange={this.handleInputChange}
+            /> */}
             {/* <TextArea
                   value={this.state.agenda}
                   onChange={this.handleInputChange}
