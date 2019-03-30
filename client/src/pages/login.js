@@ -111,7 +111,7 @@ class Login extends Component {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h1>Create Account</h1>
+          <h1 className="login-header">Create Account</h1>
           <form onSubmit={this.handleSubmit} noValidate>
 
             <div className="firstName">
