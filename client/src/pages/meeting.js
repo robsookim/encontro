@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Notes from '../meeting/notes';
 import Agenda from '../meeting/agenda';
 import '../meeting/meeting.css';
+import chat_placeholder from "../meeting/chat_placeholder.jpeg"
 import API from "./../utils/API.js";
 
 class Meeting extends Component {
@@ -69,8 +70,16 @@ class Meeting extends Component {
       // </div>
 
       <main className="app">
-        <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
         <Agenda /> 
+        <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
+        <div className="chat">
+          <img src={chat_placeholder} width="34%" height="900px" />
+        </div>
+        {/* <chat_placeholder/> */}
+        {/* <div className="chat">
+          <img src={chat_placeholder} width="30%" height="auto" />
+        </div> */}
+
       </main>
 
     );
