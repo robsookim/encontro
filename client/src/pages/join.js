@@ -1,10 +1,26 @@
 import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "./../components/Form";
-// import API from "./../utils/API.js";
+import API from "./../utils/API.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import '../join.css';
 
 class Join extends Component {
+    state = {
+        meetings: []
+      };
+
+      componentDidMount() {
+        this.getMeetings();
+      }
+
+      getMeetings = () => {
+        API.getMeetings()
+          .then(res => {
+            this.setState({ meetings: res.data })
+          })
+        .catch(err => console.log(err));
+      }
+
     render() {
         return (
             <div>
@@ -27,9 +43,21 @@ class Join extends Component {
                         <h2>Join Active Meeting</h2>
                         <div className="meetingActive">
                             <ul>
-                                <li>dummy meeting 1</li>
-                                <li>dummy meeting 2</li>
-                                <li>Pat smells meeting</li>
+                                {this.state.meetings.length ? (
+                                <ul>
+                                    {this.state.meetings.map(meeting => (
+                                    <li key={meeting.id}>
+                                        <a href={"/meeting/" + meeting.id}>
+                                        <strong>
+                                            {meeting.title}
+                                        </strong>
+                                        </a>
+                                    </li>
+                                    ))}
+                                </ul>
+                                ) : (
+                                <p>No Active Meetings</p>
+                                )}
                             </ul>
                         </div>
                     </div>
