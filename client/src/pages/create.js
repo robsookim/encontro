@@ -3,6 +3,7 @@ import { Input, TextArea, FormBtn } from "../components/Form";
 import API from "../utils/API.js";
 import "../App.css";
 import AgendaItem from "../components/AgendaItem";
+import axios from "axios"
 
 class Create extends Component {
   state = {
@@ -11,13 +12,15 @@ class Create extends Component {
     time: "",
     agenda: [{ header: "", items: [] }],
     attendees: [],
-    searchVal:""
+    attendeeSearch:""
   };
   constructor(props) {
     super(props);
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleSearchAttendee = this.handleSearchAttendee.bind(this);
+
   }
 
   getMeetings = () => {
@@ -39,6 +42,10 @@ class Create extends Component {
     this.setState({
       [fieldName]: value
     });
+    axios.post("/api/users").then(res=>{
+      console.log(res);
+    })
+
   }
   displayItems = (arr, level, parent) => {
     return arr.map((item, i) => {
@@ -173,10 +180,12 @@ class Create extends Component {
               name="time"
               placeholder="Meeting Time"
             />
-            {/* <Input
-              value={this.state.searchVal}
-              onChange={this.handleInputChange}
-            /> */}
+            <Input
+              value={this.state.attendeeSearch}
+              onChange={this.handleSearchAttendee}
+              name="attendeeSearch"
+              placeholder="Add attendees"
+            />
             {/* <TextArea
                   value={this.state.agenda}
                   onChange={this.handleInputChange}

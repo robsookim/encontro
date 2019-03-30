@@ -1,10 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
     var Organization = sequelize.define("Organization", {
-      id: {
-        type: DataTypes.STRING,
-        primaryKey: true,
-        unique: true
-      },
       name: DataTypes.STRING,
       picture: {
         type: DataTypes.STRING

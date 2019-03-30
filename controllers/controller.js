@@ -21,6 +21,42 @@ module.exports = db => {
       let meetings = await db.sql.Meeting.findAll();
       res.json(meetings);
     },
+    joinOrganization: async function(req, res) {
+      const org = await db.sql.Organization.findOne({
+        where: {
+          id: Number(req.body.orgInp)
+        }
+      });
+      if (org) {
+        const response = await db.sql.User.update(
+          { organizationId: org.id },
+          {
+            where: {
+              id: req.session.passport.user.id
+            }
+          }
+        );
+        await db.sql.Organization.update(
+          { members: org.members.concat(`,${req.session.passport.user.id}`) },
+          {
+            where: {
+              id: Number(org.id)
+            }
+          }
+        );
+        res.send(org.name);
+      } else {
+        res.sendStatus(404);
+      }
+    },
+    createOrganization: async function(req, res) {
+      console.log(req.body);
+      const newOrg = await db.sql.Organization.create({
+        members: req.session.passport.user.id,
+        name: req.body.orgInp
+      });
+      res.send(newOrg.name);
+    },
     getMeetingByID: async function(req, res) {
       const meetingId = req.params.id;
       const meeting = await db.sql.Meeting.findOne({
@@ -48,7 +84,7 @@ module.exports = db => {
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
-      if (meeting.id !== req.session.passport.id) {
+      if (meeting.id !== req.session.passport.user.id) {
         res.status(403);
       }
       meeting.attendees = meeting.attendees.split(",").map(x => {
@@ -113,23 +149,26 @@ module.exports = db => {
     },
     getUsersInOrgBySearch: async function(req, res) {
       // finds users within organization matching input field and returns array of names and ids
+      console.log(req.session.passport);
       const user = await db.sql.User.findOne({
         where: {
-          id: req.session.passport.id
+          id: req.session.passport.user.id
         }
       });
-
-      const orgUsers = await db.sql.findAll({
+      console.log(user);
+      const orgUsers = await db.sql.Organization.findAll({
         where: {
-          id: user.get("organizationId")
+          id: user.organizationId
         }
       });
       res.send(
-        orgUsers.filter(user=>{
-          return user.match(new RegExp(`${req.body.searchName}`)) // searchName is the value in the search input field
-        }).map(user => {
-          return { id: user.id, name: user.name };
-        })
+        orgUsers
+          .filter(user => {
+            return user.match(new RegExp(`${req.body.searchName}`)); // searchName is the value in the search input field
+          })
+          .map(user => {
+            return { id: user.id, name: user.name };
+          })
       );
     }
   };
