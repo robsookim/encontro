@@ -55,7 +55,7 @@ class Create extends Component {
       .then(res => {
         console.log("REACT saved the meeting")
         // this.getMeetings()
-        this.props.history.push("/meetings");
+        this.props.history.push("/join");
       }).catch(err => console.log(err));
     }
   
