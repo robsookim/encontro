@@ -47,25 +47,21 @@ class Join extends Component {
 
                 <div className="row">
                     <div className="meetingActive">
+                      <ul>
+                        {this.state.meetings.length ? (
                         <ul>
-                            {this.state.meetings.length ? (
-                            <ul>
-                                {this.state.meetings.length ? (
-                                <ul>
-                                    {this.state.meetings.map(meeting => (
-                                    <li key={meeting.id}>
-                                        <a href={"/meeting/" + meeting.id}>
-                                        <strong>
-                                            {meeting.title}
-                                        </strong>
-                                        </a>
-                                    </li>
-                                    ))}
-                                </ul>
-                                ) : (
-                                <p>No Active Meetings</p>
-                                )}
+                          {this.state.meetings.map(meeting => (
+                            <li key={meeting.id}>
+                                <a href={"/meeting/" + meeting.id}>
+                                  <strong>{meeting.title}</strong>
+                                </a>
+                            </li>
+                          ))}
                         </ul>
+                        ) : (
+                          <p>No Active Meetings</p>
+                        )}
+                      </ul>
                     </div>
                 </div>
             </div>
