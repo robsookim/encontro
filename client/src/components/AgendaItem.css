@@ -1,0 +1,17 @@
+.agenda-item-wrapper{
+    box-sizing: border-box;
+    width:90%;
+    height:60px;
+    background:white;
+}
+
+label.item-header{
+    box-sizing: border-box;
+    width:80%;
+    height:40px;
+}
+button.add-item{
+    box-sizing: border-box;
+    width:200px;
+    height:40px;
+}
