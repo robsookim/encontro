@@ -1,25 +1,38 @@
 const axios = require("axios");
 const agendaFunctions = require("./utilities/agenda.js");
+const keys = {
+  oneDeeper: "HOWELNVASIHVOAWNKVHONWDVAEV",
+  same: "LKNWDVLKQNDLVKNDLVKNQELDKNVLAEKDNVLQKENVQEWefv",
+  backOne: "8y4982y34230regh093h4g"
+};
+const regexx = new RegExp(
+  `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+  "gi"
+);
 
 module.exports = db => {
   return {
     getMeetings: async function(req, res) {
-      // const userId = req.session.passport.id;
-      // const organizationId = await db.sql.User.findOne({
-      //   where: { id: userId },
-      //   attributes: ["organization"]
-      // });
-      // let meetings = await db.sql.Meeting.findAll({
-      //   where: { OrganizationId: organizationId[0] }
-      // });
-      // meetings = meetings.map(meeting => {
-      //   meeting.agenda = agendaFunctions.agendaIntoObject(meeting.agenda);
-      //   return meeting;
-      // });
-      // res.json(meetings);
-
-      let meetings = await db.sql.Meeting.findAll();
+      const userId = req.session.passport.user.id;
+      const organizationId = await db.sql.User.findOne({
+        where: { id: userId },
+        attributes: ["organization"]
+      });
+      let meetings = await db.sql.Meeting.findAll({
+        where: { OrganizationId: organizationId.organization[0] }
+      });
+      console.log(meetings);
+      meetings = meetings.map(meeting => {
+        meeting.agenda = agendaFunctions.agendaIntoObject(
+          regexx,
+          meeting.agenda
+        );
+        return meeting;
+      });
       res.json(meetings);
+
+      // let meetings = await db.sql.Meeting.findAll();
+      // res.json(meetings);
     },
     joinOrganization: async function(req, res) {
       const org = await db.sql.Organization.findOne({
@@ -55,6 +68,10 @@ module.exports = db => {
         members: req.session.passport.user.id,
         name: req.body.orgInp
       });
+      await db.sql.User.update(
+        { organization: newOrg.id },
+        { where: { id: req.session.passport.user.id } }
+      );
       res.send(newOrg.name);
     },
     getMeetingByID: async function(req, res) {
@@ -62,17 +79,29 @@ module.exports = db => {
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
-      res.json(meeting);
+
+      for (let attendee of meeting.attendees.split(",")) {
+        if (req.session.passport.user.id === attendee) {
+          res.json(meeting);
+        }
+      }
+      res.status(403);
     },
     getUsers: function(req, res) {
       db.sql.User.findAll()
         .then(dbUsers => res.json(dbUsers))
         .catch(err => res.status(422).json(err));
     },
-    saveMeeting: function(req, res) {
+    saveMeeting: async function(req, res) {
       const meeting = req.body;
-      console.log("CONTROLLER meeting info: " + meeting);
+      console.log(meeting.agenda[0].items);
+      const user = await db.sql.User.findOne({
+        where: { id: req.session.passport.user.id }
+      });
+      meeting.OrganizationId = user.organization;
       meeting.agenda = agendaFunctions.recieveAgenda(meeting.agenda);
+      meeting.host = req.session.passport.user.id;
+      meeting.attendees = req.session.passport.user.id;
       db.sql.Meeting.create(meeting)
         .then(dbMeeting => res.json(dbMeeting))
         .catch(err => res.status(422).json(err));
@@ -120,14 +149,14 @@ module.exports = db => {
       const mongoMeetingId = req.params.id;
       const mongoMeeting = await db.mongo.findById(mongoMeetingId);
       if (mongoMeeting) {
-        if (!(req.session.passport.id in mongoMeeting.attendees)) {
+        if (!(req.session.passport.user.id in mongoMeeting.attendees)) {
           res.status(403);
         }
       } else {
         res.status(404);
       }
       req.session.currentMeeting = mongoMeetingId;
-      res.send(200);
+      res.status(200);
     },
     getUsersInOrg: async function(req, res) {
       // finds users within organization and returns array of names and ids

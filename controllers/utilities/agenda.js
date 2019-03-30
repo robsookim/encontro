@@ -1,12 +1,9 @@
 const keys = {
-  oneDeeper: "HOWELNVASIHVOAWNKVHONWDVAEV",
-  same: "LKNWDVLKQNDLVKNDLVKNQELDKNVLAEKDNVLQKENVQEWefv",
-  backOne: "8y4982y34230regh093h4g"
+  oneDeeper: "DPR332",
+  same: "SME332",
+  backOne: "BON332"
 };
-const regex = new RegExp(
-  `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-  "gi"
-);
+
 module.exports = {
   recieveAgenda: function recieveAgenda(agendaObj, curStr = "") {
     if (!(typeof agendaObj === "object")) {
@@ -15,24 +12,24 @@ module.exports = {
 
     if (Array.isArray(agendaObj)) {
       if (agendaObj.length === 1) {
-        return recieveAgenda(agendaObj[0]);
+        return this.recieveAgenda(agendaObj[0]);
       }
       return (
         agendaObj.reduce((str = "", arrItem) => {
-          return str + keys.same + recieveAgenda(arrItem);
+          return str + keys.same + this.recieveAgenda(arrItem);
         }) + keys.backOne
       );
     }
-    return agendaObj.header + keys.oneDeeper + recieveAgenda(agendaObj.items);
+    return agendaObj.header +keys.oneDeeper + this.recieveAgenda(agendaObj.items);
   },
-  agendaIntoObject: function agendaIntoObject(regex = regex, agendaStr) {
+  agendaIntoObject: function agendaIntoObject(regex, agendaStr) {
     const returnArray = [];
     let testArray = [];
 
     while ((testArray = regex.exec(agendaStr)) !== null) {
       if (testArray[2] === keys.oneDeeper) {
         //   console.log(testArray[0]);
-        const newLevel = agendaIntoObject(regex, agendaStr);
+        const newLevel = this.agendaIntoObject(regex, agendaStr);
         if (newLevel.agendaLevel !== null) {
           returnArray.push({
             header: testArray[0].slice(
