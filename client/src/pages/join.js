@@ -22,7 +22,7 @@ class Join extends Component {
         .catch(err => console.log(err));
       }
 
-      render() {
+    render(){
         return (
             <div className="container">
             
@@ -50,19 +50,21 @@ class Join extends Component {
                         <ul>
                             {this.state.meetings.length ? (
                             <ul>
-                                {this.state.meetings.map(meeting => (
-                                <li key={meeting.id}>
-                                    <a href={"/meeting/" + meeting.id}>
-                                    <strong>
-                                        {meeting.title}
-                                    </strong>
-                                    </a>
-                                </li>
-                                ))}
-                            </ul>
-                            ) : (
-                            <p>No Active Meetings</p>
-                            )}
+                                {this.state.meetings.length ? (
+                                <ul>
+                                    {this.state.meetings.map(meeting => (
+                                    <li key={meeting.id}>
+                                        <a href={"/meeting/" + meeting.id}>
+                                        <strong>
+                                            {meeting.title}
+                                        </strong>
+                                        </a>
+                                    </li>
+                                    ))}
+                                </ul>
+                                ) : (
+                                <p>No Active Meetings</p>
+                                )}
                         </ul>
                     </div>
                 </div>

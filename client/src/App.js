@@ -23,9 +23,9 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/create" component={Create} />
           <Route path="/join" component={Join} /> 
-          <Route path="/meetings" component={Meetings} />
-          <Route path="/users" component={Users} />
-          {/* <Route path="/meeting/:id" component={Meeting} /> */}
+          {/* <Route path="/meetings" component={Meetings} /> */}
+          {/* <Route path="/users" component={Users} /> */}
+          <Route path="/meeting/:id" component={Meeting} />
           <Route exact path="/meeting" component={Meeting} />  
 
         </Switch>
