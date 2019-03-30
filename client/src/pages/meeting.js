@@ -73,7 +73,7 @@ class Meeting extends Component {
         <Agenda /> 
         <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
         <div className="chat">
-          <img src={chat_placeholder} width="34%" height="900px" />
+          <img src={chat_placeholder} width="34%" min-height="900px" />
         </div>
         {/* <chat_placeholder/> */}
         {/* <div className="chat">
