@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Notes from '../meeting/notes';
-// import Agenda from '../meeting/agenda';
-// import '../meeting/meeting.css';
+import Agenda from '../meeting/agenda';
+import '../meeting/meeting.css';
 import API from "./../utils/API.js";
 
 class Meeting extends Component {

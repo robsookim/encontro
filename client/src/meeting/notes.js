@@ -1,5 +1,5 @@
 import React from 'react';
-// import '../meeting.css';
+import '../meeting.css';
 
 const Notes = ({currentNote, handleChange}) => (
   <section className="notes">
