@@ -33,6 +33,7 @@ class Join extends Component {
   startMeeting=(id, e)=>{
     API.startMeeting(id).then(res=>{
       console.log(res);
+      window.location.href="/meeting/"+res.data.id
     })
   }
 
