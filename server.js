@@ -44,7 +44,6 @@ passport.serializeUser((user, done) => {
   });
 });
 passport.deserializeUser((user, done) => {
-  console.log(user);
   console.log("hitting the deserialize path");
   done(null, user);
 
@@ -68,8 +67,7 @@ app.use(
 function authRequired(req, res, next) {
   if (!req.session.passport) {
     req.session.oauth2return = req.originalUrl;
-    console.log(req.originalUrl);
-    console.log(req.originalUrl.split("/")[1]);
+
 
     if (
       req.originalUrl !== "/login" &&

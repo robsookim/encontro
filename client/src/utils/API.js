@@ -6,11 +6,14 @@ export default {
     },
 
     getMeetingById: function(meetingID) {
-        return axios.get("/meeting/" + meetingID);
+        return axios.post("/meeting/id", {id:meetingID});
     },
 
     getMeetings: function() {
         return axios.get("/api/meetings");
+    },
+    getHostedMeetings: function() {
+        return axios.get("/api/meetings/ashost");
     },
 
     getUsers: function() {

@@ -10,7 +10,7 @@ class Create extends Component {
     title: "",
     date: "",
     time: "",
-    agenda: [{ header: "", items: [] }],
+    agenda: [{ header: "", items: [""] }],
     attendees: [],
     attendeeSearch:""
   };
@@ -78,6 +78,7 @@ class Create extends Component {
   };
   handleFormSubmit(event) {
     event.preventDefault();
+    console.log(this.state.agenda);
     console.log("form has been submitted");
     const meeting = {
       title: this.state.title,
@@ -90,7 +91,7 @@ class Create extends Component {
       title: "",
       date: "",
       time: "",
-      agenda: ""
+      agenda: [{ header: "", items: [] }]
     });
 
     API.saveMeeting(meeting)
@@ -121,9 +122,6 @@ class Create extends Component {
       }
     }
     let agendaCopy = stepThrough(this.state.agenda.slice(0), parent);
-
-    console.log(agendaCopy);
-    console.log(this.state.agenda);
 
     this.setState({
       agenda: agendaCopy
@@ -192,7 +190,7 @@ class Create extends Component {
                   name="agenda"
                   placeholder="Agenda"
                 /> */}
-            {this.displayItems(this.state.agenda, 0, [])}
+            {this.displayItems(this.state.agenda.slice(0), 0, [])}
             <FormBtn
               disabled={!this.state.title}
               onClick={this.handleFormSubmit}

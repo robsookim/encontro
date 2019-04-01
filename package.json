@@ -16,7 +16,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-linkedin-oauth2": "^1.6.1",
     "path": "^0.12.7",
-    "sequelize": "^4.43.0"
+    "sequelize": "^4.43.0",
+    "util": "^0.11.1"
   },
   "devDependencies": {},
   "scripts": {
