@@ -165,7 +165,7 @@ module.exports = db => {
       const liveMeeting = new db.mongo.Meeting(meeting.dataValues);
       liveMeeting.save(err => {
         if (err) console.log(err);
-        res.send(liveMeeting);
+        res.send({id:liveMeeting._id});
       });
     },
     closeLiveMeeting: async function(req, res) {
@@ -189,17 +189,25 @@ module.exports = db => {
     },
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
-      const mongoMeetingId = req.params.id;
-      const mongoMeeting = await db.mongo.Meeting.findById(mongoMeetingId);
+      console.log("ID: "+req.body.id);
+      const mongoMeetingId = req.body.id;
+      const mongoMeeting = await db.mongo.Meeting.findById(
+        db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
+      );
+      console.log(mongoMeeting);
+
       if (mongoMeeting) {
-        if (!(req.session.passport.user.id in mongoMeeting.attendees)) {
-          res.status(403);
+        for (let attendee of mongoMeeting.attendees) {
+          if (req.session.passport.user.id === attendee.attendee) {
+            console.log("user is allowed");
+            req.session.currentMeeting = mongoMeetingId;
+            res.send(mongoMeeting);
+          }
         }
+        res.status(403);
       } else {
         res.status(404);
       }
-      req.session.currentMeeting = mongoMeetingId;
-      res.status(200);
     },
     getUsersInOrg: async function(req, res) {
       // finds users within organization and returns array of names and ids
