@@ -26,7 +26,9 @@ class OrganizationForm extends Component {
               value={this.props.formState.orgSecret}
             />
           </label>
-          <span>Approval Required</span>
+          <span style={{
+            fontSize:"30px"
+          }}>Approval Required</span>
           <div className="org-form-input-wrapper">
             <input
               type="radio"
