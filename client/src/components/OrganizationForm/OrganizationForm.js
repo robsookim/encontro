@@ -8,16 +8,16 @@ class OrganizationForm extends Component {
           <h2>Create Organization</h2>
           <label>
             Organization Name
-            <input type="text" name="org-name" onChange={this.props.changeOrgFormValue}/>
+            <input type="text" name="orgName" onChange={this.props.changeOrgFormValue}/>
           </label>
           <label>
             Organization Secret
-            <input type="password" name="org-secret" onChange={this.props.changeOrgFormValue}/>
+            <input type="password" name="orgSecret" onChange={this.props.changeOrgFormValue}/>
           </label>
           <span>Approval Required</span>
-          <input type="radio" name="org-approval" id="Yes" value={true} onChange={this.props.changeOrgFormValue}/>
+          <input type="radio" name="orgApproval" id="Yes" value={true} onChange={this.props.changeOrgFormValue}/>
           <label for="Yes">Yes</label>
-          <input type="radio" name="org-approval" id="No" value={false} onChange={this.props.changeOrgFormValue}/>
+          <input type="radio" name="orgApproval" id="No" value={false} onChange={this.props.changeOrgFormValue}/>
           <label for="No">No</label>
           <button type="submit">
               Create
