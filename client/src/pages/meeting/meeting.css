@@ -1,0 +1,137 @@
+/* ************************************************************************************************************************ */
+/* all ******************************************************************************************************************** */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/*  */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* background-color: #0b3b69; */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* body{
+  font-family: 'Times New Roman', Times, serif;
+  line-height: 1.5; 
+  color: #333333;
+  text-decoration: none; 
+} */
+
+/* 
+MAIN COLORS
+orange - #ff8566
+green - #36c389
+yellow - #ffc673
+navy - #0b3b69
+white - #ffffff 
+*/
+
+/* ************************************************************************************************************************ */
+/* notes section ********************************************************************************************************** */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* notes section in the meeting page */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  flex: 0.8;
+  background-color: #36c389;
+  width: 33%; 
+  /* height: 100%; */
+  min-height: 900px; 
+  float: right;
+}
+
+.notes__input {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  /* background-color: #9FBBCC;  */
+  /* background-color: #7A9CC6; */
+}
+
+.notesTitle{
+  background-color: #36c389; 
+}
+
+.notes__input_text {
+  /* flex-grow: 1; */
+  padding: 1px;
+  line-height: 1.5;
+  min-height: 650px;
+  /* background-color: #9FBBCC;  */
+  /* background-color: #B3D2B2;  */
+  background-color: #BDE4A7; 
+  /* background-color: #7A9CC6; */
+}
+
+/* ************************************************************************************************************************ */
+/* agenda section ********************************************************************************************************* */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* agenda section in the meeting page */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.agendaWrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  flex: 0.8;
+  background-color: #ff8566;
+  width: 33%; 
+  /* height: 100%; */
+  min-height: 900px; 
+  border-bottom: 1px solid #efefef;
+  text-align: left;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.agendaTitle{
+  background-color: #ff8566;
+}
+
+.agendaList{
+  background-color: #B3D2B2; 
+}
+
+.agendaInput{
+  background-color: #36c389;
+}
+
+button {
+  outline: none;
+  box-shadow: none;
+  /* border-width: 2px; */
+  /* border-radius: 3px;
+  border-style: solid; */
+  /* padding: 8px; */
+  margin: 5px;
+  width: 40px;
+  height: 40px;
+  align-self: center;
+  /* color: #7A9CC6;
+  border-color: #7A9CC6; */
+  background-color: #36c389;
+}
+
+chat_placeholder {
+  width: 300px; 
+  float: center; 
+}
