@@ -6,7 +6,7 @@ import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "./../components/Form";
 // import API from "./../utils/API.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../home.css";
+import "./home.css";
 import NavBar from "../components/NavBar.js";
 import axios from "axios";
 
