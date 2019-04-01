@@ -1,3 +1,5 @@
 module.exports=()=>{
-    return (require("./Meeting.js"));
+    return {
+        Meeting:require("./Meeting")()
+    };
 }

@@ -16,9 +16,9 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         default: 0
       },
-      open:{
+      approvalRequired:{
         type: DataTypes.INTEGER,
-        default:0
+        default:1
       }
     });
   

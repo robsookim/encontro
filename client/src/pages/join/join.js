@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "./../components/Form";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./join.css";
 
 class Join extends Component {
@@ -30,6 +30,12 @@ class Join extends Component {
       })
       .catch(err => console.log(err));
   };
+  startMeeting=(id, e)=>{
+    API.startMeeting(id).then(res=>{
+      console.log(res);
+      window.location.href="/meeting/"+res.data.id
+    })
+  }
 
   render() {
     return (
@@ -43,74 +49,73 @@ class Join extends Component {
           onSearchType={this.updateSearch}
         />
 
-      <div className="container">
-        <h1>JOIN A MEETING</h1>
+        <div className="join-container">
 
-        <h2>Join by ID</h2>
+            <h1 className="titleMeeting">JOIN A MEETING</h1>
 
-        <div className="row">
-          <div className="meetingName">
-            {/* <h2>Join by ID</h2> */}
-            <form>
-              <div className="form-group">
-                <label for="meetingNameInput">Meeting Name</label>
-                <input
-                  type="name"
-                  className="form-control"
-                  id="meetingNameInput"
-                  placeholder="meeting name"
-                />
+            <h2>Join by ID</h2>
+
+            <div className="row">
+              <div className="meetingName">
+                {/* <h2>Join by ID</h2> */}
+                <form>
+                  <div className="form-group">
+                    <label for="meetingNameInput">Meeting Name</label>
+                    <input
+                      type="name"
+                      className="form-control"
+                      id="meetingNameInput"
+                      placeholder="meeting name"
+                    />
+                  </div>
+                  <button type="submit" className="btn btn-primary">
+                    Join
+                  </button>
+                </form>
               </div>
-              <button type="submit" className="btn btn-primary">
-                Join
-              </button>
-            </form>
-          </div>
+            </div>
+
+            <h2>Join Active Meeting</h2>
+
+            <div className="row">
+              <div className="meetingActive">
+                  {this.state.meetings.length ? (
+                    <ul>
+                      {this.state.meetings.map(meeting => (
+                        <li key={meeting.id}>
+                          <a href={"/meeting/" + meeting.id}>
+                            <strong>{meeting.title}</strong>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No Active Meetings</p>
+                  )}
+              </div>
+            </div>
+            <h2>Begin your Meeting</h2>
+
+            <div className="row">
+              <div className="meetingHosted">
+                  {this.state.hostedMeetings.length ? (
+                    <ul>
+                      {this.state.hostedMeetings.map(meeting => (
+                        <li key={meeting.id}>
+                          <span onClick={this.startMeeting.bind(this,meeting.id)}>
+                            <strong>{meeting.title}</strong>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>You are not the host of any meetings</p>
+                  )}
+              </div>
+            </div>
+
         </div>
 
-        <h2>Join Active Meeting</h2>
-
-        <div className="row">
-          <div className="meetingActive">
-            <ul>
-              {this.state.meetings.length ? (
-                <ul>
-                  {this.state.meetings.map(meeting => (
-                    <li key={meeting.id}>
-                      <a href={"/meeting/" + meeting.id}>
-                        <strong>{meeting.title}</strong>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No Active Meetings</p>
-              )}
-            </ul>
-          </div>
-        </div>
-        <h2>Begin your Meeting</h2>
-
-        <div className="row">
-          <div className="meetingHosted">
-            <ul>
-              {this.state.hostedMeetings.length ? (
-                <ul>
-                  {this.state.hostedMeetings.map(meeting => (
-                    <li key={meeting.id}>
-                      <a href={"/meeting/" + meeting.id}>
-                        <strong>{meeting.title}</strong>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>You are not the host of any meetings</p>
-              )}
-            </ul>
-          </div>
-        </div>
-      </div>
       </div>
     );
   }

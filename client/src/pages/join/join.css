@@ -49,24 +49,24 @@ white - #ffffff
   /* color: #0b3b69; */
 /* } */
 
-.container{
-  /* background-color: #ffc673; */
+.join-container{
   /* background-color: #289065;  */
-  background-color: #438D6F; 
-  width: 100%;
-  margin: 5% auto 5% auto;
-  height: 100%;
+  /* background-color: #438D6F;  */
+  /* background-color: #ffc673; */
   /* height: 800px; */
   /* position: relative; */
   /* display: flex; */
+  background-color: #36c389;
+  width: 70%; 
+  height: auto;
+  /* margin: 5% auto 5% auto; */
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
-
-h1{
+.titleMeeting{
   text-align: center;
   color: black; 
   font-weight: bolder; 

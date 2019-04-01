@@ -9,6 +9,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "moment": "^2.24.0",
     "mongoose": "^5.4.19",
     "mysql2": "^1.6.5",
     "nodeenv": "^1.0.0",
