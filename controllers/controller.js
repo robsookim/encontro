@@ -1,16 +1,15 @@
 const axios = require("axios");
 const agendaFunctions = require("./utilities/agenda.js");
+const util = require('util');
 const keys = {
-  oneDeeper: "HOWELNVASIHVOAWNKVHONWDVAEV",
-  same: "LKNWDVLKQNDLVKNDLVKNQELDKNVLAEKDNVLQKENVQEWefv",
-  backOne: "8y4982y34230regh093h4g"
+  oneDeeper: "DPR332",
+  same: "SME332",
+  backOne: "BON332"
 };
-const regexx = new RegExp(
-  `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-  "gi"
-);
+
 
 module.exports = db => {
+  
   return {
     getMeetings: async function(req, res) {
       const userId = req.session.passport.user.id;
@@ -19,17 +18,23 @@ module.exports = db => {
         attributes: ["organization"]
       });
       let meetings = await db.sql.Meeting.findAll({
-        where: { OrganizationId: organizationId.organization[0] }
+        where: { OrganizationId: organizationId.organization }
       });
-      console.log(meetings);
+
       meetings = meetings.map(meeting => {
+        const regexx = new RegExp(
+          `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+          "gi"
+        );
+        console.log("meeting agenda: "+meeting.agenda);
         meeting.agenda = agendaFunctions.agendaIntoObject(
           regexx,
           meeting.agenda
-        );
+        ).agendaLevel;
         return meeting;
       });
-      res.json(meetings);
+      console.log("meeting agenda: "+meetings[0].agenda);
+      res.send(meetings);
 
       // let meetings = await db.sql.Meeting.findAll();
       // res.json(meetings);
@@ -42,7 +47,7 @@ module.exports = db => {
       });
       if (org) {
         const response = await db.sql.User.update(
-          { organizationId: org.id },
+          { organizationId: Number(org.id) },
           {
             where: {
               id: req.session.passport.user.id
@@ -63,7 +68,6 @@ module.exports = db => {
       }
     },
     createOrganization: async function(req, res) {
-      console.log(req.body);
       const newOrg = await db.sql.Organization.create({
         members: req.session.passport.user.id,
         name: req.body.orgInp
@@ -75,14 +79,24 @@ module.exports = db => {
       res.send(newOrg.name);
     },
     getMeetingByID: async function(req, res) {
-      const meetingId = req.params.id;
+      console.log("HERE")
+      const meetingId = req.body.id;
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
-
+      const regexx = new RegExp(
+        `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+        "gi"
+      );
+      console.log("meeting agenda: "+meeting.agenda);
+      meeting.agenda = agendaFunctions.agendaIntoObject(
+        regexx,
+        meeting.agenda
+      ).agendaLevel;
       for (let attendee of meeting.attendees.split(",")) {
         if (req.session.passport.user.id === attendee) {
-          res.json(meeting);
+          console.log(meeting);
+          res.send(meeting);
         }
       }
       res.status(403);
@@ -94,12 +108,13 @@ module.exports = db => {
     },
     saveMeeting: async function(req, res) {
       const meeting = req.body;
-      console.log(meeting.agenda[0].items);
+
       const user = await db.sql.User.findOne({
         where: { id: req.session.passport.user.id }
       });
+
       meeting.OrganizationId = user.organization;
-      meeting.agenda = agendaFunctions.recieveAgenda(meeting.agenda);
+      meeting.agenda = agendaFunctions.recieveAgenda(meeting.agenda) + keys.backOne;
       meeting.host = req.session.passport.user.id;
       meeting.attendees = req.session.passport.user.id;
       db.sql.Meeting.create(meeting)
@@ -119,7 +134,7 @@ module.exports = db => {
       meeting.attendees = meeting.attendees.split(",").map(x => {
         return { attendee: x.trim(), present: false };
       });
-      meeting.agenda = agendaFunctions.agendaIntoObject(meeting.agenda);
+      meeting.agenda = agendaFunctions.agendaIntoObject(regexx, meeting.agenda).agendaLevel;
 
       const liveMeeting = new db.mongo.Meeting(meeting);
       liveMeeting.save(err => {
@@ -128,7 +143,7 @@ module.exports = db => {
       });
     },
     closeLiveMeeting: async function(req, res) {
-      // grabs meeting data from mongo and deletes the document. This meeting data is then stored properly in sql for later access
+      // grabs meeting data from mongo and deletes the document. meeting data is then stored properly in sql for later access
       // takes in a mongo meeting id and returns nothing to front end
       const mongoMeetingId = req.params.id;
       const mongoMeeting = await db.mongo.findByIdAndRemove(mongoMeetingId);
@@ -178,13 +193,11 @@ module.exports = db => {
     },
     getUsersInOrgBySearch: async function(req, res) {
       // finds users within organization matching input field and returns array of names and ids
-      console.log(req.session.passport);
       const user = await db.sql.User.findOne({
         where: {
           id: req.session.passport.user.id
         }
       });
-      console.log(user);
       const orgUsers = await db.sql.Organization.findAll({
         where: {
           id: user.organizationId

@@ -5,22 +5,22 @@ const keys = {
 };
 
 module.exports = {
-  recieveAgenda: function recieveAgenda(agendaObj, curStr = "") {
+  recieveAgenda: function recieveAgenda(agendaObj) {
     if (!(typeof agendaObj === "object")) {
       return agendaObj;
     }
 
     if (Array.isArray(agendaObj)) {
       if (agendaObj.length === 1) {
-        return this.recieveAgenda(agendaObj[0]);
+        return recieveAgenda(agendaObj[0]) + keys.backOne;
       }
       return (
-        agendaObj.reduce((str = "", arrItem) => {
-          return str + keys.same + this.recieveAgenda(arrItem);
-        }) + keys.backOne
+        agendaObj.reduce((str, arrItem) => {
+          return str + keys.same + recieveAgenda(arrItem);
+        }, "") + keys.backOne
       );
     }
-    return agendaObj.header +keys.oneDeeper + this.recieveAgenda(agendaObj.items);
+    return agendaObj.header + keys.oneDeeper + recieveAgenda(agendaObj.items);
   },
   agendaIntoObject: function agendaIntoObject(regex, agendaStr) {
     const returnArray = [];
@@ -29,7 +29,7 @@ module.exports = {
     while ((testArray = regex.exec(agendaStr)) !== null) {
       if (testArray[2] === keys.oneDeeper) {
         //   console.log(testArray[0]);
-        const newLevel = this.agendaIntoObject(regex, agendaStr);
+        const newLevel = agendaIntoObject(regex, agendaStr);
         if (newLevel.agendaLevel !== null) {
           returnArray.push({
             header: testArray[0].slice(

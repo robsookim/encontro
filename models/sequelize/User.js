@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     organization: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       default: null
     },
     numMeetings: {

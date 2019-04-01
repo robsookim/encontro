@@ -36,7 +36,6 @@ class Home extends Component {
     });
   };
   createOrg = event => {
-    console.log(this.state.orgSearchValue);
     axios.post("/api/organization", {orgInp:this.state.orgSearchValue}).then(res => {
       if (res.status === 200) {
         window.alert(`Organization ${res.data} created!`);

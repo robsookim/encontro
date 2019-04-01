@@ -6,7 +6,7 @@ export default {
     },
 
     getMeetingById: function(meetingID) {
-        return axios.get("/meeting/" + meetingID);
+        return axios.post("/meeting/id", {id:meetingID});
     },
 
     getMeetings: function() {
