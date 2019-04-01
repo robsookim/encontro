@@ -55,13 +55,8 @@
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-<<<<<<< HEAD
 .form-wrapper {
   width: 600px;
-=======
-/* .form-wrapper {
-  width: 400px;
->>>>>>> a6c51387e20bbf7b8695d62758e938c4bc8955f5
   display: flex;
   flex-direction: column;
   padding: 20px 60px 20px 20px;
