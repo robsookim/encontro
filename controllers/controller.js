@@ -1,15 +1,13 @@
 const axios = require("axios");
 const agendaFunctions = require("./utilities/agenda.js");
-const util = require('util');
+const util = require("util");
 const keys = {
   oneDeeper: "DPR332",
   same: "SME332",
   backOne: "BON332"
 };
 
-
 module.exports = db => {
-  
   return {
     getMeetings: async function(req, res) {
       const userId = req.session.passport.user.id;
@@ -21,19 +19,19 @@ module.exports = db => {
         where: { OrganizationId: organizationId.organization }
       });
 
-      meetings = meetings.map(meeting => {
-        const regexx = new RegExp(
-          `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-          "gi"
-        );
-        console.log("meeting agenda: "+meeting.agenda);
-        meeting.agenda = agendaFunctions.agendaIntoObject(
-          regexx,
-          meeting.agenda
-        ).agendaLevel;
-        return meeting;
-      });
-      console.log("meeting agenda: "+meetings[0].agenda);
+      // meetings = meetings.map(meeting => {
+      //   const regexx = new RegExp(
+      //     `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+      //     "gi"
+      //   );
+      //   console.log("meeting agenda: " + meeting.agenda);
+      //   meeting.agenda = agendaFunctions.agendaIntoObject(
+      //     regexx,
+      //     meeting.agenda
+      //   ).agendaLevel;
+      //   return meeting;
+      // });
+      // console.log("meeting agenda: " + meetings[0].agenda);
       res.send(meetings);
 
       // let meetings = await db.sql.Meeting.findAll();
@@ -45,9 +43,10 @@ module.exports = db => {
           id: Number(req.body.orgInp)
         }
       });
+
       if (org) {
         const response = await db.sql.User.update(
-          { organizationId: Number(org.id) },
+          { organization: Number(org.id) },
           {
             where: {
               id: req.session.passport.user.id
@@ -79,7 +78,7 @@ module.exports = db => {
       res.send(newOrg.name);
     },
     getMeetingByID: async function(req, res) {
-      console.log("HERE")
+      console.log("HERE");
       const meetingId = req.body.id;
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
@@ -88,7 +87,7 @@ module.exports = db => {
         `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
         "gi"
       );
-      console.log("meeting agenda: "+meeting.agenda);
+      console.log("meeting agenda: " + meeting.agenda);
       meeting.agenda = agendaFunctions.agendaIntoObject(
         regexx,
         meeting.agenda
@@ -114,39 +113,52 @@ module.exports = db => {
       });
 
       meeting.OrganizationId = user.organization;
-      meeting.agenda = agendaFunctions.recieveAgenda(meeting.agenda) + keys.backOne;
-      meeting.host = req.session.passport.user.id;
+      meeting.agenda =
+        agendaFunctions.recieveAgenda(meeting.agenda) + keys.backOne;
+      meeting.UserId = req.session.passport.user.id;
       meeting.attendees = req.session.passport.user.id;
+      meeting.active = 0;
       db.sql.Meeting.create(meeting)
         .then(dbMeeting => res.json(dbMeeting))
         .catch(err => res.status(422).json(err));
     },
+    getHostedMeetings: async function(req, res) {
+      const meetings = await db.sql.Meeting.findAll({
+        where: { UserId: req.session.passport.user.id }
+      });
+      res.send(meetings);
+    },
     openMeetingLive: async function(req, res) {
       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
       // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
-      const meetingId = req.params.id;
+      const meetingId = req.body.meetingId;
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
-      if (meeting.id !== req.session.passport.user.id) {
+      if (meeting.UserId !== req.session.passport.user.id) {
         res.status(403);
       }
       meeting.attendees = meeting.attendees.split(",").map(x => {
         return { attendee: x.trim(), present: false };
       });
-      meeting.agenda = agendaFunctions.agendaIntoObject(regexx, meeting.agenda).agendaLevel;
+      meeting.agenda = agendaFunctions.agendaIntoObject(
+        regexx,
+        meeting.agenda
+      ).agendaLevel;
 
       const liveMeeting = new db.mongo.Meeting(meeting);
       liveMeeting.save(err => {
         if (err) console.log(err);
-        return liveMeeting;
+        res.send(liveMeeting);
       });
     },
     closeLiveMeeting: async function(req, res) {
       // grabs meeting data from mongo and deletes the document. meeting data is then stored properly in sql for later access
       // takes in a mongo meeting id and returns nothing to front end
-      const mongoMeetingId = req.params.id;
-      const mongoMeeting = await db.mongo.findByIdAndRemove(mongoMeetingId);
+      const mongoMeetingId = req.body.meetingId;
+      const mongoMeeting = await db.mongo.Meeting.findByIdAndRemove(
+        mongoMeetingId
+      );
       mongoMeeting.agenda = agendaFunctions.recieveAgenda(mongoMeeting.agenda);
       mongoMeeting.attendees = mongoMeeting.attendees
         .map(x => x.attendee)
@@ -162,7 +174,7 @@ module.exports = db => {
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
       const mongoMeetingId = req.params.id;
-      const mongoMeeting = await db.mongo.findById(mongoMeetingId);
+      const mongoMeeting = await db.mongo.Meeting.findById(mongoMeetingId);
       if (mongoMeeting) {
         if (!(req.session.passport.user.id in mongoMeeting.attendees)) {
           res.status(403);

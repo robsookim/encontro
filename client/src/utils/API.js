@@ -12,6 +12,9 @@ export default {
     getMeetings: function() {
         return axios.get("/api/meetings");
     },
+    getHostedMeetings: function() {
+        return axios.get("/api/meetings/ashost");
+    },
 
     getUsers: function() {
         return axios.get("/api/users");
