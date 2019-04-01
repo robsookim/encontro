@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
-import Create from "./pages/create";
+import Create from "./pages/create/create";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import Join from "./pages/join/join"; 
