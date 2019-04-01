@@ -6,9 +6,9 @@ import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "./../components/Form";
 // import API from "./../utils/API.js";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./home.css";
 import NavBar from "../../components/NavBar";
 import axios from "axios";
+import "./home.css";
 
 class Home extends Component {
   state = {
@@ -57,7 +57,8 @@ class Home extends Component {
           onSearchType={this.updateSearch}
         />
         <div className="container-fluid">
-          <div className="jumbotron jumbotron-1 ">
+
+          {/* <div className="jumbotron jumbotron-1 ">
             <h2>Join Meeting</h2>
             <a href="/join">
               <button type="button" className="btn btn-join">
@@ -65,6 +66,7 @@ class Home extends Component {
               </button>
             </a>
           </div>
+
           <div className="jumbotron jumbotron-2">
             <h2>Create Meeting</h2>
             <a href="/create">
@@ -72,7 +74,38 @@ class Home extends Component {
                 +
               </button>
             </a>
+          </div> */}
+
+          <div className="section1">
+            <h2>Join Meeting</h2>
+            <a href="/join">
+              <button type="button" className="btn btn-join">
+                →
+              </button>
+            </a>
           </div>
+
+          <div className="section2">
+            {/* <div className="row">
+              <h2>Create Meeting</h2>
+            </div> */}
+            <h2>Create Meeting</h2>
+            {/* <div className="row">
+              <a href="/create">
+                <button type="button" className="btn btn-create">
+                  +
+                </button>
+              </a>
+            </div> */}
+            <a href="/create">
+              <button type="button" className="btn btn-create">
+                +
+              </button>
+            </a>
+          </div>
+
+
+
         </div>
       </div>
     );

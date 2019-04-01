@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Input, TextArea, FormBtn } from "../components/Form";
 import API from "../utils/API.js";
-import "../App.css";
+import "./create.css";
 import AgendaItem from "../components/AgendaItem";
 import axios from "axios"
 
 class Create extends Component {
-  state = {
+  state = { 
     title: "",
     date: "",
     time: "",
