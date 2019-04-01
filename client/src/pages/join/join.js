@@ -30,6 +30,11 @@ class Join extends Component {
       })
       .catch(err => console.log(err));
   };
+  startMeeting=(id, e)=>{
+    API.startMeeting(id).then(res=>{
+      console.log(res);
+    })
+  }
 
   render() {
     return (
@@ -73,7 +78,6 @@ class Join extends Component {
 
             <div className="row">
               <div className="meetingActive">
-                <ul>
                   {this.state.meetings.length ? (
                     <ul>
                       {this.state.meetings.map(meeting => (
@@ -87,28 +91,25 @@ class Join extends Component {
                   ) : (
                     <p>No Active Meetings</p>
                   )}
-                </ul>
               </div>
             </div>
             <h2>Begin your Meeting</h2>
 
             <div className="row">
               <div className="meetingHosted">
-                <ul>
                   {this.state.hostedMeetings.length ? (
                     <ul>
                       {this.state.hostedMeetings.map(meeting => (
                         <li key={meeting.id}>
-                          <a href={"/meeting/" + meeting.id}>
+                          <span onClick={this.startMeeting.bind(this,meeting.id)}>
                             <strong>{meeting.title}</strong>
-                          </a>
+                          </span>
                         </li>
                       ))}
                     </ul>
                   ) : (
                     <p>You are not the host of any meetings</p>
                   )}
-                </ul>
               </div>
             </div>
 

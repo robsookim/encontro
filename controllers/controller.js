@@ -1,12 +1,16 @@
 const axios = require("axios");
 const agendaFunctions = require("./utilities/agenda.js");
 const util = require("util");
+const moment = require("moment");
 const keys = {
   oneDeeper: "DPR332",
   same: "SME332",
   backOne: "BON332"
 };
-
+const regexx = new RegExp(
+  `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+  "gi"
+);
 module.exports = db => {
   return {
     getMeetings: async function(req, res) {
@@ -32,7 +36,7 @@ module.exports = db => {
       //   return meeting;
       // });
       // console.log("meeting agenda: " + meetings[0].agenda);
-      res.send(meetings);
+      res.send(meetings.filter(meeting => meeting.active === 1));
 
       // let meetings = await db.sql.Meeting.findAll();
       // res.json(meetings);
@@ -74,9 +78,9 @@ module.exports = db => {
       const newOrg = await db.sql.Organization.create({
         members: req.session.passport.user.id,
         name: req.body.orgName,
-        secret:req.body.orgSecret,
-        approvalRequired:req.body.orgApproval,
-        UserId:req.session.passport.user.id
+        secret: req.body.orgSecret,
+        approvalRequired: req.body.orgApproval,
+        UserId: req.session.passport.user.id
       });
       await db.sql.User.update(
         { organization: newOrg.id },
@@ -90,10 +94,7 @@ module.exports = db => {
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
-      const regexx = new RegExp(
-        `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-        "gi"
-      );
+
       console.log("meeting agenda: " + meeting.agenda);
       meeting.agenda = agendaFunctions.agendaIntoObject(
         regexx,
@@ -138,7 +139,7 @@ module.exports = db => {
     openMeetingLive: async function(req, res) {
       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
       // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
-      const meetingId = req.body.meetingId;
+      const meetingId = req.body.id;
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
@@ -152,8 +153,16 @@ module.exports = db => {
         regexx,
         meeting.agenda
       ).agendaLevel;
-
-      const liveMeeting = new db.mongo.Meeting(meeting);
+      console.log(meeting.dataValues);
+      meeting.date = new Date(
+        ...moment("040819", "MMDDYY")
+          .format("YYYY MM DD")
+          .split(" ")
+          .map((x, i) => {
+            return i === 1 ? Number(x) - 1 : Number(x);
+          })
+      );
+      const liveMeeting = new db.mongo.Meeting(meeting.dataValues);
       liveMeeting.save(err => {
         if (err) console.log(err);
         res.send(liveMeeting);
