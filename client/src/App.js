@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './App.css';
 import Create from "./pages/create";
-import Login from "./pages/login";
-import Home from "./pages/home";
-import Join from "./pages/join"; 
-import Meetings from "./pages/meetings";
-import Users from "./pages/users";
-import Meeting from "./pages/meeting";
+import Login from "./pages/login/login";
+import Home from "./pages/home/home";
+import Join from "./pages/join/join"; 
+// import Meetings from "./pages/meetings";
+// import Users from "./pages/users";
+import Meeting from "./pages/meeting/meeting";
 import {createBrowserHistory} from "history";
 
 

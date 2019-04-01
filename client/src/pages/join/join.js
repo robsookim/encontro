@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "./../components/Form";
-import API from "./../utils/API.js";
+import API from "../../utils/API";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../join.css";
+import "./join.css";
 
 class Join extends Component {
   state = {

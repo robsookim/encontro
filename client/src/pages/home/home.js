@@ -7,7 +7,7 @@ import React, { Component } from "react";
 // import API from "./../utils/API.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./home.css";
-import NavBar from "../components/NavBar.js";
+import NavBar from "../../components/NavBar";
 import axios from "axios";
 
 class Home extends Component {

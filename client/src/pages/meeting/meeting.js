@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Notes from '../meeting/notes';
 import Agenda from '../meeting/agenda';
-import '../meeting/meeting.css';
+import './meeting.css';
 import chat_placeholder from "../meeting/chat_placeholder.jpeg"
-import API from "./../utils/API.js";
+import API from "../../utils/API";
 
 class Meeting extends Component {
   state = {
