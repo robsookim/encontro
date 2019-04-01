@@ -28,7 +28,7 @@ mongoose.connect(MONGODB_URI, {
 
 const db = {
   sql: require("./models/sequelize"),
-  mongo: require("./models/mongoose")
+  mongo: require("./models/mongoose")()
 };
 
 passport.use(require("./auth/googleconfig.js")(db, process.env.NODE_ENV));

@@ -39,6 +39,11 @@ class Organization extends Component {
             orgApproval: 0
           }
         });
+        if (res.status === 200) {
+          window.alert(`Organization ${res.data} created!`);
+        } else {
+          window.alert("Could not create organization!");
+        }
       });
   };
   handleFormSubmitJoinOrg = e => {
