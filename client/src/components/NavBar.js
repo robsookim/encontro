@@ -9,14 +9,15 @@ class NavBar extends Component {
           justifyContent: "space-between",
           padding: "0 30px",
           background: "#ffc673",
-          borderBottom: "1px solid black",
+          // borderBottom: "1px solid black",
           marginBottom: "30px",
           alignItems: "center"
         }}
       >
         <span
           style={{
-            fontSize: "25px"
+            fontSize: "25px",
+            fontWeight: "bold"
           }}
         >
           encontro

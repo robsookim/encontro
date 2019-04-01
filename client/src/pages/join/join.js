@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import { Input, TextArea, FormBtn } from "./../components/Form";
 import API from "../../utils/API";
+import NavBar from "../../components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./join.css";
 
@@ -32,6 +33,16 @@ class Join extends Component {
 
   render() {
     return (
+      <div>
+        <NavBar
+          searchVal={this.state.orgSearchValue}
+          searchType={this.state.orgSearchType}
+          typeSwitch={this.changeSearchType}
+          joinOrg={this.joinOrg}
+          createOrg={this.createOrg}
+          onSearchType={this.updateSearch}
+        />
+
       <div className="container">
         <h1>JOIN A MEETING</h1>
 
@@ -99,6 +110,7 @@ class Join extends Component {
             </ul>
           </div>
         </div>
+      </div>
       </div>
     );
   }

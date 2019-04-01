@@ -8,6 +8,7 @@ white - #ffffff
 
 body{
     background-color: #36c389; 
+    position: relative;
 }
 
 .container-fluid{
@@ -21,10 +22,11 @@ h1{
     margin-bottom: 20px;
     color: #0b3b69;
 }
-.jumbotron{
+
+/* .jumbotron{
     width: 40%;
-    /* height: 80vh; */
-    /* height: 40vh; */
+    height: 80vh;
+    height: 40vh;
     display: inline-flex;
 }
 .jumbotron-1 {
@@ -33,11 +35,32 @@ h1{
 
 .jumbotron-2 {
     background-color: #ff8566;
+} */
+
+.section1{
+    width: 40%;
+    height: 80vh;
+    height: 40vh;
+    display: inline-flex;
+    background-color: #ffc637;
 }
+
+.section2{
+    width: 40%;
+    height: 80vh;
+    height: 40vh;
+    display: inline-flex;
+    background-color: #ff8566;
+}
+
 h2{
     color: #0b3b69;
     text-align: center;
+    margin: 20px; 
+    /* padding: 10px;  */
 }
+
+
 .btn{
     background-color: #36c389;
     width: 50px;
