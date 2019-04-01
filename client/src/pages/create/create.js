@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Input, TextArea, FormBtn } from "../components/Form";
-import API from "../utils/API.js";
+import { Input, TextArea, FormBtn } from "../../components/Form";
+import API from "../../utils/API.js";
 import "./create.css";
-import AgendaItem from "../components/AgendaItem";
+import AgendaItem from "../../components/AgendaItem";
 import axios from "axios"
 
 class Create extends Component {
