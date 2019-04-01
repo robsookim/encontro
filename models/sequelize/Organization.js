@@ -4,6 +4,10 @@ module.exports = function(sequelize, DataTypes) {
       picture: {
         type: DataTypes.STRING
       },
+      secret:{
+        type: DataTypes.STRING,
+        default: null
+      },
       members: {
         type: DataTypes.STRING,
         default: null
@@ -11,12 +15,16 @@ module.exports = function(sequelize, DataTypes) {
       numMeetings: {
         type: DataTypes.INTEGER,
         default: 0
+      },
+      open:{
+        type: DataTypes.INTEGER,
+        default:0
       }
     });
   
     Organization.associate = function(models) {
       Organization.hasMany(models.Meeting);
-      // Organization.hasMany(models.User);
+      Organization.belongsTo(models.User);
     };
   
     return Organization;
