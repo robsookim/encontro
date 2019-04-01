@@ -5,6 +5,8 @@ import Create from "./pages/create/create";
 import Login from "./pages/login/login";
 import Home from "./pages/home/home";
 import Join from "./pages/join/join"; 
+import Organization from "./pages/Organization/Organization.js"; 
+
 // import Meetings from "./pages/meetings";
 // import Users from "./pages/users";
 import Meeting from "./pages/meeting/meeting";
@@ -23,6 +25,8 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/create" component={Create} />
           <Route path="/join" component={Join} /> 
+          <Route path="/organization" component={Organization} /> 
+
           {/* <Route path="/meetings" component={Meetings} /> */}
           {/* <Route path="/users" component={Users} /> */}
           <Route path="/meeting/:id" component={Meeting} />
