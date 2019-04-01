@@ -109,10 +109,10 @@ class Login extends Component {
   render () {
     const { formErrors } = this.state; 
     return (
-      <div className="wrapper">
-        <div className="form-wrapper">
+      <div className="login-wrapper">
+        <div className="login-form-wrapper">
           <h1 className="login-header">Create Account</h1>
-          <form onSubmit={this.handleSubmit} noValidate>
+          <form onSubmit={this.handleSubmit} noValidate className="login-form">
 
             <div className="firstName">
               <label htmlFor="firstName">First Name: </label>
