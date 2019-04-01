@@ -45,23 +45,27 @@ module.exports = db => {
       });
 
       if (org) {
-        const response = await db.sql.User.update(
-          { organization: Number(org.id) },
-          {
-            where: {
-              id: req.session.passport.user.id
+        if (org.secret === req.body.orgSecret) {
+          const response = await db.sql.User.update(
+            { organization: Number(org.id) },
+            {
+              where: {
+                id: req.session.passport.user.id
+              }
             }
-          }
-        );
-        await db.sql.Organization.update(
-          { members: org.members.concat(`,${req.session.passport.user.id}`) },
-          {
-            where: {
-              id: Number(org.id)
+          );
+          await db.sql.Organization.update(
+            { members: org.members.concat(`,${req.session.passport.user.id}`) },
+            {
+              where: {
+                id: Number(org.id)
+              }
             }
-          }
-        );
-        res.send(org.name);
+          );
+          res.send(org.name);
+        } else {
+          res.status(403);
+        }
       } else {
         res.sendStatus(404);
       }
@@ -69,7 +73,10 @@ module.exports = db => {
     createOrganization: async function(req, res) {
       const newOrg = await db.sql.Organization.create({
         members: req.session.passport.user.id,
-        name: req.body.orgInp
+        name: req.body.orgName,
+        secret:req.body.orgSecret,
+        approvalRequired:req.body.orgApproval,
+        UserId:req.session.passport.user.id
       });
       await db.sql.User.update(
         { organization: newOrg.id },

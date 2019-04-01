@@ -34,7 +34,7 @@ class OrganizationForm extends Component {
               type="radio"
               name="orgApproval"
               id="Yes"
-              value={true}
+              value={1}
               onChange={this.props.changeOrgFormValue}
               className="org-form-input"
             />
@@ -43,7 +43,7 @@ class OrganizationForm extends Component {
               type="radio"
               name="orgApproval"
               id="No"
-              value={false}
+              value={0}
               onChange={this.props.changeOrgFormValue}
               className="org-form-input"
             />

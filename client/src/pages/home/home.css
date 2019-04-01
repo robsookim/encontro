@@ -52,6 +52,21 @@ h1{
     display: inline-flex;
     background-color: #ff8566;
 }
+.section3{
+    width: 40%;
+    height: 80vh;
+    height: 40vh;
+    display: inline-flex;
+    background-color: #0b3b69;
+    color:white;
+}
+.section4{
+    width: 40%;
+    height: 80vh;
+    height: 40vh;
+    display: inline-flex;
+    background-color: #36c389;
+}
 
 h2{
     color: #0b3b69;
@@ -70,6 +85,37 @@ h2{
     border: 2px solid #0b3b69;
     color: white;
 
+}
+
+.btn.btn-join-meeting{
+    background-color: #0b3b69;
+    border-color: #0b3b69;
+}
+.btn.btn-join-meeting:hover{
+    background-color: #ffc637;
+}
+.btn.btn-create-meeting{
+    background-color: #36c389;
+    border-color: #36c389;
+}
+.btn.btn-create-meeting:hover{
+    background-color: #ff8566;
+}
+.btn.btn-organization{
+    background-color: #f7c756;
+    border-color: #f7c756;
+    color:black;
+}
+.btn.btn-organization:hover{
+    background-color: #0b3b69;
+    color: white;
+}
+.btn.btn-invitation{
+    background-color: #ff8566;
+    border-color: #ff8566;
+}
+.btn.btn-invitation:hover{
+    background-color: #36c389;
 }
 /* .btn-join{
     border-radius: 10px;
