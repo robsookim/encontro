@@ -103,21 +103,19 @@ class Join extends Component {
 
               <div className="rowThree">
                 <div className="meetingHosted">
-                  <ul>
                     {this.state.hostedMeetings.length ? (
                       <ul>
                         {this.state.hostedMeetings.map(meeting => (
                           <li key={meeting.id}>
-                            <a href={"/meeting/" + meeting.id}>
+                            <div onClick={this.startMeeting.bind(this, meeting.id)}>
                               <strong>{meeting.title}</strong>
-                            </a>
+                            </div>
                           </li>
                         ))}
                       </ul>
                     ) : (
                       <p>You are not the host of any meetings</p>
                     )}
-                  </ul>
                 </div>
               </div>
                           

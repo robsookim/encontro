@@ -30,6 +30,7 @@ const db = {
   sql: require("./models/sequelize"),
   mongo: require("./models/mongoose")()
 };
+// console.log(mongoose.connection.collections.meetings);
 db.mongo.mongoose = mongoose;
 
 passport.use(require("./auth/googleconfig.js")(db, process.env.NODE_ENV));
@@ -47,7 +48,6 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((user, done) => {
   console.log("hitting the deserialize path");
   done(null, user);
-
 });
 
 app.use(cookieParser());
@@ -68,7 +68,6 @@ app.use(
 function authRequired(req, res, next) {
   if (!req.session.passport) {
     req.session.oauth2return = req.originalUrl;
-
 
     if (
       req.originalUrl !== "/login" &&
