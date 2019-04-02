@@ -89,7 +89,9 @@ class Organization extends Component {
   render() {
     return (
       <div className="org-page">
+
         <NavBar proPic={this.state.picture} userName={this.state.userName} />
+        
         <div
           className="flex-row"
           style={{
@@ -98,6 +100,7 @@ class Organization extends Component {
             alignItems: "flex-start"
           }}
         >
+
           <div
             className="flex-column"
             style={{
@@ -106,6 +109,7 @@ class Organization extends Component {
               borderRight: "1px solid #ff8566"
             }}
           >
+
             <OrganizationForm
               handleFormSubmit={this.handleFormSubmitNewOrg}
               formState={this.state.newOrganization}
@@ -113,6 +117,7 @@ class Organization extends Component {
               width="100%"
               height="auto"
             />
+            
             <OrganizationJoin
               handleFormSubmit={this.handleFormSubmitJoinOrg}
               formState={this.state.joinOrganization}
@@ -120,29 +125,42 @@ class Organization extends Component {
               width="100%"
               height="auto"
             />
+
           </div>
-          <div className="flex-column" style={{ width: "50%", height: "100%" }}>
+
+          <div 
+            className="flex-column" 
+            style={{ 
+              width: "50%", 
+              height: "100%"
+              // borderLeft: "1px solid #ff8566"
+            }}
+          >
+            
             <div
               className="org-display-wrapper flex-column"
-              style={{ width: "100%" }}
+              style={{ width: "93%" }}
             >
-              <h2>{this.state.orgName||"Your Organization"}</h2>
+
+              <h2 className="orgH2Titles">{this.state.orgName||"Your Organization"}</h2>
+
               <div className="flex-column" style={{ width: "100%" }}>
                 <div
                   className="flex-column"
                   style={{ width: "100%", height: "auto" }}
                 >
-                  <h3>Meetings</h3>
+
+                  <h3 lassName="orgH3Titles">Meetings</h3>
+
                   <div
                     className="org-meetings-display flex-column"
                     style={{
                       boxSizing: "borderBox",
-                      width: "90%",
+                      width: "95%",
                       height: "250px",
                       borderTop: "1px solid black",
-                      borderBottom: "1px solid black",
+                      // borderBottom: "1px solid black",
                       alignItems:"center",
-
                       overflow: "scroll"
                     }}
                   >
@@ -152,24 +170,28 @@ class Organization extends Component {
                       </span>
                     ))}
                   </div>
+
                 </div>
+
                 <div
                   className="flex-column"
                   style={{ width: "100%", height: "auto" }}
                 >
-                  <h3>Members</h3>
+                  <h3 className="orgH3Titles">Members</h3>
+
                   <div
                     className="org-members-display flex-column"
                     style={{
                       boxSizing: "borderBox",
-                      width: "90%",
+                      width: "95%",
                       height: "250px",
                       borderTop: "1px solid black",
-                      borderBottom: "1px solid black",
+                      // borderBottom: "1px solid black",
                       alignItems:"center",
                       overflow: "scroll"
                     }}
                   >
+
                     {this.state.orgMembers.map(member => (
                       <span >
                         {member.name}
@@ -179,6 +201,7 @@ class Organization extends Component {
                         />
                       </span>
                     ))}
+
                   </div>
                 </div>
               </div>

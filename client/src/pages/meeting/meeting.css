@@ -15,7 +15,7 @@
 }
 
 body{
-  background-color: #ffc673;
+  /* background-color: #ffc673; */
   /* line-height: 1.5;  */
   color: #333333;
   /* font-family: 'Times New Roman', Times, serif; */
@@ -44,6 +44,10 @@ white - #ffffff
 .mainApp{
   /* margin-top: -30px;  */
   min-height: 700px; 
+}
+
+NavBar{
+  background-color: #0b3b69;
 }
 
 /* ************************************************************************************************************************ */
@@ -201,7 +205,8 @@ button {
   flex-direction: column;
   padding: 1rem;
   flex: 0.8;
-  background-color: #0b3b69;
+  /* background-color: #0b3b69; */
+  background-color: #ffc673;
   width: 34%; 
   /* height: 100%; */
   min-height: 700px; 
@@ -213,6 +218,7 @@ button {
 
 .chatTitle {
   background-color: #0b3b69;
+  background-color: #ffc673;
   color: #efefef;
 }
 

@@ -1,9 +1,26 @@
+.org-page{
+    background-color: #0b3b69; 
+    color: #ffffff; 
+    width: 100%;
+    height: auto;
+}
+
+.org-display-wrapper {
+    background-color: #36c389;
+    border-radius: 20px;
+    margin: 10px; 
+    width: 90%;
+    /* min-height: 350px; */
+}
+
 .flex-column{
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* background-color: #36c389; */
 }
+
 .flex-row{
     position: relative;
     box-sizing: border-box;
@@ -12,4 +29,23 @@
     align-items: center;
     justify-content: space-around;
     flex-wrap:nowrap;
+}
+
+.orgH2Titles{
+    font-size: 40px; 
+    /* margin: 20px;  */
+    color: white;
+}
+
+/* .orgH3Titles{
+   margin: 25px;  
+} */
+
+.org-meetings-display{
+    background-color: #36c389;
+}
+
+.org-members-display {
+    background-color: #36c389;
+    margin-bottom: 50px;
 }
