@@ -118,6 +118,20 @@ module.exports = db => {
       );
       res.send(newOrg.name);
     },
+    editAgendaLive: async function(req, res) {
+      const mongoMeeting = await db.mongo.Meeting.findById(
+        db.mongo.mongoose.Types.ObjectId(req.session.currentMeeting)
+      );
+      if (req.session.passport.user.id === mongoMeeting.UserId) {
+        mongoMeeting.agenda = req.body;
+        mongoMeeting.save(err => {
+          if (err) console.log(err);
+          return res.send(mongoMeeting);
+        });
+      } else {
+        return res.send(mongoMeeting);
+      }
+    },
     getMeetingByID: async function(req, res) {
       console.log("HERE");
       const meetingId = req.body.id;
@@ -225,19 +239,11 @@ module.exports = db => {
     },
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
-      if (req.session.currentMeeting) {
-        const mongoMeetingId = req.body.id;
-        const mongoMeeting = await db.mongo.Meeting.findById(
-          db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
-        );
-        return res.send(mongoMeeting ? mongoMeeting : 404);
-      }
-      console.log("ID: " + req.body.id);
+
       const mongoMeetingId = req.body.id;
       const mongoMeeting = await db.mongo.Meeting.findById(
         db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
       );
-      console.log(mongoMeeting);
 
       if (mongoMeeting) {
         for (let attendeeNumber in mongoMeeting.attendees) {
@@ -252,9 +258,9 @@ module.exports = db => {
             return res.send(mongoMeeting);
           }
         }
-        res.status(403);
+        return res.status(403);
       } else {
-        res.status(404);
+        return res.status(404);
       }
     },
     getUsersInOrg: async function(req, res) {

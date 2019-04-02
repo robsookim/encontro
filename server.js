@@ -46,7 +46,6 @@ passport.serializeUser((user, done) => {
   });
 });
 passport.deserializeUser((user, done) => {
-  console.log("hitting the deserialize path");
   done(null, user);
 });
 
