@@ -1,19 +1,26 @@
 import React, { Component } from "react";
-// import { Input, TextArea, FormBtn } from "./../components/Form";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 import "./join.css";
 
 class Join extends Component {
   state = {
     meetings: [],
-    hostedMeetings: []
+    hostedMeetings: [],
+    userName:"",
+    picture:""
   };
 
   componentDidMount() {
     this.getMeetings();
     this.getHostedMeetings();
+    axios.get("/api/userinfo").then(res=>{
+      this.setState({
+        userName:res.data.name,
+        picture:res.data.picture
+      })
+    })
   }
 
   getMeetings = () => {
@@ -40,43 +47,14 @@ class Join extends Component {
   render() {
     return (
       <div className="join-wrapper">
-        <NavBar
-          searchVal={this.state.orgSearchValue}
-          searchType={this.state.orgSearchType}
-          typeSwitch={this.changeSearchType}
-          joinOrg={this.joinOrg}
-          createOrg={this.createOrg}
-          onSearchType={this.updateSearch}
-        />
+        <NavBar proPic={this.state.picture} userName={this.state.userName}/>
 
         <div className="join-container">
 
             <h1 className="titleJoinMeeting">join a meeting</h1>
 
             <div className="join-form-wrapper">
-            
-              <h2 className="subtitleJoinMeeting">✖︎ Join by ID ✖︎</h2>
-
-              <div className="rowOne">
-                <div className="meetingName">
-                  {/* <h2>Join by ID</h2> */}
-                  <form className="meetingNameForm">
-                    <div className="form-group">
-                      <label for="meetingNameInput">Enter Meeting ID:</label>
-                      <input
-                        type="name"
-                        className="form-control"
-                        id="meetingNameInput"
-                        placeholder="meeting ID"
-                      />
-                    </div>
-                    <button type="submit" className="btn btn-primary">
-                      Join
-                    </button>
-                  </form>
-                </div>
-              </div>
-
+  
               <h2 className="subtitleJoinMeeting">✖︎ Join Active Meeting ✖︎</h2>
 
               <div className="rowTwo">

@@ -13,9 +13,18 @@ import "./home.css";
 class Home extends Component {
   state = {
     orgSearchType: "join",
-    orgSearchValue: ""
+    orgSearchValue: "",
+    userName:"",
+    picture:""
   };
-  
+  componentDidMount(){
+    axios.get("/api/userinfo").then(res=>{
+      this.setState({
+        userName:res.data.name,
+        picture:res.data.picture
+      })
+    })
+  }
   changeSearchType = event => {
     this.setState({
       orgSearchType: this.state.orgSearchType === "join" ? "create" : "join"
@@ -48,26 +57,8 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <NavBar proPic={this.state.picture} userName={this.state.userName}/>
         <div className="container-fluid">
-
-          {/* <div className="jumbotron jumbotron-1 ">
-            <h2>Join Meeting</h2>
-            <a href="/join">
-              <button type="button" className="btn btn-join">
-                →
-              </button>
-            </a>
-          </div>
-
-          <div className="jumbotron jumbotron-2">
-            <h2>Create Meeting</h2>
-            <a href="/create">
-              <button type="button" className="btn btn-create">
-                +
-              </button>
-            </a>
-          </div> */}
 
           <div className="section1">
             <h2>Join Meeting</h2>
@@ -79,17 +70,9 @@ class Home extends Component {
           </div>
 
           <div className="section2">
-            {/* <div className="row">
-              <h2>Create Meeting</h2>
-            </div> */}
+
             <h2>Create Meeting</h2>
-            {/* <div className="row">
-              <a href="/create">
-                <button type="button" className="btn btn-create">
-                  +
-                </button>
-              </a>
-            </div> */}
+
             <a href="/create">
               <button type="button" className="btn btn-create-meeting">
                 +

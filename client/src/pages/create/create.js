@@ -3,16 +3,18 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import API from "../../utils/API.js";
 import "./create.css";
 import AgendaItem from "../../components/AgendaItem";
-import axios from "axios"
-
+import axios from "axios";
+import NavBar from "../../components/NavBar";
 class Create extends Component {
-  state = { 
+  state = {
     title: "",
     date: "",
     time: "",
     agenda: [{ header: "", items: [""] }],
     attendees: [],
-    attendeeSearch:""
+    attendeeSearch: "",
+    userName: "",
+    picture: ""
   };
   constructor(props) {
     super(props);
@@ -20,9 +22,15 @@ class Create extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleSearchAttendee = this.handleSearchAttendee.bind(this);
-
   }
-
+  componentDidMount(){
+    axios.get("/api/userinfo").then(res=>{
+      this.setState({
+        userName:res.data.name,
+        picture:res.data.picture
+      })
+    })
+  }
   getMeetings = () => {
     API.getMeetings()
       .then(res => console.log("got some meetings"))
@@ -42,10 +50,9 @@ class Create extends Component {
     this.setState({
       [fieldName]: value
     });
-    axios.post("/api/users").then(res=>{
+    axios.post("/api/users").then(res => {
       console.log(res);
-    })
-
+    });
   }
   displayItems = (arr, level, parent) => {
     return arr.map((item, i) => {
@@ -107,7 +114,7 @@ class Create extends Component {
     event.preventDefault();
 
     function stepThrough(arr, parent) {
-      if (parent.length <1) {
+      if (parent.length < 1) {
         if (typeof arr[me] === "object") {
           arr[me].items.push("");
           return arr;
@@ -115,9 +122,11 @@ class Create extends Component {
           arr[me] = { header: arr[me], items: [""] };
           return arr;
         }
-      }else{
-
-        arr[parent[0]].items = stepThrough(arr[parent[0]].items, parent.slice(1));
+      } else {
+        arr[parent[0]].items = stepThrough(
+          arr[parent[0]].items,
+          parent.slice(1)
+        );
         return arr;
       }
     }
@@ -131,7 +140,7 @@ class Create extends Component {
     console.log("ITEMCHANGE");
     event.preventDefault();
     function stepThrough(arr, parent) {
-      if (parent.length <1) {
+      if (parent.length < 1) {
         if (typeof arr[me] === "object") {
           arr[me].header = event.target.value;
           return arr;
@@ -139,10 +148,13 @@ class Create extends Component {
           arr[me] = event.target.value;
           return arr;
         }
-      }else{
+      } else {
         // console.log("Parent: "+parent);
         // console.log(arr);
-        arr[parent[0]].items = stepThrough(arr[parent[0]].items, parent.slice(1));
+        arr[parent[0]].items = stepThrough(
+          arr[parent[0]].items,
+          parent.slice(1)
+        );
         return arr;
       }
     }
@@ -154,50 +166,54 @@ class Create extends Component {
   };
   render() {
     return (
-      <div className="wrapper">
-        <div className="form-wrapper">
-          <h1>Create a Meeting</h1>
-          <form>
-            <Input
-              value={this.state.title}
-              onChange={this.handleInputChange}
-              name="title"
-              placeholder="Meeting Title"
-            />
-            {/* should change this to a "select a date" format? */}
-            <Input
-              value={this.state.date}
-              onChange={this.handleInputChange}
-              name="date"
-              placeholder="Meeting Date"
-            />
-            {/* change this to "select a time" format? */}
-            <Input
-              value={this.state.time}
-              onChange={this.handleInputChange}
-              name="time"
-              placeholder="Meeting Time"
-            />
-            <Input
-              value={this.state.attendeeSearch}
-              onChange={this.handleSearchAttendee}
-              name="attendeeSearch"
-              placeholder="Add attendees"
-            />
-            {/* <TextArea
-                  value={this.state.agenda}
-                  onChange={this.handleInputChange}
-                  name="agenda"
-                  placeholder="Agenda"
-                /> */}
-            {this.displayItems(this.state.agenda.slice(0), 0, [])}
-            <FormBtn
-              disabled={!this.state.title}
-              onClick={this.handleFormSubmit}
-            >
-              Schedule Meeting
-            </FormBtn>
-          </form>
+      <div>
+        <NavBar proPic={this.state.picture} userName={this.state.userName} />
+
+        <div className="wrapper">
+          <div className="form-wrapper">
+            <h1>Create a Meeting</h1>
+            <form>
+              <Input
+                value={this.state.title}
+                onChange={this.handleInputChange}
+                name="title"
+                placeholder="Meeting Title"
+              />
+              {/* should change this to a "select a date" format? */}
+              <Input
+                value={this.state.date}
+                onChange={this.handleInputChange}
+                name="date"
+                placeholder="Meeting Date"
+              />
+              {/* change this to "select a time" format? */}
+              <Input
+                value={this.state.time}
+                onChange={this.handleInputChange}
+                name="time"
+                placeholder="Meeting Time"
+              />
+              <Input
+                value={this.state.attendeeSearch}
+                onChange={this.handleSearchAttendee}
+                name="attendeeSearch"
+                placeholder="Add attendees"
+              />
+              {/* <TextArea
+                value={this.state.agenda}
+                onChange={this.handleInputChange}
+                name="agenda"
+                placeholder="Agenda"
+              /> */}
+              {this.displayItems(this.state.agenda.slice(0), 0, [])}
+              <FormBtn
+                disabled={!this.state.title}
+                onClick={this.handleFormSubmit}
+              >
+                Schedule Meeting
+              </FormBtn>
+            </form>
+          </div>
         </div>
       </div>
     );
