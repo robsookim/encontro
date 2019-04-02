@@ -251,19 +251,11 @@ module.exports = db => {
       );
 
       if (mongoMeeting) {
-        for (let attendeeNumber in mongoMeeting.attendees) {
-          if (
-            req.session.passport.user.id ===
-            mongoMeeting.attendees[attendeeNumber].attendee
-          ) {
             console.log("user is allowed");
-            mongoMeeting.attendees[attendeeNumber].present = true;
+            // mongoMeeting.attendees[attendeeNumber].present = true;
             mongoMeeting.save();
             req.session.currentMeeting = mongoMeetingId;
             return res.send(mongoMeeting);
-          }
-        }
-        return res.status(403);
       } else {
         return res.status(404);
       }
