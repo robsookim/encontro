@@ -27,7 +27,8 @@ class Meeting extends Component {
         time: "",
         agenda: [],
         chat: []
-      }
+      },
+      chat:[]
     };
   }
   componentDidMount() {
@@ -37,7 +38,8 @@ class Meeting extends Component {
       .then(res => {
         // res.data contains all the meeting info we'll want to display in the component
         this.setState({
-          meeting: res.data
+          meeting: res.data,
+          chat:res.data.chat
         });
         console.log(this.state);
       })
@@ -70,7 +72,7 @@ class Meeting extends Component {
       // </div>
 
       <main className="app">
-        <Agenda agenda={this.state.agenda} />
+        <Agenda agenda={this.state.meeting.agenda} />
         <Notes
           currentNote={this.state.notes[this.state.currentNote]}
           handleChange={this.handleChange}
