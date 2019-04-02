@@ -19,8 +19,8 @@ module.exports = db => {
         where: { id: userId },
         attributes: ["organization"]
       });
-      let meetings = await db.sql.Meeting.findAll({
-        where: { OrganizationId: organizationId.organization }
+      let meetings = await db.mongo.Meeting.find({
+        OrganizationId: organizationId.organization
       });
 
       // meetings = meetings.map(meeting => {
@@ -36,8 +36,8 @@ module.exports = db => {
       //   return meeting;
       // });
       // console.log("meeting agenda: " + meetings[0].agenda);
-      res.send(meetings.filter(meeting => meeting.active === 1));
-
+      console.log(meetings);
+      res.send(meetings);
       // let meetings = await db.sql.Meeting.findAll();
       // res.json(meetings);
     },
@@ -134,7 +134,11 @@ module.exports = db => {
       const meetings = await db.sql.Meeting.findAll({
         where: { UserId: req.session.passport.user.id }
       });
-      res.send(meetings);
+      res.send(
+        meetings.filter(meeting => {
+          return meeting.active ? false : true;
+        })
+      );
     },
     openMeetingLive: async function(req, res) {
       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
@@ -143,6 +147,7 @@ module.exports = db => {
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
+      db.sql.Meeting.update({ active: 1 }, { where: { id: meetingId } }); // doesnt need to be waited on
       if (meeting.UserId !== req.session.passport.user.id) {
         res.status(403);
       }
@@ -163,9 +168,10 @@ module.exports = db => {
           })
       );
       const liveMeeting = new db.mongo.Meeting(meeting.dataValues);
+
       liveMeeting.save(err => {
         if (err) console.log(err);
-        res.send({id:liveMeeting._id});
+        res.send({ id: liveMeeting._id });
       });
     },
     closeLiveMeeting: async function(req, res) {
@@ -189,7 +195,7 @@ module.exports = db => {
     },
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
-      console.log("ID: "+req.body.id);
+      console.log("ID: " + req.body.id);
       const mongoMeetingId = req.body.id;
       const mongoMeeting = await db.mongo.Meeting.findById(
         db.mongo.mongoose.Types.ObjectId(mongoMeetingId)

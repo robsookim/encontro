@@ -13,6 +13,7 @@ module.exports =()=>{
     agenda: [],
     minutes: [],
     chat:[],
+    OrganizationId:Number,
     attendees:[],
     id:Number,
     UserId:String  //meeting can only be started by host
