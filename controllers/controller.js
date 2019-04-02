@@ -71,10 +71,10 @@ module.exports = db => {
     joinOrganization: async function(req, res) {
       const org = await db.sql.Organization.findOne({
         where: {
-          id: Number(req.body.orgInp)
+          id: Number(req.body.orgId)
         }
       });
-
+      console.log(org);
       if (org) {
         if (org.secret === req.body.orgSecret) {
           const response = await db.sql.User.update(
@@ -93,12 +93,12 @@ module.exports = db => {
               }
             }
           );
-          res.send(org.name);
+          return res.send(org.name);
         } else {
-          res.status(403);
+          return res.status(403);
         }
       } else {
-        res.sendStatus(404);
+        return res.sendStatus(404);
       }
     },
     createOrganization: async function(req, res) {

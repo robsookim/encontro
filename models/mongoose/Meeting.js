@@ -18,7 +18,8 @@ module.exports =()=>{
     OrganizationId:Number,
     attendees:[],
     id:Number,
-    UserId:String  //meeting can only be started by host
+    UserId:String,  //meeting can only be started by host,
+    duration:{type:String, default:"00:30"}
   });
   
   // This creates our model from the above schema, using mongoose's model method
