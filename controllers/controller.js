@@ -248,6 +248,19 @@ module.exports = db => {
             return { id: user.id, name: user.name };
           })
       );
+    },
+
+    saveChat: async function(req, res) {
+      const userID = req.session.passport.user.name;
+      // const meetingID = req.body.id;
+
+      // const mongoMeeting = await db.mongo.Meeting.findById(db.mongo.mongoose.Types.ObjectId(req.session.meetingId));
+
+      console.log("~~~~~~~~~~~~~~~~~");
+      console.log(req.session);
+      console.log("~~~~~~~~~~~~~~~~~");
+      const chatEntry = userID + ": " + req.body.text;
+      res.json(chatEntry);
     }
   };
 };
