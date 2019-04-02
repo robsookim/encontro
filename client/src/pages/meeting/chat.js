@@ -23,15 +23,14 @@ export default class Chat extends Component {
     }
   
     addToChat(){
-        let currentChat= this.state.chat; 
+        // let currentChat= this.state.chat; 
 
         API.saveChat(this.props.meetingID, this.state.userInput)
             .then(res => {
-                console.log(res);
-                currentChat.push(res.data);
+                console.log(res.data);
                 // console.log(this.props.match.params.id);
                 this.setState({
-                    chat: currentChat,
+                    chat: res.data,
                     userInput: ''
                 })
             })
