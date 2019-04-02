@@ -68,8 +68,14 @@ state = {
       // </div>
 
       <main className="app">
+
         <NavBar /> 
 
+        <div className="timeSection">
+          <div className="timeStart">Start Time:</div>
+          <div className="timeDuration">Duration Time:</div>
+          <div className="timeLeft">Time Left:</div>
+        </div>
 
         <div className="mainApp">
         
