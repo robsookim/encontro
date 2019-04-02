@@ -17,6 +17,8 @@ class NavBar extends Component {
           minHeight: "50px"
         }}
       >
+      <a href="/"
+      style={{color:"white", textDecoration:"none"}}>
         <span
           style={{
             fontSize: "25px",
@@ -25,6 +27,7 @@ class NavBar extends Component {
         >
           encontro
         </span>
+      </a>
         <div>
           <img src={this.props.proPic} style={{height:"40px", width:"40px", marginRight:"10px"}}/>
           <a
