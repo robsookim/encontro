@@ -47,6 +47,7 @@ class Join extends Component {
   render() {
     return (
       <div className="join-wrapper">
+
         <NavBar proPic={this.state.picture} userName={this.state.userName}/>
 
         <div className="join-container">
@@ -54,7 +55,7 @@ class Join extends Component {
             <h1 className="titleJoinMeeting">join a meeting</h1>
 
             <div className="join-form-wrapper">
-  
+
               <h2 className="subtitleJoinMeeting">✖︎ Join Active Meeting ✖︎</h2>
 
               <div className="rowTwo">
@@ -77,7 +78,27 @@ class Join extends Component {
                 </div>
               </div>
 
-              <h2 className="subtitleJoinMeeting">✖︎ Begin your Meeting ✖︎</h2>
+              <div className="rowTwo">
+                <div className="meetingActive">
+                  <ul>
+                    {this.state.meetings.length ? (
+                      <ul>
+                        {this.state.meetings.map(meeting => (
+                          <li key={meeting.id}>
+                            <a href={"/meeting/" + meeting.id}>
+                              <strong>{meeting.title}</strong>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p>No Active Meetings</p>
+                    )}
+                  </ul>
+                </div>
+              </div>
+
+              <h2 className="subtitleJoinMeeting">✖︎ Hosted Meetings ✖︎</h2>
 
               <div className="rowThree">
                 <div className="meetingHosted">

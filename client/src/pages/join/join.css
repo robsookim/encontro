@@ -138,15 +138,15 @@ white - #ffffff
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-.rowOne{
-  /* background-color: #ff8566;  */
+/* .rowOne{
+  background-color: #ff8566; 
   background-color: #ffffff; 
 }
 
 .meetingName{
-  /* background-color: #438D6F; */
-  /* background-color: #ff8566;  */
-  /* background-color: #ffffff;  */
+  background-color: #438D6F;
+  background-color: #ff8566; 
+  background-color: #ffffff; 
   background-color: #ffc673; 
   width: 80%;
   min-height: 200px;
@@ -170,7 +170,7 @@ button{
 }
 .btn:hover{
   background-color: #ff8566;
-}
+} */
 
 /* ------------------------------------------------------------ */
 
@@ -190,7 +190,7 @@ button{
   /* background-color: #ffffff;  */
   background-color: #ffc673; 
   width: 80%;
-  min-height: 200px;
+  min-height: 300px;
   margin: 1% 10px 1% 10px;
   display: inline-block;
   border-radius: 10px; 
@@ -214,7 +214,7 @@ button{
 .meetingHosted{
   background-color: #ffc673; 
   width: 80%;
-  min-height: 200px;
+  min-height: 150px;
   margin: 1% 10px 2% 10px;
   display: inline-block;  
   border-radius: 10px; 
