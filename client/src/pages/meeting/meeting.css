@@ -12,16 +12,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* background-color: #0b3b69; */
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* body{
-  font-family: 'Times New Roman', Times, serif;
-  line-height: 1.5; 
+body{
+  background-color: #ffc673;
+  /* line-height: 1.5;  */
   color: #333333;
-  text-decoration: none; 
-} */
+  /* font-family: 'Times New Roman', Times, serif; */
+  /* text-decoration: none;  */
+}
 
 /* 
 MAIN COLORS
@@ -31,6 +30,62 @@ yellow - #ffc673
 navy - #0b3b69
 white - #ffffff 
 */
+
+/* ************************************************************************************************************************ */
+/* app section ********************************************************************************************************** */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* app section in the meeting page itself (basically all the sections) */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.mainApp{
+  /* margin-top: -30px;  */
+  min-height: 700px; 
+}
+
+/* ************************************************************************************************************************ */
+/* time section ********************************************************************************************************** */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* times */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.timeSection{
+  width: 100%;
+  height: 50px; 
+  margin-top: -25px;
+  padding-bottom: 10px; 
+  background-color: #333333;
+  color: #efefef;
+  padding: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 20px;
+  font-style: bolder;
+}
+
+.timeStart{
+  width: 33%;
+  float: left;
+  text-align: left;
+}
+
+.timeDuration{  
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+.timeLeft{
+  width: 33%;
+  float: left;
+  text-align: right;
+}
 
 /* ************************************************************************************************************************ */
 /* notes section ********************************************************************************************************** */
@@ -50,7 +105,7 @@ white - #ffffff
   background-color: #36c389;
   width: 33%; 
   /* height: 100%; */
-  min-height: 900px; 
+  min-height: 700px; 
   float: right;
 }
 
@@ -71,7 +126,7 @@ white - #ffffff
   /* flex-grow: 1; */
   padding: 1px;
   line-height: 1.5;
-  min-height: 650px;
+  min-height: 600px;
   /* background-color: #9FBBCC;  */
   /* background-color: #B3D2B2;  */
   background-color: #BDE4A7; 
@@ -96,7 +151,7 @@ white - #ffffff
   background-color: #ff8566;
   width: 33%; 
   /* height: 100%; */
-  min-height: 900px; 
+  min-height: 700px; 
   border-bottom: 1px solid #efefef;
   text-align: left;
   margin-bottom: 10px;
@@ -131,10 +186,15 @@ button {
   background-color: #36c389;
 }
 
-chat_placeholder {
-  width: 300px; 
-  float: center; 
-}
+/* ************************************************************************************************************************ */
+/* chat section ********************************************************************************************************* */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* chat section in the meeting page */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .chatWrapper {
   display: flex;
@@ -142,9 +202,9 @@ chat_placeholder {
   padding: 1rem;
   flex: 0.8;
   background-color: #0b3b69;
-  width: 33%; 
+  width: 34%; 
   /* height: 100%; */
-  min-height: 900px; 
+  min-height: 700px; 
   border-bottom: 1px solid #efefef;
   text-align: left;
   margin-bottom: 10px;
@@ -170,11 +230,12 @@ chat_placeholder {
 .chatBtn {
   background-color: #36c389;
   width: 50px;
-  height: 20px;
+  height: 40px;
   font-size: 15px;
   font-weight: bold;
   border: 2px solid #36c389;
   color: white;
+  border-radius: 10px; 
 }
 
 .chatEntry {
@@ -182,4 +243,50 @@ chat_placeholder {
   color: #0b3b69;
   border: 2px solid #BDE4A7;
   margin: 5px;
+}
+
+
+/* ************************************************************************************************************************ */
+/* buttons section ********************************************************************************************************* */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* buttons at the end of the meeting page */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.endButtons{
+  align-items: center;
+  text-align: center; 
+  background-color: #ffc673;
+  margin-top:  
+}
+
+.saveNotesButton{
+  width: 48%; 
+  height: 50px;
+  background-color: #ffc673;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px; 
+  margin-bottom: 1.5em;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.endMeetingButton{
+  width: 48%; 
+  height: 50px;
+  background-color: #ffc673;
+  color: #fff;
+  border: 2px solid #fff;
+  border-radius: 10px; 
+  margin-bottom: 1.5em;
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 1px;
 }
