@@ -7,10 +7,7 @@ const keys = {
   same: "SME332",
   backOne: "BON332"
 };
-const regexx = new RegExp(
-  `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-  "gi"
-);
+
 module.exports = db => {
   return {
     getMeetings: async function(req, res) {
@@ -133,6 +130,10 @@ module.exports = db => {
       }
     },
     getMeetingByID: async function(req, res) {
+      const regexx = new RegExp(
+        `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+        "gi"
+      );
       console.log("HERE");
       const meetingId = req.body.id;
       const meeting = await db.sql.Meeting.findOne({
@@ -187,6 +188,10 @@ module.exports = db => {
     openMeetingLive: async function(req, res) {
       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
       // takes in a meeting id and returns the mongo meeting object, after making sure that the host is the session's user
+      const regexx = new RegExp(
+        `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
+        "gi"
+      );
       const meetingId = req.body.id;
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
