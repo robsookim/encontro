@@ -41,6 +41,7 @@ body{
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
+
 .container-fluid{
     text-align: center;
     margin-bottom: 30px;
@@ -85,7 +86,10 @@ h2{
     width: 36%;
     height: 43vh;
     display: inline-flex;
+/*     background-color: #ffc637; */
     background-color: #fec547;
+    border: white 2px solid;
+    margin: 5px 5px 5px 5px;
     text-align: center;
 }
 
@@ -94,6 +98,8 @@ h2{
     height: 43vh;
     display: inline-flex;
     background-color: #ff8566;
+    border: white 2px solid;
+    margin: 5px 5px 5px 5px;
     text-align: center;
 }
 .section3{
@@ -101,6 +107,12 @@ h2{
     height: 43vh;
     display: inline-flex;
     background-color: #0b3b69;
+    color:white;
+    border: white 2px solid;
+    margin: 5px 5px 5px 5px;
+}
+
+.section3Title{
     color:white;
     text-align: center;
 }
@@ -110,6 +122,8 @@ h2{
     height: 43vh;
     display: inline-flex;
     background-color: #36c389;
+    border: white 2px solid;
+    margin: 5px 5px 5px 5px;
     text-align: center;
 }
 
