@@ -18,7 +18,7 @@
 body{ 
   /* background-color: #0b3b69; 
   background-color: #36c389;  */
-  background-color: #7CA091; 
+  background-color: white; 
   /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   color: black;  */
 }
@@ -44,6 +44,7 @@ white - #ffffff
 .join-wrapper{
   /* height: 100vh; */
   width: 100%;
+  height: 100%; 
   /* display: flex;  */
   flex-direction: column;
   justify-content: center;
@@ -59,13 +60,13 @@ white - #ffffff
   /* background-color: #289065;  */
   /* background-color: #438D6F;  */
   /* background-color: #36c389; */
-  background-color: #ff8566; 
   /* height: 800px; */
   /* position: relative; */
   /* flex-direction: row; */
   /* flex-wrap: wrap; */
   /* justify-content: center; */
   /* align-items: center; */
+  background-color: #ff8566; 
   width: 55%; 
   height: auto;
   flex-direction: column;
@@ -77,11 +78,11 @@ white - #ffffff
 }
 
 .join-form-wrapper{
-  background-color: #ffffff; 
-  margin-left: 15px; 
-  margin-right: 15px; 
-  margin-bottom: 20px; 
-  padding: 10px; 
+  /* background-color: #ffffff; 
+  background-color: #619B8A; */
+  background-color: #ff8566;
+  margin: 1px 10px 10px 15px; 
+  /* padding: 10px;  */
   border-radius: 10px; 
 }
 
@@ -125,6 +126,7 @@ white - #ffffff
   margin: 2% auto 2% auto; 
   font-weight: bold; 
   background-color: #ffffff; 
+  background-color: #ff8566;
   /* background-color: #ff8566;  */
   /* background-color: aquamarine; */
   /* margin-left: 20px;  */
@@ -182,6 +184,7 @@ button{
   /* background-color: #0b3b69;  */
   /* background-color: #ff8566;  */
   background-color: #ffffff; 
+  background-color: #ff8566;
 }
 
 .meetingActive{
@@ -208,6 +211,7 @@ button{
   /* background-color: #ffc673; */
   /* background-color: #ff8566;  */
   background-color: #ffffff; 
+  background-color: #ff8566;
   min-height: 200px; 
 }
 

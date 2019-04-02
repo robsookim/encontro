@@ -1,19 +1,26 @@
 import React, { Component } from "react";
-// import { Input, TextArea, FormBtn } from "./../components/Form";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 import "./join.css";
 
 class Join extends Component {
   state = {
     meetings: [],
-    hostedMeetings: []
+    hostedMeetings: [],
+    userName:"",
+    picture:""
   };
 
   componentDidMount() {
     this.getMeetings();
     this.getHostedMeetings();
+    axios.get("/api/userinfo").then(res=>{
+      this.setState({
+        userName:res.data.name,
+        picture:res.data.picture
+      })
+    })
   }
 
   getMeetings = () => {
@@ -40,7 +47,7 @@ class Join extends Component {
   render() {
     return (
       <div className="join-wrapper">
-        <NavBar />
+        <NavBar proPic={this.state.picture} userName={this.state.userName}/>
 
         <div className="join-container">
 
@@ -69,27 +76,8 @@ class Join extends Component {
                 </div>
               </div> */}
 
+  
               <h2 className="subtitleJoinMeeting">✖︎ Join Active Meeting ✖︎</h2>
-
-              <div className="rowTwo">
-                <div className="meetingActive">
-                  <ul>
-                    {this.state.meetings.length ? (
-                      <ul>
-                        {this.state.meetings.map(meeting => (
-                          <li key={meeting.id}>
-                            <a href={"/meeting/" + meeting.id}>
-                              <strong>{meeting.title}</strong>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <p>No Active Meetings</p>
-                    )}
-                  </ul>
-                </div>
-              </div>
 
               <div className="rowTwo">
                 <div className="meetingActive">

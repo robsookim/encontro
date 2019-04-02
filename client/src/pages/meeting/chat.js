@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
-// import './meeting.css';
+import './meeting.css';
 
 export default class Chat extends Component {
     constructor(props) {
@@ -11,25 +11,26 @@ export default class Chat extends Component {
   
       this.state = {
         userInput: '',
-        chat: []
+        chat: this.props.currentChat
       }
     }
   
     changeUserInput(input){
+      console.log(input);
       this.setState({
         userInput: input
       });
     }
   
-    addToChat(input){
-        let currentChat= this.state.chat; 
+    addToChat(){
+        // let currentChat= this.state.chat; 
 
-        API.saveChat(input)
+        API.saveChat(this.props.meetingID, this.state.userInput)
             .then(res => {
-                console.log(res);
-                currentChat.push(res.data);
+                console.log(res.data);
+                // console.log(this.props.match.params.id);
                 this.setState({
-                    chat: currentChat,
+                    chat: res.data,
                     userInput: ''
                 })
             })
@@ -42,15 +43,15 @@ export default class Chat extends Component {
   
           <h1 className="chatTitle">chat</h1>
   
-          <ul className="chatList">
-            {this.state.chat.map((val, index)=> <li key={index}>{val}</li>)}
-          </ul>
+          <div className="chatList">
+            {this.state.chat.map((val, index)=> <p className="chatEntry" key={index}>{val}</p>)}
+          </div>
           <input className="chatInput"
             onChange={ (e)=>this.changeUserInput(e.target.value) }
             value={this.state.userInput} 
             type="text"
           />
-          <button onClick={ ()=> this.addToChat(this.state.userInput)}>send</button>
+          <button className="chatBtn" onClick={this.addToChat}>send</button>
         </div>
       )
     }
