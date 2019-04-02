@@ -169,10 +169,10 @@ class Create extends Component {
       <div>
         <NavBar proPic={this.state.picture} userName={this.state.userName} />
 
-        <div className="wrapper">
-          <div className="form-wrapper">
-            <h1>Create a Meeting</h1>
-            <form>
+        <div className="create-wrapper">
+          <div className="create-form-wrapper">
+            <h1 className="meetingTitle">Create a Meeting</h1>
+            <form className="create-form">
               <Input
                 value={this.state.title}
                 onChange={this.handleInputChange}
