@@ -156,7 +156,7 @@ class Organization extends Component {
                     className="org-meetings-display flex-column"
                     style={{
                       boxSizing: "borderBox",
-                      width: "100%",
+                      width: "95%",
                       height: "250px",
                       borderTop: "1px solid black",
                       // borderBottom: "1px solid black",
@@ -183,7 +183,7 @@ class Organization extends Component {
                     className="org-members-display flex-column"
                     style={{
                       boxSizing: "borderBox",
-                      width: "90%",
+                      width: "95%",
                       height: "250px",
                       borderTop: "1px solid black",
                       // borderBottom: "1px solid black",

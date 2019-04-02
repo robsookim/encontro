@@ -55,7 +55,7 @@ class Join extends Component {
 
             <div className="join-form-wrapper">
             
-              <h2 className="subtitleJoinMeeting">✖︎ Join Active Meeting ✖︎</h2>
+              <h2 className="subtitleJoinMeeting">Join Active Meeting</h2>
 
               <div className="rowTwo">
                 <div className="meetingActive">
@@ -77,7 +77,7 @@ class Join extends Component {
                 </div>
               </div>
 
-              <h2 className="subtitleJoinMeeting">✖︎ Hosted Meetings ✖︎</h2>
+              <h2 className="subtitleJoinMeeting">Hosted Meetings</h2>
 
               <div className="rowThree">
                 <div className="meetingHosted">

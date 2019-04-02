@@ -128,7 +128,7 @@ white - #ffffff
   color: black; 
   margin: 2% auto 2% auto; 
   font-weight: bold; 
-  /* background-color: #ffffff;  */
+  border-bottom: 1px solid rgb(61, 61, 61); 
   background-color: #ffc673;  
   background-color: #ff8566; 
   /* background-color: #ff8566;  */
