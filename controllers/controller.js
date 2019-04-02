@@ -146,7 +146,7 @@ module.exports = db => {
       ).agendaLevel;
       console.log(meeting.dataValues);
       meeting.date = new Date(
-        ...moment("040819", "MMDDYY")
+        ...moment(meeting.date, "YYYY-MM-DD")
           .format("YYYY MM DD")
           .split(" ")
           .map((x, i) => {

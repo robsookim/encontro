@@ -185,6 +185,7 @@ class Create extends Component {
                 onChange={this.handleInputChange}
                 name="date"
                 placeholder="Meeting Date"
+                type="date"
               />
               {/* change this to "select a time" format? */}
               <Input
@@ -192,6 +193,8 @@ class Create extends Component {
                 onChange={this.handleInputChange}
                 name="time"
                 placeholder="Meeting Time"
+                type="time"
+
               />
               <Input
                 value={this.state.attendeeSearch}
