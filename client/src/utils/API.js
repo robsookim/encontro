@@ -18,5 +18,8 @@ export default {
 
     getUsers: function() {
         return axios.get("/api/users");
+    },
+    startMeeting:function(id){
+        return axios.put("/meeting/start", {id:id})
     }
   };

@@ -15,7 +15,7 @@ class Home extends Component {
     orgSearchType: "join",
     orgSearchValue: ""
   };
-
+  
   changeSearchType = event => {
     this.setState({
       orgSearchType: this.state.orgSearchType === "join" ? "create" : "join"
@@ -48,14 +48,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <NavBar
-          searchVal={this.state.orgSearchValue}
-          searchType={this.state.orgSearchType}
-          typeSwitch={this.changeSearchType}
-          joinOrg={this.joinOrg}
-          createOrg={this.createOrg}
-          onSearchType={this.updateSearch}
-        />
+        <NavBar />
         <div className="container-fluid">
 
           {/* <div className="jumbotron jumbotron-1 ">
@@ -79,7 +72,7 @@ class Home extends Component {
           <div className="section1">
             <h2>Join Meeting</h2>
             <a href="/join">
-              <button type="button" className="btn btn-join">
+              <button type="button" className="btn btn-join-meeting">
                 →
               </button>
             </a>
@@ -98,14 +91,28 @@ class Home extends Component {
               </a>
             </div> */}
             <a href="/create">
-              <button type="button" className="btn btn-create">
+              <button type="button" className="btn btn-create-meeting">
                 +
               </button>
             </a>
           </div>
+          <div className="section3">
 
+            <h2>Organizations</h2>
+            <a href="/organization">
+              <button type="button" className="btn btn-organization">
+              <i class="fas fa-sitemap"></i>
+              </button>
+            </a>
+          </div>
+          <div className="section4">
 
-
+            <h2>Invitations</h2>
+            <a href="/invitations">
+              <button type="button" className="btn btn-invitation">
+              <i class="fas fa-paper-plane"></i>              </button>
+            </a>
+          </div>
         </div>
       </div>
     );

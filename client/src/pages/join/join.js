@@ -30,6 +30,12 @@ class Join extends Component {
       })
       .catch(err => console.log(err));
   };
+  startMeeting=(id, e)=>{
+    API.startMeeting(id).then(res=>{
+      console.log(res);
+      window.location.href="/meeting/"+res.data.id
+    })
+  }
 
   render() {
     return (
