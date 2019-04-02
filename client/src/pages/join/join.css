@@ -102,7 +102,7 @@ white - #ffffff
   background-color: #ff8566; 
   color: black; 
   text-align: center;
-  font-family: 'Bangers', cursive; 
+  /* font-family: 'Bangers', cursive;  */
   font-size: 80px; 
   /* font-weight: bolder;  */
 }

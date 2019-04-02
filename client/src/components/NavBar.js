@@ -25,6 +25,7 @@ class NavBar extends Component {
         >
           encontro
         </span>
+        
         <div>
           <img src={this.props.proPic} style={{height:"40px", width:"40px", marginRight:"10px"}}/>
           <a
