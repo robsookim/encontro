@@ -3,6 +3,7 @@ import Notes from '../meeting/notes';
 import Agenda from '../meeting/agenda';
 import './meeting.css';
 import chat_placeholder from "../meeting/chat_placeholder.jpeg"
+import Chat from '../meeting/chat'
 import API from "../../utils/API";
 
 class Meeting extends Component {
@@ -10,7 +11,8 @@ class Meeting extends Component {
       title: "",
       date: "",
       time: "",
-      agenda: ""
+      agenda: "",
+      chat: []
   }
   componentDidMount() {
       const id = this.props.match.params.id;
@@ -23,7 +25,8 @@ class Meeting extends Component {
               title: res.data.title,
               date: res.data.date,
               time: res.data.time,
-              agenda: res.data.agenda
+              agenda: res.data.agenda,
+              chat: res.data.chat
           });
           console.log(this.state);
       }).catch(err => console.log(err))
@@ -75,9 +78,10 @@ class Meeting extends Component {
       <main className="app">
         <Agenda /> 
         <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
-        <div className="chat">
+        {/* <div className="chat">
           <img src={chat_placeholder} width="34%" min-height="900px" />
-        </div>
+        </div> */}
+        <Chat currentChat={this.state.chat}/>
         {/* <chat_placeholder/> */}
         {/* <div className="chat">
           <img src={chat_placeholder} width="30%" height="auto" />
