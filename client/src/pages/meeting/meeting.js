@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Notes from "../meeting/notes";
 import Agenda from "../meeting/agenda";
 import "./meeting.css";
-import chat_placeholder from "../meeting/chat_placeholder.jpeg";
+import NavBar from "../../components/NavBar";
+// import chat_placeholder from "../meeting/chat_placeholder.jpeg";
 import Chat from "../meeting/chat";
 import API from "../../utils/API";
 
@@ -67,19 +68,28 @@ state = {
       // </div>
 
       <main className="app">
-        <Agenda agenda={this.state.meeting.agenda} />
-        <Notes
-          currentNote={this.state.notes[this.state.currentNote]}
-          handleChange={this.handleChange}
-        />
+        <NavBar /> 
+
+
+        <div className="mainApp">
+        
+          <Agenda agenda={this.state.meeting.agenda} />
+          <Notes
+            currentNote={this.state.notes[this.state.currentNote]}
+            handleChange={this.handleChange}
+          /> 
+          <Chat meetingID={this.props.match.params.id} currentChat={this.state.chat}/>
+
+        </div>
+
         {/* <div className="chat">
           <img src={chat_placeholder} width="34%" min-height="900px" />
         </div> */}
-        <Chat meetingID={this.props.match.params.id} currentChat={this.state.chat}/>
         {/* <chat_placeholder/> */}
         {/* <div className="chat">
           <img src={chat_placeholder} width="30%" height="auto" />
         </div> */}
+
       </main>
     );
   }
