@@ -71,12 +71,13 @@ white - #ffffff
   /* background-color: #ffc673;  */
   width: 55%; 
   height: auto;
+  display: flex; 
   flex-direction: column;
   padding: 20px 20px 20px 20px;
   margin: 10px auto 5% auto;
   border-radius: 10px; 
-  display: flex; 
   text-align: center; 
+  box-shadow: 0px 10px 50px #555;
 }
 
 .join-form-wrapper{

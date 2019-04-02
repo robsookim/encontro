@@ -171,7 +171,7 @@ class Create extends Component {
 
         <div className="create-wrapper">
           <div className="create-form-wrapper">
-            <h1 className="meetingTitle">Create a Meeting</h1>
+            <h1 className="create-title">Create a Meeting</h1>
             <form className="create-form">
               <Input
                 value={this.state.title}
