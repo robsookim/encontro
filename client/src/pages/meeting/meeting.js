@@ -82,6 +82,18 @@ state = {
 
         </div>
 
+        <div className ="endButtons">
+
+          <button className="saveNotesButton">
+            Save Notes
+          </button>
+
+          <button className="endMeetingButton">
+            End Meeting
+          </button>
+
+        </div>
+
         {/* <div className="chat">
           <img src={chat_placeholder} width="34%" min-height="900px" />
         </div> */}

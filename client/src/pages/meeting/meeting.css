@@ -15,7 +15,7 @@
 }
 
 body{
-  /* background-color: #B3D2B2;  */
+  background-color: #ffc673;
   line-height: 1.5; 
   color: #333333;
   /* font-family: 'Times New Roman', Times, serif; */
@@ -201,4 +201,56 @@ button {
   color: #0b3b69;
   border: 2px solid #BDE4A7;
   margin: 5px;
+}
+
+
+/* ************************************************************************************************************************ */
+/* buttons section ********************************************************************************************************* */
+/* ************************************************************************************************************************ */
+
+/* ------------------------------------------------------------ */
+
+/* buttons at the end of the meeting page */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.endButtons{
+  align-items: center;
+  text-align: center; 
+  background-color: #ffc673;
+  margin-top:  
+}
+
+.saveNotesButton{
+  width: 48%; 
+  height: 50px;
+  /* float: right; */
+  
+  background-color: #ffc673;
+  color: #fff;
+  border: 2px solid #fff;
+  /* width: 100%; */
+  margin-bottom: 1.5em;
+  /* margin-right:1em; */
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.endMeetingButton{
+  width: 48%; 
+  height: 50px;
+  /* float: right;  */
+  
+  background-color: #ffc673;
+  color: #fff;
+  border: 2px solid #fff;
+  /* width: 100%; */
+  margin-bottom: 1.5em;
+  /* margin-right:1em; */
+  padding: 8px 0px;
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 1px;
 }
