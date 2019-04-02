@@ -6,6 +6,9 @@ module.exports = function(router, db) {
     .route("/api/meetings")
     .get(controller.getMeetings)
     .post(controller.saveMeeting);
+  router.route("/api/all/meetings").get(controller.getAllMeetings);
+  router.route("/api/all/members").get(controller.getAllMembers);
+
   router.route("/api/meetings/ashost").get(controller.getHostedMeetings);
   router.route("/meeting/:id").post(controller.joinMeeting);
   router.route("/meeting/:id/chat").post(controller.saveChat);

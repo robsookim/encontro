@@ -27,6 +27,50 @@ module.exports = db => {
       });
       res.send(meetings);
     },
+    getAllMeetings: async function(req, res) {
+      const userId = req.session.passport.user.id;
+      const organizationId = await db.sql.User.findOne({
+        where: { id: userId },
+        attributes: ["organization"]
+      });
+      console.log(organizationId.organization);
+      if (organizationId.organization === null) {
+        console.log("Here");
+        return res.send([]);
+      }
+      let meetings = await db.sql.Meeting.findAll({
+        where: {
+          OrganizationId: organizationId.organization
+        }
+      });
+      if (meetings) {
+        meetings = meetings.map(meeting => {
+          return { date: meeting.date, title: meeting.title };
+        });
+        return res.send(meetings);
+      }
+      return res.send([]);
+    },
+    getAllMembers: async function(req, res) {
+      const userId = req.session.passport.user.id;
+      const organizationId = await db.sql.User.findOne({
+        where: { id: userId },
+        attributes: ["organization"]
+      });
+      if (organizationId.organization === null) {
+        return res.send({ users: [], orgName: null });
+      }
+      const organization = await db.sql.Organization.findOne({
+        where: { id: organizationId.organization }
+      });
+      let users = await db.sql.User.findAll({
+        where: { organization: organizationId.organization } ///If we're worried about scale, this query will be very slow. need to index this or do something
+      });
+      users = users.map(user => {
+        return { picture: user.picture, name: user.name };
+      });
+      return res.send({ users: users, orgName: organization.name });
+    },
     joinOrganization: async function(req, res) {
       const org = await db.sql.Organization.findOne({
         where: {
@@ -186,7 +230,7 @@ module.exports = db => {
         const mongoMeeting = await db.mongo.Meeting.findById(
           db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
         );
-        res.send(mongoMeeting?mongoMeeting:404);
+        return res.send(mongoMeeting ? mongoMeeting : 404);
       }
       console.log("ID: " + req.body.id);
       const mongoMeetingId = req.body.id;
@@ -205,7 +249,7 @@ module.exports = db => {
             mongoMeeting.attendees[attendeeNumber].present = true;
             mongoMeeting.save();
             req.session.currentMeeting = mongoMeetingId;
-            res.send(mongoMeeting);
+            return res.send(mongoMeeting);
           }
         }
         res.status(403);
@@ -261,17 +305,22 @@ module.exports = db => {
 
       const chatEntry = userID + ": " + req.body.text;
 
-      const dbChat = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
-          console.log("found the meeting; existing chat:");
-          console.log(dbChat.chat);
-          let oldChat = dbChat.chat;
-          newChat = oldChat.concat([chatEntry]);
-          console.log("new chat:");
-          console.log(newChat);
+      const dbChat = await db.mongo.Meeting.findOne({ _id: mongoMeetingId });
+      console.log("found the meeting; existing chat:");
+      console.log(dbChat.chat);
+      let oldChat = dbChat.chat;
+      newChat = oldChat.concat([chatEntry]);
+      console.log("new chat:");
+      console.log(newChat);
 
-      const addChat = await db.mongo.Meeting.updateOne( {_id: mongoMeetingId}, { chat: newChat })
+      const addChat = await db.mongo.Meeting.updateOne(
+        { _id: mongoMeetingId },
+        { chat: newChat }
+      );
 
-      const newMeeting = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
+      const newMeeting = await db.mongo.Meeting.findOne({
+        _id: mongoMeetingId
+      });
       console.log("=================");
       console.log(newMeeting.chat);
       res.send(newMeeting.chat);
