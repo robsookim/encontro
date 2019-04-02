@@ -7,12 +7,7 @@ import Chat from "../meeting/chat";
 import API from "../../utils/API";
 
 class Meeting extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-    this.updateCurrentNote = this.updateCurrentNote.bind(this);
-    this.state = {
+state = {
       currentNote: "note0",
       notes: {
         note0: {
@@ -30,7 +25,7 @@ class Meeting extends Component {
       },
       chat:[]
     };
-  }
+
   componentDidMount() {
     const id = this.props.match.params.id;
 
@@ -45,13 +40,13 @@ class Meeting extends Component {
       })
       .catch(err => console.log(err));
   }
-  updateCurrentNote(e) {
+  updateCurrentNote = (e)=> {
     this.setState({
       currentNote: e.target.id
     });
   }
 
-  handleChange(e) {
+  handleChange =(e) =>{
     const notes = { ...this.state.notes };
     const name = e.target.name;
     notes[this.state.currentNote] = {
