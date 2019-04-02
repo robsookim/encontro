@@ -1,6 +1,15 @@
 .organization-form-wrapper{
     display:flex;
     flex-direction: column;
+    background-color: #0b3b69;
+    min-height: 350px; 
+}
+.org-form-header{
+    align-self: flex-start;
+    font-size: 30px; 
+    color: #ffffff;
+    margin-left: -10px; 
+
 }
 .org-create-form,
 .org-join-form{
@@ -8,15 +17,28 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    width:100%;
+    width: 95%;
     height:100%;
+    margin-right: 20px; 
+}
+
+.org-create-form {
+    background-color: #ffc673;
+    border-radius:10px;
+}
+
+.org-join-form{
+    background-color: #ff8566;
+    border-radius:10px;
 }
 .org-form-submit{
     width:100px;
     border-radius:10px;
 }
 .org-form-input-wrapper{
-    
+    padding: 5px;
+    color: #ffffff;
+    font-size: 14px; 
 }
 .org-form-input{
     margin-left:10px;
@@ -25,7 +47,8 @@
     width:300px;
     height:40px;
 }
-.org-form-header{
-    align-self: flex-start;
-    margin:0;
+
+.orgButton {
+    width: 30px; 
+    color: #ffffff;
 }

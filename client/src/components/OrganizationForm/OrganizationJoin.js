@@ -26,7 +26,7 @@ class OrganizationJoin extends Component {
               value={this.props.formState.orgSecret}
             />
           </label>
-          <button onClick = {this.props.handleFormSubmit} className="org-form-submit" type="submit">
+          <button className="orgButton" onClick = {this.props.handleFormSubmit} className="org-form-submit" type="submit">
             Join
           </button>
         </form>

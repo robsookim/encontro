@@ -26,9 +26,11 @@ class OrganizationForm extends Component {
               value={this.props.formState.orgSecret}
             />
           </label>
+
           <span style={{
-            fontSize:"30px"
+            fontSize:"20px"
           }}>Approval Required</span>
+
           <div className="org-form-input-wrapper">
             <input
               type="radio"
@@ -50,7 +52,7 @@ class OrganizationForm extends Component {
             <label htmlFor="No">No</label>
           </div>
 
-          <button onClick = {this.props.handleFormSubmit} className="org-form-submit" type="submit">
+          <button className="orgButton" onClick = {this.props.handleFormSubmit} className="org-form-submit" type="submit">
             Create
           </button>
         </form>
