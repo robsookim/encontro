@@ -9,10 +9,13 @@ module.exports = {
     if (!(typeof agendaObj === "object")) {
       return agendaObj;
     }
+    if (!Array.isArray(agendaObj) && !("header" in agendaObj)) {
+      return agendaObj.text;
+    }
 
     if (Array.isArray(agendaObj)) {
       if (agendaObj.length === 1) {
-        return recieveAgenda(agendaObj[0]) + keys.backOne;
+        return recieveAgenda(agendaObj[0]) + keys.backOne
       }
       return (
         agendaObj.reduce((str, arrItem) => {
@@ -36,7 +39,8 @@ module.exports = {
               0,
               testArray[0].length - keys.oneDeeper.length
             ),
-            items: newLevel.agendaLevel
+            items: newLevel.agendaLevel,
+            completed: false
           });
         }
         regex = newLevel.regex;
@@ -48,7 +52,7 @@ module.exports = {
           testArray[0].length - keys.backOne.length
         );
         if (lastItem.length !== 0) {
-          returnArray.push(lastItem);
+          returnArray.push({ text: lastItem, completed: false });
         }
         return { agendaLevel: returnArray, regex: regex };
       }
@@ -58,7 +62,7 @@ module.exports = {
           testArray[0].length - keys.same.length
         );
         if (nextItem.length !== 0) {
-          returnArray.push(nextItem);
+          returnArray.push({ text: nextItem, completed: false });
         }
       }
     }
