@@ -2,13 +2,15 @@
     display:flex;
     flex-direction: column;
     min-height: 350px; 
+    margin-left: 50px; 
 }
 
 .org-form-header{
     align-self: flex-start;
     font-size: 40px; 
     color: #ffffff;
-    margin-left: -10px; 
+    margin-left: 5px; 
+    text-align: center; 
 }
 
 .org-create-form,
@@ -20,6 +22,8 @@
     width: 94%;
     height:100%;
     border-radius:20px;
+    padding-left: 30px; 
+    padding-bottom: 25px; 
 }
 
 .org-create-form {
@@ -29,6 +33,7 @@
 
 .org-join-form{
     background-color: #ff8566;
+    margin-top: 25px; 
 }
 .org-form-submit{
     width:100px;
