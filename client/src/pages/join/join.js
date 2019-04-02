@@ -55,12 +55,11 @@ class Join extends Component {
 
             <div className="join-form-wrapper">
             
-              <h2 className="subtitleJoinMeeting">✖︎ Join by ID ✖︎</h2>
-
+              {/* <h2 className="subtitleJoinMeeting">✖︎ Join by ID ✖︎</h2>
               <div className="rowOne">
-                <div className="meetingName">
+                <div className="meetingName"> */}
                   {/* <h2>Join by ID</h2> */}
-                  <form className="meetingNameForm">
+                  {/* <form className="meetingNameForm">
                     <div className="form-group">
                       <label for="meetingNameInput">Enter Meeting ID:</label>
                       <input
@@ -75,7 +74,7 @@ class Join extends Component {
                     </button>
                   </form>
                 </div>
-              </div>
+              </div> */}
 
               <h2 className="subtitleJoinMeeting">✖︎ Join Active Meeting ✖︎</h2>
 
@@ -99,7 +98,7 @@ class Join extends Component {
                 </div>
               </div>
 
-              <h2 className="subtitleJoinMeeting">✖︎ Begin your Meeting ✖︎</h2>
+              <h2 className="subtitleJoinMeeting">✖︎ Hosted Meetings ✖︎</h2>
 
               <div className="rowThree">
                 <div className="meetingHosted">
