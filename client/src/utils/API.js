@@ -5,6 +5,10 @@ export default {
         return axios.post("/api/meetings", meetingData);
     },
 
+    getChat: function(meetingID) {
+        return axios.post("/meeting/id/chat/get", {id: meetingID });
+    },
+
     saveChat: function(meetingID, currentChat) {
         return axios.post("/meeting/id/chat", {id: meetingID, text: currentChat});
     },

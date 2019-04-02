@@ -309,6 +309,14 @@ module.exports = db => {
       );
     },
 
+    getChat: async function(req, res) {
+      const mongoMeetingId = req.body.id;
+      const dbChat = await db.mongo.Meeting.findOne({ _id: mongoMeetingId });
+      let oldChat = dbChat.chat;
+      res.send(oldChat);
+
+    },
+
     saveChat: async function(req, res) {
       const userID = req.session.passport.user.name;
       const mongoMeetingId = req.body.id;
@@ -317,12 +325,8 @@ module.exports = db => {
       const chatEntry = userID + ": " + req.body.text;
 
       const dbChat = await db.mongo.Meeting.findOne({ _id: mongoMeetingId });
-      console.log("found the meeting; existing chat:");
-      console.log(dbChat.chat);
       let oldChat = dbChat.chat;
       newChat = oldChat.concat([chatEntry]);
-      console.log("new chat:");
-      console.log(newChat);
 
       const addChat = await db.mongo.Meeting.updateOne(
         { _id: mongoMeetingId },
@@ -332,10 +336,8 @@ module.exports = db => {
       const newMeeting = await db.mongo.Meeting.findOne({
         _id: mongoMeetingId
       });
-      console.log("=================");
-      console.log(newMeeting.chat);
+
       res.send(newMeeting.chat);
-      console.log("=================");
     }
   };
 };

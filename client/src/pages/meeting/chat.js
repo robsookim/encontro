@@ -8,18 +8,36 @@ export default class Chat extends Component {
 
       this.changeUserInput = this.changeUserInput.bind(this);
       this.addToChat = this.addToChat.bind(this);
+      this.getChat = this.getChat.bind(this);
   
       this.state = {
         userInput: '',
         chat: this.props.currentChat
       }
     }
+
+    componentDidMount() {
+      this.setState({
+        chat: this.props.currentChat
+      })
+      const chatTimer = setInterval(this.getChat, 1000);
+      // this.getChat();
+    }
   
     changeUserInput(input){
-      console.log(input);
       this.setState({
         userInput: input
       });
+    }
+
+    getChat() {
+      API.getChat(this.props.meetingID).then(res => {
+        console.log(res);
+        this.setState({
+          chat: res.data,
+          userInput: ''
+        })
+      }).catch(err => console.log(err));
     }
   
     addToChat(){
