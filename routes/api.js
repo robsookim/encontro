@@ -7,7 +7,6 @@ module.exports = function(router, db) {
     .get(controller.getMeetings)
     .post(controller.saveMeeting);
   router.route("/api/meetings/ashost").get(controller.getHostedMeetings);
-  // router.route("/meeting/:id").post(controller.getMeetingByID);
   router.route("/meeting/:id").post(controller.joinMeeting);
   router.route("/meeting/:id/chat").post(controller.saveChat);
   router.route("/meeting/start").put(controller.openMeetingLive);

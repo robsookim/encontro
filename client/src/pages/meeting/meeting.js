@@ -19,8 +19,6 @@ class Meeting extends Component {
 
       API.getMeetingById(id).then(res => {
           // res.data contains all the meeting info we'll want to display in the component
-          console.log(res);
-
           this.setState({
               title: res.data.title,
               date: res.data.date,

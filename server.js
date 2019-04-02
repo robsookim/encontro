@@ -30,6 +30,7 @@ const db = {
   sql: require("./models/sequelize"),
   mongo: require("./models/mongoose")()
 };
+db.mongo.mongoose = mongoose;
 
 passport.use(require("./auth/googleconfig.js")(db, process.env.NODE_ENV));
 passport.use(require("./auth/linkedinconfig.js")(db, process.env.NODE_ENV));
