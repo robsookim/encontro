@@ -195,7 +195,7 @@ button{
   /* background-color: #438D6F; */
   /* background-color: #ff8566;  */
   /* background-color: #ffffff;  */
-  background-color: #ffc673; 
+  background-color: #fec547; 
   /* background-color: #36c389; */
   width: 80%;
   min-height: 300px;
@@ -215,13 +215,13 @@ button{
 .rowThree{
   /* background-color: #ff8566;  */
   /* background-color: #ffffff;  */
-  background-color: #ffc673; 
+  /* background-color: #ffc673;  */
   background-color: #ff8566; 
   min-height: 200px; 
 }
 
 .meetingHosted{
-  background-color: #ffc673; 
+  background-color: #fec547; 
   /* background-color: #36c389; */
   width: 80%;
   min-height: 150px;
