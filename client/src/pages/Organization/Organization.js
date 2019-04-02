@@ -76,7 +76,7 @@ class Organization extends Component {
   handleFormSubmitJoinOrg = e => {
     e.preventDefault();
     console.log(this.state.joinOrganization);
-    axios.put("/api/organization", this.state.newOrganization).then(res => {
+    axios.put("/api/organization", this.state.joinOrganization).then(res => {
       this.setState({
         joinOrganization: {
           orgId: "",
