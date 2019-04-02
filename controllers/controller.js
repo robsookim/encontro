@@ -19,27 +19,57 @@ module.exports = db => {
         where: { id: userId },
         attributes: ["organization"]
       });
-      let meetings = await db.sql.Meeting.findAll({
-        where: { OrganizationId: organizationId.organization }
+      let meetings = await db.mongo.Meeting.find({
+        OrganizationId: organizationId.organization
       });
-
-      // meetings = meetings.map(meeting => {
-      //   const regexx = new RegExp(
-      //     `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-      //     "gi"
-      //   );
-      //   console.log("meeting agenda: " + meeting.agenda);
-      //   meeting.agenda = agendaFunctions.agendaIntoObject(
-      //     regexx,
-      //     meeting.agenda
-      //   ).agendaLevel;
-      //   return meeting;
-      // });
-      // console.log("meeting agenda: " + meetings[0].agenda);
-      res.send(meetings.filter(meeting => meeting.active === 1));
-
-      // let meetings = await db.sql.Meeting.findAll();
-      // res.json(meetings);
+      meetings = meetings.map(meeting => {
+        return { id: meeting._id, title: meeting.title };
+      });
+      res.send(meetings);
+    },
+    getAllMeetings: async function(req, res) {
+      const userId = req.session.passport.user.id;
+      const organizationId = await db.sql.User.findOne({
+        where: { id: userId },
+        attributes: ["organization"]
+      });
+      console.log(organizationId.organization);
+      if (organizationId.organization === null) {
+        console.log("Here");
+        return res.send([]);
+      }
+      let meetings = await db.sql.Meeting.findAll({
+        where: {
+          OrganizationId: organizationId.organization
+        }
+      });
+      if (meetings) {
+        meetings = meetings.map(meeting => {
+          return { date: meeting.date, title: meeting.title };
+        });
+        return res.send(meetings);
+      }
+      return res.send([]);
+    },
+    getAllMembers: async function(req, res) {
+      const userId = req.session.passport.user.id;
+      const organizationId = await db.sql.User.findOne({
+        where: { id: userId },
+        attributes: ["organization"]
+      });
+      if (organizationId.organization === null) {
+        return res.send({ users: [], orgName: null });
+      }
+      const organization = await db.sql.Organization.findOne({
+        where: { id: organizationId.organization }
+      });
+      let users = await db.sql.User.findAll({
+        where: { organization: organizationId.organization } ///If we're worried about scale, this query will be very slow. need to index this or do something
+      });
+      users = users.map(user => {
+        return { picture: user.picture, name: user.name };
+      });
+      return res.send({ users: users, orgName: organization.name });
     },
     joinOrganization: async function(req, res) {
       const org = await db.sql.Organization.findOne({
@@ -134,7 +164,11 @@ module.exports = db => {
       const meetings = await db.sql.Meeting.findAll({
         where: { UserId: req.session.passport.user.id }
       });
-      res.send(meetings);
+      res.send(
+        meetings.filter(meeting => {
+          return meeting.active ? false : true;
+        })
+      );
     },
     openMeetingLive: async function(req, res) {
       // transfers meeting data from sql into mongo to effectively begin a meeting. Done by meeting host
@@ -143,6 +177,7 @@ module.exports = db => {
       const meeting = await db.sql.Meeting.findOne({
         where: { id: meetingId }
       });
+      db.sql.Meeting.update({ active: 1 }, { where: { id: meetingId } }); // doesnt need to be waited on
       if (meeting.UserId !== req.session.passport.user.id) {
         res.status(403);
       }
@@ -155,7 +190,7 @@ module.exports = db => {
       ).agendaLevel;
       console.log(meeting.dataValues);
       meeting.date = new Date(
-        ...moment("040819", "MMDDYY")
+        ...moment(meeting.date, "YYYY-MM-DD")
           .format("YYYY MM DD")
           .split(" ")
           .map((x, i) => {
@@ -163,9 +198,10 @@ module.exports = db => {
           })
       );
       const liveMeeting = new db.mongo.Meeting(meeting.dataValues);
+
       liveMeeting.save(err => {
         if (err) console.log(err);
-        res.send({id:liveMeeting._id});
+        res.send({ id: liveMeeting._id });
       });
     },
     closeLiveMeeting: async function(req, res) {
@@ -189,7 +225,14 @@ module.exports = db => {
     },
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
-      console.log("ID: "+req.body.id);
+      if (req.session.currentMeeting) {
+        const mongoMeetingId = req.body.id;
+        const mongoMeeting = await db.mongo.Meeting.findById(
+          db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
+        );
+        return res.send(mongoMeeting ? mongoMeeting : 404);
+      }
+      console.log("ID: " + req.body.id);
       const mongoMeetingId = req.body.id;
       const mongoMeeting = await db.mongo.Meeting.findById(
         db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
@@ -197,11 +240,16 @@ module.exports = db => {
       console.log(mongoMeeting);
 
       if (mongoMeeting) {
-        for (let attendee of mongoMeeting.attendees) {
-          if (req.session.passport.user.id === attendee.attendee) {
+        for (let attendeeNumber in mongoMeeting.attendees) {
+          if (
+            req.session.passport.user.id ===
+            mongoMeeting.attendees[attendeeNumber].attendee
+          ) {
             console.log("user is allowed");
+            mongoMeeting.attendees[attendeeNumber].present = true;
+            mongoMeeting.save();
             req.session.currentMeeting = mongoMeetingId;
-            res.send(mongoMeeting);
+            return res.send(mongoMeeting);
           }
         }
         res.status(403);
@@ -248,6 +296,35 @@ module.exports = db => {
             return { id: user.id, name: user.name };
           })
       );
+    },
+
+    saveChat: async function(req, res) {
+      const userID = req.session.passport.user.name;
+      const mongoMeetingId = req.body.id;
+      let newChat;
+
+      const chatEntry = userID + ": " + req.body.text;
+
+      const dbChat = await db.mongo.Meeting.findOne({ _id: mongoMeetingId });
+      console.log("found the meeting; existing chat:");
+      console.log(dbChat.chat);
+      let oldChat = dbChat.chat;
+      newChat = oldChat.concat([chatEntry]);
+      console.log("new chat:");
+      console.log(newChat);
+
+      const addChat = await db.mongo.Meeting.updateOne(
+        { _id: mongoMeetingId },
+        { chat: newChat }
+      );
+
+      const newMeeting = await db.mongo.Meeting.findOne({
+        _id: mongoMeetingId
+      });
+      console.log("=================");
+      console.log(newMeeting.chat);
+      res.send(newMeeting.chat);
+      console.log("=================");
     }
   };
 };

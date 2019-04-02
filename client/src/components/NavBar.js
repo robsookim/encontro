@@ -12,7 +12,7 @@ class NavBar extends Component {
           // borderBottom: "1px solid black",
           marginBottom: "30px",
           alignItems: "center",
-          minHeight:"50px"
+          minHeight: "50px"
         }}
       >
         <span
@@ -23,14 +23,17 @@ class NavBar extends Component {
         >
           encontro
         </span>
-        <a
-          href="/auth/logout"
-          style={{
-            textDecoration: "none"
-          }}
-        >
-          <span>Log out</span>
-        </a>
+        <div>
+          <img src={this.props.proPic} style={{height:"40px", width:"40px", marginRight:"10px"}}/>
+          <a
+            href="/auth/logout"
+            style={{
+              textDecoration: "none"
+            }}
+          >
+            <span>Log out</span>
+          </a>
+        </div>
       </div>
     );
   }
