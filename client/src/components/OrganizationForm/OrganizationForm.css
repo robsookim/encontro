@@ -17,14 +17,14 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
-    width: 95%;
+    width: 94%;
     height:100%;
-    margin-right: 20px; 
     border-radius:20px;
 }
 
 .org-create-form {
     background-color: #ffc673;
+    margin-top: 10px;
 }
 
 .org-join-form{
@@ -49,4 +49,9 @@
 .org-form-input.text-input{
     width:300px;
     height:40px;
+}
+
+span{
+    font-size: 15px; 
+    padding: 5px; 
 }

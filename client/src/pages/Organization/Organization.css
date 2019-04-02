@@ -8,7 +8,7 @@
 .org-display-wrapper {
     background-color: #36c389;
     border-radius: 20px;
-    margin: 10px 0 10px 20px; 
+    margin: 10px; 
     width: 90%;
     /* min-height: 350px; */
 }
