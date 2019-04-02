@@ -79,40 +79,32 @@ class Home extends Component {
           </div>
 
           <div className="section2">
-            {/* <div className="row">
-              <h2>Create Meeting</h2>
-            </div> */}
             <h2>Create Meeting</h2>
-            {/* <div className="row">
-              <a href="/create">
-                <button type="button" className="btn btn-create">
-                  +
-                </button>
-              </a>
-            </div> */}
             <a href="/create">
               <button type="button" className="btn btn-create-meeting">
                 +
               </button>
             </a>
           </div>
-          <div className="section3">
 
-            <h2>Organizations</h2>
+          <div className="section3">
+            <h2 className="section3Title">Organizations</h2>
             <a href="/organization">
               <button type="button" className="btn btn-organization">
-              <i class="fas fa-sitemap"></i>
+                <i class="fas fa-sitemap"></i>
               </button>
             </a>
           </div>
-          <div className="section4">
 
+          <div className="section4">
             <h2>Invitations</h2>
             <a href="/invitations">
               <button type="button" className="btn btn-invitation">
-              <i class="fas fa-paper-plane"></i>              </button>
+                <i class="fas fa-paper-plane"></i>              
+              </button>
             </a>
           </div>
+
         </div>
       </div>
     );

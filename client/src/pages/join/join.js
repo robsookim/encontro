@@ -40,14 +40,7 @@ class Join extends Component {
   render() {
     return (
       <div className="join-wrapper">
-        <NavBar
-          searchVal={this.state.orgSearchValue}
-          searchType={this.state.orgSearchType}
-          typeSwitch={this.changeSearchType}
-          joinOrg={this.joinOrg}
-          createOrg={this.createOrg}
-          onSearchType={this.updateSearch}
-        />
+        <NavBar />
 
         <div className="join-container">
 
