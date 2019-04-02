@@ -41,6 +41,7 @@ class Organization extends Component {
         });
         if (res.status === 200) {
           window.alert(`Organization ${res.data} created!`);
+          window.location.href= "/";
         } else {
           window.alert("Could not create organization!");
         }

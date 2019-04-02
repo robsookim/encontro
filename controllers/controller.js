@@ -22,6 +22,9 @@ module.exports = db => {
       let meetings = await db.mongo.Meeting.find({
         OrganizationId: organizationId.organization
       });
+      meetings = meetings.map(meeting => {
+        return { id: meeting._id, title: meeting.title };
+      });
 
       // meetings = meetings.map(meeting => {
       //   const regexx = new RegExp(
