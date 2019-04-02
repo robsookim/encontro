@@ -11,24 +11,10 @@ class Meeting extends Component {
       title: "",
       date: "",
       time: "",
-      agenda: "",
+      agenda: [],
       chat: []
   }
-  componentDidMount() {
-      const id = this.props.match.params.id;
 
-      API.getMeetingById(id).then(res => {
-          // res.data contains all the meeting info we'll want to display in the component
-          this.setState({
-              title: res.data.title,
-              date: res.data.date,
-              time: res.data.time,
-              agenda: res.data.agenda,
-              chat: res.data.chat
-          });
-          console.log(this.state);
-      }).catch(err => console.log(err))
-  }
   constructor(props) {
     super(props);
 
@@ -43,10 +29,29 @@ class Meeting extends Component {
           text: ' ',
         },
       },
+      title: "",
+      date: "",
+      time: "",
+      agenda: [],
+      chat: []
     };
 
   }; 
+  componentDidMount() {
+    const id = this.props.match.params.id;
 
+    API.getMeetingById(id).then(res => {
+        // res.data contains all the meeting info we'll want to display in the component
+        this.setState({
+            title: res.data.title,
+            date: res.data.date,
+            time: res.data.time,
+            agenda: res.data.agenda,
+            chat: res.data.chat
+        });
+        console.log(this.state);
+    }).catch(err => console.log(err))
+}
   updateCurrentNote(e) {
     this.setState({
       currentNote: e.target.id
@@ -74,7 +79,7 @@ class Meeting extends Component {
       // </div>
 
       <main className="app">
-        <Agenda /> 
+        <Agenda agenda={this.state.agenda}/> 
         <Notes currentNote={this.state.notes[this.state.currentNote]} handleChange={this.handleChange} /> 
         {/* <div className="chat">
           <img src={chat_placeholder} width="34%" min-height="900px" />
