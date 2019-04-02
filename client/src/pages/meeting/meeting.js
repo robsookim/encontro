@@ -84,7 +84,7 @@ class Meeting extends Component {
         {/* <div className="chat">
           <img src={chat_placeholder} width="34%" min-height="900px" />
         </div> */}
-        <Chat currentChat={this.state.chat}/>
+        <Chat meetingID={this.props.match.params.id} currentChat={this.state.chat}/>
         {/* <chat_placeholder/> */}
         {/* <div className="chat">
           <img src={chat_placeholder} width="30%" height="auto" />

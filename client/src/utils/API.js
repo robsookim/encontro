@@ -5,8 +5,8 @@ export default {
         return axios.post("/api/meetings", meetingData);
     },
 
-    saveChat: function(currentChat) {
-        return axios.post("/meeting/id/chat", {text: currentChat});
+    saveChat: function(meetingID, currentChat) {
+        return axios.post("/meeting/id/chat", {id: meetingID, text: currentChat});
     },
 
     getMeetingById: function(meetingID) {

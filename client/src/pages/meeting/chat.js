@@ -11,7 +11,7 @@ export default class Chat extends Component {
   
       this.state = {
         userInput: '',
-        chat: []
+        chat: this.props.currentChat
       }
     }
   
@@ -24,10 +24,11 @@ export default class Chat extends Component {
     addToChat(input){
         let currentChat= this.state.chat; 
 
-        API.saveChat(input)
+        API.saveChat(this.props.meetingID, input)
             .then(res => {
                 console.log(res);
                 currentChat.push(res.data);
+                // console.log(this.props.match.params.id);
                 this.setState({
                     chat: currentChat,
                     userInput: ''
@@ -42,9 +43,9 @@ export default class Chat extends Component {
   
           <h1 className="chatTitle">chat</h1>
   
-          <ul className="chatList">
-            {this.state.chat.map((val, index)=> <li key={index}>{val}</li>)}
-          </ul>
+          <div className="chatList">
+            {this.state.chat.map((val, index)=> <p key={index}>{val}</p>)}
+          </div>
           <input className="chatInput"
             onChange={ (e)=>this.changeUserInput(e.target.value) }
             value={this.state.userInput} 

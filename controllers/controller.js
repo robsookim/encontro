@@ -261,14 +261,38 @@ module.exports = db => {
 
     saveChat: async function(req, res) {
       const userID = req.session.passport.user.name;
-      // const meetingID = req.body.id;
+      const mongoMeetingId = req.body.id;
+      let newChat;
 
-      // const mongoMeeting = await db.mongo.Meeting.findById(db.mongo.mongoose.Types.ObjectId(req.session.meetingId));
-
-      console.log("~~~~~~~~~~~~~~~~~");
-      console.log(req.session);
-      console.log("~~~~~~~~~~~~~~~~~");
       const chatEntry = userID + ": " + req.body.text;
+
+      const meeting = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
+        .then(function(dbChat) {
+          console.log("found the meeting; existing chat:");
+          if (dbChat.chat) {
+            console.log(dbChat.chat);
+            let oldChat = dbChat.chat;
+            newChat = oldChat.push(chatEntry);
+            console.log("new chat:");
+            console.log(newChat);
+          } else {
+            newChat = [chatEntry];
+            console.log("new chat:");
+            console.log(newChat);
+          }
+        })
+        .catch(function(err) {
+          console.log(err);
+        })
+
+      const newMeeting = await db.mongo.Meeting.updateOne( {_id: mongoMeetingId}, { chat: newChat })
+        .then(function(dbChat) {
+          console.log(dbChat);
+        })
+        .catch(function(err) {
+          console.log(err);
+        })
+
       res.json(chatEntry);
     }
   };
