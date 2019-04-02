@@ -25,24 +25,7 @@ module.exports = db => {
       meetings = meetings.map(meeting => {
         return { id: meeting._id, title: meeting.title };
       });
-
-      // meetings = meetings.map(meeting => {
-      //   const regexx = new RegExp(
-      //     `(.)*?((${keys.oneDeeper})|(${keys.same})|(${keys.backOne}))`,
-      //     "gi"
-      //   );
-      //   console.log("meeting agenda: " + meeting.agenda);
-      //   meeting.agenda = agendaFunctions.agendaIntoObject(
-      //     regexx,
-      //     meeting.agenda
-      //   ).agendaLevel;
-      //   return meeting;
-      // });
-      // console.log("meeting agenda: " + meetings[0].agenda);
-      console.log(meetings);
       res.send(meetings);
-      // let meetings = await db.sql.Meeting.findAll();
-      // res.json(meetings);
     },
     joinOrganization: async function(req, res) {
       const org = await db.sql.Organization.findOne({
@@ -198,6 +181,13 @@ module.exports = db => {
     },
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
+      if (req.session.currentMeeting) {
+        const mongoMeetingId = req.body.id;
+        const mongoMeeting = await db.mongo.Meeting.findById(
+          db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
+        );
+        res.send(mongoMeeting?mongoMeeting:404);
+      }
       console.log("ID: " + req.body.id);
       const mongoMeetingId = req.body.id;
       const mongoMeeting = await db.mongo.Meeting.findById(
@@ -206,9 +196,14 @@ module.exports = db => {
       console.log(mongoMeeting);
 
       if (mongoMeeting) {
-        for (let attendee of mongoMeeting.attendees) {
-          if (req.session.passport.user.id === attendee.attendee) {
+        for (let attendeeNumber in mongoMeeting.attendees) {
+          if (
+            req.session.passport.user.id ===
+            mongoMeeting.attendees[attendeeNumber].attendee
+          ) {
             console.log("user is allowed");
+            mongoMeeting.attendees[attendeeNumber].present = true;
+            mongoMeeting.save();
             req.session.currentMeeting = mongoMeetingId;
             res.send(mongoMeeting);
           }
