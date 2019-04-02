@@ -1,19 +1,26 @@
 import React, { Component } from "react";
-// import { Input, TextArea, FormBtn } from "./../components/Form";
 import API from "../../utils/API";
 import NavBar from "../../components/NavBar";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios";
 import "./join.css";
 
 class Join extends Component {
   state = {
     meetings: [],
-    hostedMeetings: []
+    hostedMeetings: [],
+    userName:"",
+    picture:""
   };
 
   componentDidMount() {
     this.getMeetings();
     this.getHostedMeetings();
+    axios.get("/api/userinfo").then(res=>{
+      this.setState({
+        userName:res.data.name,
+        picture:res.data.picture
+      })
+    })
   }
 
   getMeetings = () => {
@@ -40,14 +47,7 @@ class Join extends Component {
   render() {
     return (
       <div className="join-wrapper">
-        <NavBar
-          searchVal={this.state.orgSearchValue}
-          searchType={this.state.orgSearchType}
-          typeSwitch={this.changeSearchType}
-          joinOrg={this.joinOrg}
-          createOrg={this.createOrg}
-          onSearchType={this.updateSearch}
-        />
+        <NavBar proPic={this.state.picture} userName={this.state.userName}/>
 
         <div className="join-container">
 

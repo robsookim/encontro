@@ -10,6 +10,12 @@ module.exports = function(router, db) {
   router.route("/meeting/:id").post(controller.joinMeeting);
   router.route("/meeting/:id/chat").post(controller.saveChat);
   router.route("/meeting/start").put(controller.openMeetingLive);
+  router.route("/api/userinfo").get((req, res) => {
+    res.send({
+      name: req.session.passport.user.name,
+      picture: req.session.passport.user.image
+    });
+  });
   router
     .route("/api/users")
     // .get(controller.getUsers)
