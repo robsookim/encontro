@@ -40,10 +40,10 @@ white - #ffffff
 /* app section in the meeting page itself (basically all the sections) */
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
+/* 
 body{
   background-color: #0b3b69;
-}
+} */
 
 .mainApp{
   /* margin-top: -30px;  */
@@ -275,6 +275,7 @@ body{
   background-color: #0b3b69;
   padding-top: 20px;
   margin-top: 0.5em;
+  margin-top: -10px;
 }
 
 .saveNotesButton{

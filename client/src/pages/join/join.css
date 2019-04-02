@@ -84,7 +84,7 @@ white - #ffffff
   /* background-color: #ffffff; 
   background-color: #619B8A; */
   /* background-color: #ffc673; */
-  background-color: #ff8566; 
+  background-color: #ff8566;
   margin: 1px 10px 10px 15px; 
   /* padding: 10px;  */
   border-radius: 10px; 
@@ -100,9 +100,10 @@ white - #ffffff
   /* padding: 15px;  */
   /* background-color: #ffc673; */
   background-color: #ff8566; 
+  /* background-color: #ffffff;  */
   color: black; 
   text-align: center;
-  font-family: 'Bangers', cursive; 
+  /* font-family: 'Bangers', cursive;  */
   font-size: 80px; 
   /* font-weight: bolder;  */
 }
@@ -130,9 +131,10 @@ white - #ffffff
   margin: 2% auto 2% auto; 
   font-weight: bold; 
   border-bottom: 1px solid rgb(61, 61, 61); 
-  background-color: #ffc673;  
+  /* background-color: #ffc673;  
+  background-color: #ff8566;  
+  background-color: #ffffff; */
   background-color: #ff8566; 
-  /* background-color: #ff8566;  */
   /* background-color: aquamarine; */
   /* margin-left: 20px;  */
   /* margin-top: 20px; */
@@ -188,8 +190,8 @@ button{
 .rowTwo{
   /* background-color: #0b3b69;  */
   background-color: #ff8566; 
-  /* background-color: #ffffff; 
-  background-color: #ffc673; */
+  /* background-color: #ffffff;  */
+  /* background-color: #ffc673; */
 }
 
 .meetingActive{
@@ -214,15 +216,14 @@ button{
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .rowThree{
-  /* background-color: #ff8566;  */
-  /* background-color: #ffffff;  */
-  /* background-color: #ffc673;  */
+  /* background-color: #ffffff; 
+  background-color: #ffc673;  */
   background-color: #ff8566; 
   min-height: 200px; 
 }
 
 .meetingHosted{
-  background-color: #fec547; 
+  background-color: #fec547;
   /* background-color: #36c389; */
   width: 80%;
   min-height: 150px;

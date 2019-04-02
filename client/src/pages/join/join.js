@@ -51,7 +51,7 @@ class Join extends Component {
 
         <div className="join-container">
 
-            <h1 className="titleJoinMeeting">join a meeting</h1>
+            <h1 className="titleJoinMeeting">Join a Meeting</h1>
 
             <div className="join-form-wrapper">
             
