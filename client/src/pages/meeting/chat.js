@@ -16,15 +16,16 @@ export default class Chat extends Component {
     }
   
     changeUserInput(input){
+      console.log(input);
       this.setState({
         userInput: input
       });
     }
   
-    addToChat(input){
+    addToChat(){
         let currentChat= this.state.chat; 
 
-        API.saveChat(this.props.meetingID, input)
+        API.saveChat(this.props.meetingID, this.state.userInput)
             .then(res => {
                 console.log(res);
                 currentChat.push(res.data);
@@ -51,7 +52,7 @@ export default class Chat extends Component {
             value={this.state.userInput} 
             type="text"
           />
-          <button onClick={ ()=> this.addToChat(this.state.userInput)}>send</button>
+          <button onClick={this.addToChat}>send</button>
         </div>
       )
     }

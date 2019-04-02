@@ -146,7 +146,7 @@ module.exports = db => {
       ).agendaLevel;
       console.log(meeting.dataValues);
       meeting.date = new Date(
-        ...moment("040819", "MMDDYY")
+        ...moment(meeting.date, "YYYY-MM-DD")
           .format("YYYY MM DD")
           .split(" ")
           .map((x, i) => {
@@ -261,13 +261,12 @@ module.exports = db => {
 
       const chatEntry = userID + ": " + req.body.text;
 
-      const meeting = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
-        .then(function(dbChat) {
+      const dbChat = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
           console.log("found the meeting; existing chat:");
           if (dbChat.chat) {
             console.log(dbChat.chat);
             let oldChat = dbChat.chat;
-            newChat = oldChat.push(chatEntry);
+            newChat = oldChat.concat([chatEntry]);
             console.log("new chat:");
             console.log(newChat);
           } else {
@@ -275,10 +274,6 @@ module.exports = db => {
             console.log("new chat:");
             console.log(newChat);
           }
-        })
-        .catch(function(err) {
-          console.log(err);
-        })
 
       const newMeeting = await db.mongo.Meeting.updateOne( {_id: mongoMeetingId}, { chat: newChat })
         .then(function(dbChat) {
