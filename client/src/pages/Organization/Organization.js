@@ -139,7 +139,7 @@ class Organization extends Component {
             
             <div
               className="org-display-wrapper flex-column"
-              style={{ width: "100%" }}
+              style={{ width: "93%" }}
             >
 
               <h2 className="orgH2Titles">{this.state.orgName||"Your Organization"}</h2>
@@ -156,7 +156,7 @@ class Organization extends Component {
                     className="org-meetings-display flex-column"
                     style={{
                       boxSizing: "borderBox",
-                      width: "90%",
+                      width: "100%",
                       height: "250px",
                       borderTop: "1px solid black",
                       // borderBottom: "1px solid black",

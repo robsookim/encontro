@@ -52,7 +52,10 @@ class OrganizationForm extends Component {
             <label htmlFor="No">No</label>
           </div>
 
-          <button className="orgButton" onClick = {this.props.handleFormSubmit} className="org-form-submit" type="submit">
+          <button 
+          onClick = {this.props.handleFormSubmit} 
+          className="org-form-submit" 
+          type="submit">
             Create
           </button>
         </form>
