@@ -9,7 +9,7 @@ class MeetingAgendaItem extends Component {
       >
         <div
           className="item-header"
-          style={{ display: "flex", marginLeft: `${this.props.level * 10}px` }}
+          style={{ display: "flex", marginLeft: `${this.props.level * 20}px` }}
         >
           <span
             className="item-header"

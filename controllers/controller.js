@@ -239,13 +239,6 @@ module.exports = db => {
     },
     joinMeeting: async function(req, res) {
       // takes in mongo meeting id and adds meeting to the user's session if he/she has access
-      if (req.session.currentMeeting) {
-        const mongoMeetingId = req.body.id;
-        const mongoMeeting = await db.mongo.Meeting.findById(
-          db.mongo.mongoose.Types.ObjectId(mongoMeetingId)
-        );
-        return res.send(mongoMeeting ? mongoMeeting : 404);
-      }
 
       const mongoMeetingId = req.body.id;
       const mongoMeeting = await db.mongo.Meeting.findById(
