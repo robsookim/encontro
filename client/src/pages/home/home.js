@@ -61,20 +61,18 @@ class Home extends Component {
         <div className="container-fluid">
 
           <div className="section1">
-            <h2>Join Meeting</h2>
+            <h2 className="sectionTitle">Join Meeting</h2>
             <a href="/join">
-              <button type="button" className="btn btn-join-meeting">
+              <button type="button" className="btnHome btn-join-meeting">
                 →
               </button>
             </a>
           </div>
 
           <div className="section2">
-
-            <h2>Create Meeting</h2>
-
+            <h2 className="sectionTitle">Create Meeting</h2>
             <a href="/create">
-              <button type="button" className="btn btn-create-meeting">
+              <button type="button" className="btnHome btn-create-meeting">
                 +
               </button>
             </a>
@@ -83,16 +81,16 @@ class Home extends Component {
           <div className="section3">
             <h2 className="section3Title">Organizations</h2>
             <a href="/organization">
-              <button type="button" className="btn btn-organization">
+              <button type="button" className="btnHome btn-organization">
                 <i class="fas fa-sitemap"></i>
               </button>
             </a>
           </div>
 
           <div className="section4">
-            <h2>Invitations</h2>
+            <h2 className="sectionTitle">Invitations</h2>
             <a href="/invitations">
-              <button type="button" className="btn btn-invitation">
+              <button type="button" className="btnHome btn-invitation">
                 <i class="fas fa-paper-plane"></i>              
               </button>
             </a>

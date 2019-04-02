@@ -9,6 +9,8 @@ class NavBar extends Component {
           justifyContent: "space-between",
           padding: "0 50px",
           background: "#ffc673",
+          // background: "#fec547",
+          color: "white", 
           // borderBottom: "1px solid black",
           marginBottom: "30px",
           alignItems: "center",
