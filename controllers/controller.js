@@ -263,27 +263,19 @@ module.exports = db => {
 
       const dbChat = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
           console.log("found the meeting; existing chat:");
-          if (dbChat.chat) {
-            console.log(dbChat.chat);
-            let oldChat = dbChat.chat;
-            newChat = oldChat.concat([chatEntry]);
-            console.log("new chat:");
-            console.log(newChat);
-          } else {
-            newChat = [chatEntry];
-            console.log("new chat:");
-            console.log(newChat);
-          }
+          console.log(dbChat.chat);
+          let oldChat = dbChat.chat;
+          newChat = oldChat.concat([chatEntry]);
+          console.log("new chat:");
+          console.log(newChat);
 
-      const newMeeting = await db.mongo.Meeting.updateOne( {_id: mongoMeetingId}, { chat: newChat })
-        .then(function(dbChat) {
-          console.log(dbChat);
-        })
-        .catch(function(err) {
-          console.log(err);
-        })
+      const addChat = await db.mongo.Meeting.updateOne( {_id: mongoMeetingId}, { chat: newChat })
 
-      res.json(chatEntry);
+      const newMeeting = await db.mongo.Meeting.findOne( {_id: mongoMeetingId})
+      console.log("=================");
+      console.log(newMeeting.chat);
+      res.send(newMeeting.chat);
+      console.log("=================");
     }
   };
 };
