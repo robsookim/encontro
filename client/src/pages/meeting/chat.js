@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import API from '../../utils/API';
-// import './meeting.css';
+import './meeting.css';
 
 export default class Chat extends Component {
     constructor(props) {
@@ -44,14 +44,14 @@ export default class Chat extends Component {
           <h1 className="chatTitle">chat</h1>
   
           <div className="chatList">
-            {this.state.chat.map((val, index)=> <p key={index}>{val}</p>)}
+            {this.state.chat.map((val, index)=> <p className="chatEntry" key={index}>{val}</p>)}
           </div>
           <input className="chatInput"
             onChange={ (e)=>this.changeUserInput(e.target.value) }
             value={this.state.userInput} 
             type="text"
           />
-          <button onClick={this.addToChat}>send</button>
+          <button className="chatBtn" onClick={this.addToChat}>send</button>
         </div>
       )
     }
