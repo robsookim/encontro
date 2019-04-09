@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import API from "../../utils/API.js";
+// import API from "../../utils/API.js";
 import OrganizationForm from "../../components/OrganizationForm/OrganizationForm.js";
 import OrganizationJoin from "../../components/OrganizationForm/OrganizationJoin.js";
 import axios from "axios";

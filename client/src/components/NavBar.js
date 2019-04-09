@@ -1,33 +1,15 @@
 import React, { Component } from "react";
+import "./navbar.css";
+
 class NavBar extends Component {
   render() {
     return (
-      <div
-        className="nav-bar"
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0 50px",
-          background: "#ffc673",
-          // background: "#fec547",
-          color: "white", 
-          // borderBottom: "1px solid black",
-          marginBottom: "30px",
-          alignItems: "center",
-          minHeight: "50px"
-        }}
-      >
-        <span
-          style={{
-            fontSize: "25px",
-            fontWeight: "bold"
-          }}
-        >
-          encontro
-        </span>
+      <div className="nav-bar">
+
+        <span className="nav-bar-title"> encontro </span>
         
         <div>
-          <img src={this.props.proPic} style={{height:"40px", width:"40px", marginRight:"10px"}}/>
+          <img src={this.props.proPic} style={{height:"30px", width:"30px", borderRadius:"10px", marginRight:"10px"}}/>
           <a
             href="/auth/logout"
             style={{

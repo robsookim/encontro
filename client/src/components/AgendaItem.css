@@ -1,17 +1,27 @@
 .agenda-item-wrapper{
     box-sizing: border-box;
-    width:90%;
-    height:60px;
-    background:white;
+    width:100%;
+    height:auto;
+    /* background:white; */
+    margin-top: 5px;
+    margin-bottom: 10px; 
 }
 
 label.item-header{
     box-sizing: border-box;
-    width:80%;
-    height:40px;
+    width:100%;
+    height:35px;
 }
+
+input.item-header {
+    width: 100%;
+}
+
 button.add-item{
     box-sizing: border-box;
-    width:200px;
-    height:40px;
+    width: 25%;
+    height:35px;
+    /* display: flex;
+    margin-left: 10px; */
+    border-radius: 5px;
 }
