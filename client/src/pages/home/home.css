@@ -42,7 +42,7 @@ white - #ffffff
 
 .container-fluid{
     text-align: center;
-    margin-bottom: 30px;
+    margin: 2% auto 2% auto;
 }
 
 /* ************************************************************************************************************************ */
@@ -70,12 +70,6 @@ h2{
 }
 
 .sectionTitle{
-    text-align: center;
-    margin-left: 20%;
-}
-
-.section3Title{
-    color:white;
     text-align: center;
     margin-left: 20%;
 }
@@ -113,6 +107,7 @@ h2{
 .section3Title{
     color:white;
     text-align: center;
+    margin-left: 20%;
 }
 
 .section4{
@@ -131,21 +126,27 @@ h2{
 
 /* ------------------------------------------------------------ */
 
-/*  */
+/* all buttons */
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */ 
 
 .btnHome{
-    background-color: #36c389;
+    /* background-color: #36c389; */
     width: 50px;
     height: 50px;
     font-size: 25px;
     font-weight: bold;
-    border: 2px solid #0b3b69;
+    /* border: 2px solid #0b3b69; */
     color: white;
-    border-radius: 10px; 
-    margin: 500% 50px 0 -80px;
+    /* border-radius: 10px;  */
+    /* margin: 500% 50px 0 -80px; */
 }
+
+/* ------------------------------------------------------------ */
+
+/* join button */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */ 
 
 .btnHome.btn-join-meeting{
     background-color: #0b3b69;
@@ -156,6 +157,12 @@ h2{
     background-color: #ffc637;
 }
 
+/* ------------------------------------------------------------ */
+
+/* create button */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */ 
+
 .btnHome.btn-create-meeting{
     background-color: #36c389;
     border-color: #36c389;
@@ -164,6 +171,12 @@ h2{
 .btnHome.btn-create-meeting:hover{
     background-color: #ff8566;
 }
+
+/* ------------------------------------------------------------ */
+
+/* organization button */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */ 
 
 .btnHome.btn-organization{
     background-color: #f7c756;
@@ -176,6 +189,12 @@ h2{
     color: white;
 }
 
+/* ------------------------------------------------------------ */
+
+/* invitation button */
+
+/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */ 
+
 .btnHome.btn-invitation{
     background-color: #ff8566;
     border-color: #ff8566;
@@ -184,10 +203,3 @@ h2{
 .btnHome.btn-invitation:hover{
     background-color: #36c389;
 }
-
-/* .btn-join{
-    border-radius: 10px;
-} */
-/* .btn-create{
-    border-radius: 30px;
-} */
