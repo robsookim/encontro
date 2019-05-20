@@ -23,13 +23,6 @@
   color: black; 
 } */
 
-/* font-family: 'Pacifico', cursive;
-font-family: 'Catamaran', sans-serif;
-font-family: 'Alegreya Sans', sans-serif;
-font-family: 'Exo', sans-serif;
-font-family: 'Knewave', cursive;
-font-family: 'Skranji', cursive; */
-
 /* 
 orange - #ff8566
 green - #36c389
@@ -52,25 +45,23 @@ white - #ffffff
   /* height: 100vh; */
   width: 100%;
   height: 100%; 
-  height: 100vh;
   /* display: flex;  */
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: #0b3b69; 
-  background-color: #36c389;  */
-  background-color: #fec547; 
+  /* background-color: #0b3b69;  */
+  background-color: #36c389; 
   /* background-color: #ff8566; */
   /* background-color: #7CA091;  */
   /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
   color: black; 
 }
 
-/* .join-container{ */
+.join-container{
   /* background-color: #289065;  */
   /* background-color: #438D6F;  */
   /* background-color: #36c389; */
-  /* background-color: #ff8566;  */
+  background-color: #ff8566; 
   /* height: 800px; */
   /* position: relative; */
   /* flex-direction: row; */
@@ -78,9 +69,7 @@ white - #ffffff
   /* justify-content: center; */
   /* align-items: center; */
   /* background-color: #ffc673;  */
-  /* background-color: #ffffff;  */
-  /* width: 55%;  */
-  /* width: 500px; 
+  width: 55%; 
   height: auto;
   display: flex; 
   flex-direction: column;
@@ -88,34 +77,17 @@ white - #ffffff
   margin: 10px auto 5% auto;
   border-radius: 10px; 
   text-align: center; 
-  box-shadow: 0px 10px 50px #555; */
-/* } */
+  box-shadow: 0px 10px 50px #555;
+}
 
 .join-form-wrapper{
   /* background-color: #ffffff; 
-  background-color: #619B8A;
-  background-color: #ffc673;
+  background-color: #619B8A; */
+  /* background-color: #ffc673; */
   background-color: #ff8566;
-  background-color: #0b3b69; */
-  /* margin: 1px 10px 10px 15px;  */
+  margin: 1px 10px 10px 15px; 
   /* padding: 10px;  */
-  /* border-radius: 10px;  */
-  /* box-shadow: 0px 10px 50px #555; */
-  /* margin-top: 15px; 
-  margin-bottom: 15px;  */
-  /* margin: 10px auto 5% auto; */
-  background-color: #0C4275;
   border-radius: 10px; 
-  width: 500px;
-  min-height: 400px; 
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 20px 20px 20px;
-  margin: 5% auto 5% auto;
-  border-radius: 10px; 
-  text-align: center; 
-  box-shadow: 0px 10px 50px #555;
 }
 
 /* ------------------------------------------------------------ */
@@ -127,14 +99,12 @@ white - #ffffff
 .titleJoinMeeting{
   /* padding: 15px;  */
   /* background-color: #ffc673; */
-  /* background-color: #ff8566;  */
-  color: #ffffff; 
+  background-color: #ff8566; 
+  /* background-color: #ffffff;  */
+  color: black; 
   text-align: center;
-  font-size: 50px; 
-  font-family: 'Exo', sans-serif;
-    /* font-family: 'Bangers', cursive;  */
-  font-weight: bold; 
-  margin: 2%; 
+  /* font-family: 'Bangers', cursive;  */
+  font-size: 80px; 
   /* font-weight: bolder;  */
 }
 
@@ -153,15 +123,18 @@ white - #ffffff
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
 .subtitleJoinMeeting{
-  font-size: 20px; 
+  font-size: 50px; 
   padding: 15px; 
-  /* font-size: 35px; */
+  font-size: 35px;
   text-align: center;
-  color: #ffffff; 
-  margin: 0.5% auto 0.5% auto; 
+  color: black; 
+  margin: 2% auto 2% auto; 
   font-weight: bold; 
   border-bottom: 1px solid rgb(61, 61, 61); 
-  border-bottom: 1px solid rgb(255, 255, 255);   
+  /* background-color: #ffc673;  
+  background-color: #ff8566;  
+  background-color: #ffffff; */
+  background-color: #ff8566; 
   /* background-color: aquamarine; */
   /* margin-left: 20px;  */
   /* margin-top: 20px; */
@@ -214,29 +187,26 @@ button{
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-/* .rowTwo{ */
+.rowTwo{
   /* background-color: #0b3b69;  */
-  /* background-color: #ff8566;  */
+  background-color: #ff8566; 
   /* background-color: #ffffff;  */
   /* background-color: #ffc673; */
-/* } */
+}
 
 .meetingActive{
   /* background-color: #438D6F; */
   /* background-color: #ff8566;  */
   /* background-color: #ffffff;  */
-  /* background-color: #fec547;  */
+  background-color: #fec547; 
   /* background-color: #36c389; */
-  width: 100%;
-  /* min-height: 300px; */
-  height: auto;
-  margin: 0.5%;
+  width: 80%;
+  min-height: 300px;
+  margin: 1% 10px 1% 10px;
   display: inline-block;
+  border-radius: 10px; 
   text-align: center;
-  font-size: 12px; 
-  color: #ffffff; 
-  /* box-shadow: 0px 5px 20px rgb(125, 125, 125);
-  box-shadow: 0px 10px 50px #555; */
+  font-size: 18px; 
 }
 
 /* ------------------------------------------------------------ */
@@ -245,25 +215,23 @@ button{
 
 /* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-/* .rowThree{
-  background-color: #ffffff;  */
-  /* background-color: #ffc673; 
-  background-color: #ff8566;  */
-  /* min-height: 200px;  */
-/* } */
+.rowThree{
+  /* background-color: #ffffff; 
+  background-color: #ffc673;  */
+  background-color: #ff8566; 
+  min-height: 200px; 
+}
 
 .meetingHosted{
-  /* background-color: #fec547;
-  background-color: #36c389; */
-  /* background-color: #ffffff;  */
-  width: 100%;
-  /* min-height: 150px; */
-  height: auto;
-  margin: 0.5%;
+  background-color: #fec547;
+  /* background-color: #36c389; */
+  width: 80%;
+  min-height: 150px;
+  margin: 1% 10px 2% 10px;
   display: inline-block;  
+  border-radius: 10px; 
   text-align: center;
-  font-size: 12px; 
-  color: #ffffff;
+  font-size: 18px; 
 }
 
 p{

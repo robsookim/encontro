@@ -47,14 +47,13 @@ class Join extends Component {
   render() {
     return (
       <div className="join-wrapper">
-        <NavBar proPic={this.state.picture} userName={this.state.userName} />
+        <NavBar proPic={this.state.picture} userName={this.state.userName}/>
 
         <div className="join-container">
 
-            {/* <h1 className="titleJoinMeeting">Join a Meeting</h1> */}
+            <h1 className="titleJoinMeeting">Join a Meeting</h1>
 
             <div className="join-form-wrapper">
-              <h1 className="titleJoinMeeting">Join a Meeting</h1>
             
               <h2 className="subtitleJoinMeeting">Join Active Meeting</h2>
 
