@@ -167,7 +167,7 @@ class Create extends Component {
   render() {
     return (
       <div>
-        <NavBar proPic={this.state.picture} userName={this.state.userName} style={{background: "#ffc673"}}/>
+        <NavBar proPic={this.state.picture} userName={this.state.userName} />
 
         <div className="create-wrapper">
           <div className="create-form-wrapper">

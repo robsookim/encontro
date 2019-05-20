@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import "./navbar.css";
-
 class NavBar extends Component {
   render() {
     return (
@@ -30,8 +28,9 @@ class NavBar extends Component {
           encontro
         </span>
       </a>
+
         <div>
-          <img src={this.props.proPic} style={{height:"30px", width:"30px", borderRadius:"10px", marginRight:"10px"}}/>
+          <img src={this.props.proPic} style={{height:"40px", width:"40px", marginRight:"10px"}}/>
           <a
             href="/auth/logout"
             style={{
